@@ -1,0 +1,55 @@
+# labeler "full" schema
+
+# enable labeler on issues, prs, or both.
+enable:
+  issues: true
+  prs: true
+
+# comments object allows you to specify a different message for issues and prs
+# comments:
+#   issues: |
+#     라벨 잘 지정되었는지 확인 한 번 해 주기 🎇
+#   prs: |
+#     라벨 잘 지정되었는지 확인 한 번 해 주기 🎇
+
+# Labels is an object where:
+# - keys are labels
+# - values are objects of { include: [ pattern ], exclude: [ pattern ], color: color_code }
+#    - pattern must be a valid regex, and is applied globally to
+#      title + description of issues and/or prs (see enabled config above)
+#    - 'include' patterns will associate a label if any of these patterns match
+#    - 'exclude' patterns will ignore this label if any of these patterns match
+labels:
+  '🐛 BUGFIX':
+    color: '#d73a4a'
+    include: ['\bBug\b', '\bbug\b', '\bFix\b', '\bfix\b']
+  '✨ FEAT':
+    color: '#a2eeef'
+    include: ['\bFeat\b', '\bfeat\b', '\bFeature\b', '\bfeature\b']
+  '📝 DOCS':
+    color: '#0366d6'
+    include: ['\bDocs\b', '\bdocs\b', '\bREADME\b']
+  '📦 CHORE':
+    color: '#d4c5f9'
+    include: ['\bChore\b', '\bchore\b']
+  '💄 DESIGN':
+    color: '#ff7f50'
+    include: ['\bDesign\b', '\bdesign\b']
+  '🚀 API':
+    color: '#8dd9cc'
+    include: ['\bAPI\b', '\bapi\b']
+  '♻️ REFACTOR':
+    color: '#c5def5'
+    include: ['\bRefactor\b', '\brefactor\b']
+  '🔧 INIT':
+    color: '#fbca04'
+    include: ['\bINIT\b', '\bInit\b', '\binit\b']
+  '🔀 MERGE':
+    color: '#ededed'
+    include: ['\bMERGE\b', '\bMerge\b', '\bmerge\b']
+  '🚑 HOTFIX':
+    color: '#e11d21'
+    include: ['\bHOTFIX\b', '\bhotfix\b']
+  ':bookmark: RELEASE':
+    color: '#0e8a16'
+    include: ['\bRelease\b', '\brelease\b']
