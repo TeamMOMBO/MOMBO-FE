@@ -1,4 +1,6 @@
 import NavBar from '<prefix>/components/common/bar/navBar';
+import BackTopBar from '<prefix>/components/common/bar/backTopBar';
+import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import MiddleButton from '<prefix>/components/common/button/middleButton';
 import Modal from '<prefix>/components/common/modal';
@@ -21,6 +23,8 @@ export default function Home() {
       </MiddleButton>
       <MiddleButton variant='outline'>outline</MiddleButton>
       <Modal />
+      <MainTopBar />
+      <BackTopBar title='Top App Bar' />
       <NavBar />
     </div>
   );
