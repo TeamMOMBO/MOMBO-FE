@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '<prefix>/shared/styles/global.css';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -25,6 +26,7 @@ export default function RootLayout({
         className={`${pretendard.className} mx-auto h-[100dvh] w-390 shadow-xl`}
       >
         {children}
+        <Script src='/public/service-worker.js' />
       </body>
     </html>
   );
