@@ -1,3 +1,4 @@
+import NavBar from '<prefix>/components/common/bar/navBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import MiddleButton from '<prefix>/components/common/button/middleButton';
 import Modal from '<prefix>/components/common/modal';
@@ -20,6 +21,7 @@ export default function Home() {
       </MiddleButton>
       <MiddleButton variant='outline'>outline</MiddleButton>
       <Modal />
+      <NavBar />
     </div>
   );
 }
