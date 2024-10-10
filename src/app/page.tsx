@@ -9,10 +9,19 @@ import LargeButton from '<prefix>/components/common/button/largeButton';
 import MiddleButton from '<prefix>/components/common/button/middleButton';
 import Modal from '<prefix>/components/common/modal';
 import CheckButton from '<prefix>/components/common/button/checkButton';
+import { useState } from 'react';
 
 export default function Home() {
   const [isSelected, toggleButton] = useToggle();
+  const [value, setValue] = useState('');
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value;
+    const sanitizedValue = inputValue.replace(/\s/g, '');
+    if (sanitizedValue.length <= 8) {
+      setValue(sanitizedValue);
+    }
+  };
   return (
     <div className='mt-56 grid place-items-center gap-8'>
       <LargeButton variant='fill' buttonColor='primary'>
@@ -32,10 +41,25 @@ export default function Home() {
       <Modal />
       <MainTopBar />
       <BackTopBar title='Top App Bar' />
-      <Input placeholder='placeholder' />
-      <Input value='input' />
-      <Input value='input' errorMessage='error message' />
-      <Input value='input' enableMessage='enable message' />
+      <Input
+        maxLength={8}
+        onChange={handleInputChange}
+        placeholder='placeholder'
+      />
+      <Input
+        value={value}
+        maxLength={8}
+        placeholder='placeholder'
+        errorMessage='error message'
+        onChange={handleInputChange}
+      />
+      <Input
+        value={value}
+        maxLength={8}
+        placeholder='placeholder'
+        enableMessage='enable message'
+        onChange={handleInputChange}
+      />
       <CheckButton isSelected={isSelected} onClick={toggleButton} />
       <NavBar />
     </div>
