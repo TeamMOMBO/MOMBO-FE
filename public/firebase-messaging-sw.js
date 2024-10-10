@@ -21,7 +21,7 @@ messaging.onBackgroundMessage((payload) => {
   const title = payload.notification.title + ' (onBackgroundMessage)';
   const notificationOptions = {
     body: payload.notification.body,
-    icon: 'https://avatars.githubusercontent.com/sasha1107',
+    icon: 'https://avatars.githubusercontent.com/u/180538886?s=200&v=4',
   };
 
   self.registration.showNotification(title, notificationOptions);
