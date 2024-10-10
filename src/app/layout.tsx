@@ -22,7 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='kr' className={`${pretendard.variable}`}>
-      <body className={pretendard.className}>{children}</body>
+      <body
+        className={`${pretendard.className} mx-auto h-[100dvh] w-390 shadow-2xl`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

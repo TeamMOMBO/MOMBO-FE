@@ -1,6 +1,6 @@
 'use client';
 
-import { useToggle } from './_hooks/useToggle';
+import { useToggle } from '../hooks/useToggle';
 import Input from '<prefix>/components/common/input';
 import NavBar from '<prefix>/components/common/bar/navBar';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
@@ -23,7 +23,7 @@ export default function Home() {
     }
   };
   return (
-    <div className='mt-56 grid place-items-center gap-8'>
+    <div className='grid w-full h-full place-items-center gap-8'>
       <LargeButton variant='fill' buttonColor='primary'>
         primary
       </LargeButton>
