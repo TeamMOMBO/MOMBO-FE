@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
-
-import './global.css';
+import '<prefix>/shared/styles/global.css';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -23,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang='kr' className={`${pretendard.variable}`}>
       <body
-        className={`${pretendard.className} mx-auto h-[100dvh] w-390 shadow-2xl`}
+        className={`${pretendard.className} mx-auto h-[100dvh] w-390 shadow-xl`}
       >
         {children}
       </body>
