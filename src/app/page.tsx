@@ -1,3 +1,4 @@
+import Input from '<prefix>/components/common/input';
 import NavBar from '<prefix>/components/common/bar/navBar';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
@@ -25,6 +26,10 @@ export default function Home() {
       <Modal />
       <MainTopBar />
       <BackTopBar title='Top App Bar' />
+      <Input placeholder='placeholder' />
+      <Input value='input' />
+      <Input value='input' errorMessage='error message' />
+      <Input value='input' enableMessage='enable message' />
       <NavBar />
     </div>
   );
