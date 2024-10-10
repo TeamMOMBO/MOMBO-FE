@@ -23,9 +23,9 @@ importers:
       react-dom:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
-      tailwind-merge:
-        specifier: ^2.5.3
-        version: 2.5.3
+      tailwindcss-preset-px-to-rem:
+        specifier: ^1.2.1
+        version: 1.2.1
       zustand:
         specifier: 5.0.0-rc.2
         version: 5.0.0-rc.2(@types/react@18.3.11)(react@18.3.1)
@@ -2510,6 +2510,8 @@ packages:
 
   tailwind-merge@2.5.3:
     resolution: {integrity: sha512-d9ZolCAIzom1nf/5p4LdD5zvjmgSxY0BGgdSvmXIoMYAiPdAW/dSpP7joCDYFY7r/HkEa2qmPtkgsu0xjQeQtw==}
+  tailwindcss-preset-px-to-rem@1.2.1:
+    resolution: {integrity: sha512-m3GHwciFiXZviaN7WvOiiMjRBT7razJxgPTY6h2KcOvzvkOTysOV6gN3HkejfXUyL4DKx6YjiPcLCqv6yMeXHw==}
 
   tailwindcss@3.4.13:
     resolution: {integrity: sha512-KqjHOJKogOUt5Bs752ykCeiwvi0fKVkr5oqsFNt/8px/tA8scFPIlkygsf6jXrfCqGHz7VflA6+yytWuM+XhFw==}
@@ -5509,7 +5511,11 @@ snapshots:
       csso: 5.0.5
       picocolors: 1.1.0
 
+<<<<<<< Updated upstream
   tailwind-merge@2.5.3: {}
+=======
+  tailwindcss-preset-px-to-rem@1.2.1: {}
+>>>>>>> Stashed changes
 
   tailwindcss@3.4.13:
     dependencies:
