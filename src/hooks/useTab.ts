@@ -11,10 +11,10 @@ interface UseTabsReturn {
 
 // tab 버튼 사용시 선택한 버튼 표시 시 사용
 export default function useTab(
-  initialTab: number = 0,
-  allTabs: Tab[] = [] // 전체 탭 목록 배열
+  initialTab: number = -1,
+  allTabs: Tab[] = [],
 ): UseTabsReturn {
-    // allTabs가 유효한 배열이 아닌 경우 기본값을 반환하여 안전하게 처리
+  // allTabs가 유효한 배열이 아닌 경우 기본값을 반환하여 안전하게 처리
   if (!Array.isArray(allTabs) || allTabs.length === 0) {
     return {
       currentItem: null,
@@ -22,13 +22,13 @@ export default function useTab(
     };
   }
 
-   // 유효한 초기 인덱스가 아니면 0으로 설정
+  // 유효한 초기 인덱스가 아니면 -1로 설정
   const [currentIndex, setCurrentIndex] = useState<number>(
-    initialTab >= 0 && initialTab < allTabs.length ? initialTab : 0
+    initialTab >= 0 && initialTab < allTabs.length ? initialTab : -1,
   );
 
   return {
-    currentItem: allTabs[currentIndex],
+    currentItem: currentIndex >= 0 ? allTabs[currentIndex] : null,
     changeItem: setCurrentIndex,
   };
 }
@@ -38,10 +38,10 @@ export default function useTab(
 //     { tab: 'Tab 2' },
 //     { tab: 'Tab 3' },
 //   ];
-  
+
 //   const TabComponent = () => {
 //     const { currentItem, changeItem } = useTab(0, tabs);
-  
+
 //     return (
 //       <div>
 //         <div>
@@ -58,5 +58,5 @@ export default function useTab(
 //       </div>
 //     );
 //   };
-  
+
 //   export default TabComponent;
