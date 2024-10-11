@@ -1,9 +1,13 @@
+'use client';
+
+import Link from 'next/link';
+import useTab from '<prefix>/hooks/useTab';
+import { USER_TYPE } from '<prefix>/shared/constants/user';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
-import { USER_TYPE } from '<prefix>/shared/constants/user';
-import Link from 'next/link';
 
 export default function NickNamePage() {
+  const { currentItem, changeItem } = useTab(-1, USER_TYPE);
 
   return (
     <>
@@ -21,13 +25,23 @@ export default function NickNamePage() {
               key={index}
               variant='fill'
               buttonColor={'primary'}
+              className={`h-80 px-16 pb-14 pt-16 ${
+                currentItem?.tab === tab ? 'bg-primary' : 'bg-neutral-200'
+              }`}
+              onClick={() => changeItem(index)}
               disabled={false}
             >
               <span
+                className={`mb-2 block text-left text-body-01 ${
+                  currentItem?.tab === tab ? 'text-white' : 'text-neutral-900'
+                } `}
               >
                 {tab}
               </span>
               <span
+                className={`block text-left text-body-10 ${
+                  currentItem?.tab === tab ? 'text-white' : 'text-neutral-600'
+                }`}
               >
                 {description}
               </span>
@@ -39,6 +53,7 @@ export default function NickNamePage() {
             variant='fill'
             buttonColor='primary'
             className='absolute bottom-40'
+            disabled={!currentItem}
           >
             다음
           </LargeButton>
