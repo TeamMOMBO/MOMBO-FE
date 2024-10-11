@@ -28,7 +28,6 @@ const messaging = async () => {
 export default function Home() {
   const [isSelected, toggleButton] = useToggle();
   const [value, setValue] = useState('');
-  const [token, setToken] = useState<string | null>(null);
   const requestPermission = async () => {
     if (!('Notification' in window)) {
       console.warn('This browser does not support notifications.');
