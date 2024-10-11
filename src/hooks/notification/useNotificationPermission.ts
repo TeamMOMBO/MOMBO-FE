@@ -1,10 +1,12 @@
 import { useState, useCallback } from 'react';
 
 export const useNotificationPermission = () => {
-  const [permission, setPermission] = useState(Notification.permission);
+  const [permission, setPermission] = useState(
+    typeof window !== 'undefined' ? Notification.permission : 'default',
+  );
 
   const requestPermission = useCallback(async () => {
-    if (!('Notification' in window)) {
+    if (typeof window === 'undefined' || !('Notification' in window)) {
       console.warn('This browser does not support notifications.');
       return;
     }
