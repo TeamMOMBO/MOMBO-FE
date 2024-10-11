@@ -3,10 +3,10 @@
 import { useState } from 'react';
 import { FunnelData } from '<prefix>/shared/types/auth';
 import useFunnel from '<prefix>/hooks/funnel/useFunnel';
-import Weeks from '<prefix>/components/onboard/weeks';
+import Weeks from '<prefix>/components/onboarding/weeks';
 import Funnel from '<prefix>/components/funnel/funnel';
-import NickName from '<prefix>/components/onboard/nickName';
-import UserType from '<prefix>/components/onboard/userType';
+import NickName from '<prefix>/components/onboarding/nickName';
+import UserType from '<prefix>/components/onboarding/userType';
 
 const initailFunnelData: FunnelData = {
   nickname: '',
@@ -41,13 +41,21 @@ export default function OnboardingPage() {
   return (
     <Funnel step={step}>
       <Funnel.Step name='닉네임'>
-        <NickName onNext={onNext} />
+        <NickName onNext={onNext} initialValue={funnelData.nickname} />
       </Funnel.Step>
       <Funnel.Step name='회원유형'>
-        <UserType onNext={onNext} onPrev={onPrevStep} />
+        <UserType
+          onNext={onNext}
+          onPrev={onPrevStep}
+          initialValue={funnelData.userType}
+        />
       </Funnel.Step>
       <Funnel.Step name='주차'>
-        <Weeks onPrev={onPrevStep} onSubmit={onSubmit} />
+        <Weeks
+          onPrev={onPrevStep}
+          onSubmit={onSubmit}
+          initialValue={funnelData.weeks}
+        />
       </Funnel.Step>
     </Funnel>
   );

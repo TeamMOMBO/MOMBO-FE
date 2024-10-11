@@ -12,9 +12,10 @@ import {
 
 interface NickNameProps {
   onNext: (value: Partial<FunnelData>) => void;
+  initialValue: string;
 }
 
-export default function NickName({ onNext }: NickNameProps) {
+export default function NickName({ onNext, initialValue }: NickNameProps) {
   const validator = (value: string) => {
     return (
       maxLenRegExp(8).test(value) &&
@@ -22,7 +23,10 @@ export default function NickName({ onNext }: NickNameProps) {
       !specialCharRegExp.test(value)
     );
   };
-  const [nickname, handleInputChange] = useInput<string>('', validator);
+  const [nickname, handleInputChange] = useInput<string>(
+    initialValue,
+    validator,
+  );
 
   return (
     <div className='px-16'>

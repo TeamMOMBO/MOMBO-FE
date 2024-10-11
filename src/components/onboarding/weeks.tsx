@@ -1,23 +1,24 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import useInput from '<prefix>/hooks/useInput';
 import { useToggle } from '<prefix>/hooks/useToggle';
 import Input from '<prefix>/components/common/input';
+import { FunnelData } from '<prefix>/shared/types/auth';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
-import { FunnelData } from '<prefix>/shared/types/auth';
 
 interface WeeksProps {
   onSubmit: (data: Partial<FunnelData>) => void;
   onPrev: () => void;
+  initialValue: number;
 }
 
-export default function Weeks({ onPrev, onSubmit }: WeeksProps) {
-  const router = useRouter();
+export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
   const [isSelected, toggleButton] = useToggle();
-  const [weeks, handleInputChange] = useInput<number | undefined>(undefined);
+  const [weeks, handleInputChange] = useInput<number | undefined>(
+    initialValue || undefined,
+  );
 
   return (
     <>
@@ -34,7 +35,6 @@ export default function Weeks({ onPrev, onSubmit }: WeeksProps) {
         <div className='mb-16 flex items-center gap-12'>
           <Input
             type='number'
-            maxLength={8}
             placeholder='ex) 12'
             onChange={handleInputChange}
             className='w-120 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
@@ -52,7 +52,7 @@ export default function Weeks({ onPrev, onSubmit }: WeeksProps) {
           variant='fill'
           buttonColor='primary'
           className='absolute bottom-40'
-          onClick={() => onSubmit({ weeks })}
+          onClick={() => onSubmit({ weeks: isSelected ? 0 : weeks })}
           disabled={!!weeks === false && isSelected === false}
         >
           맘보 시작하기

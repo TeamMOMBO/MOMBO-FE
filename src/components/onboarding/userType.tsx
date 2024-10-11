@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import useTab from '<prefix>/hooks/useTab';
 import { USER_TYPE } from '<prefix>/shared/constants/user';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
@@ -10,10 +9,19 @@ import { FunnelData } from '<prefix>/shared/types/auth';
 interface UserTypeProps {
   onNext: (value: Partial<FunnelData>) => void;
   onPrev: () => void;
+  initialValue: string;
 }
 
-export default function UserType({ onNext, onPrev }: UserTypeProps) {
-  const { currentItem, changeItem } = useTab(-1, USER_TYPE);
+export default function UserType({
+  onNext,
+  onPrev,
+  initialValue,
+}: UserTypeProps) {
+  const initialIndex = USER_TYPE.findIndex((type) => type.tab === initialValue);
+  const { currentItem, changeItem } = useTab(
+    initialIndex !== -1 ? initialIndex : -1,
+    USER_TYPE,
+  );
 
   return (
     <>
