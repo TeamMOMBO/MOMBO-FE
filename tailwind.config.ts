@@ -23,6 +23,7 @@ module.exports = {
         'neutral-700': '#696B6E',
         'neutral-800': '#4A4B4D',
         'neutral-900': '#2A2B2C',
+        'primary-kakao': '#FEE500',
       },
       fontSize: {
         'head-01': [

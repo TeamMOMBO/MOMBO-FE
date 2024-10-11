@@ -26,7 +26,7 @@ export default function RootLayout({
         className={`${pretendard.className} mx-auto h-[100dvh] w-390 shadow-xl`}
       >
         {children}
-        <Script src='/public/service-worker.js' />
+        <Script src='/service-worker.js' />
       </body>
     </html>
   );
