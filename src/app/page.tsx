@@ -1,7 +1,7 @@
 'use client';
 import { useToggle } from '../hooks/useToggle';
 import Input from '<prefix>/components/common/input';
-import NavBar from '<prefix>/components/common/bar/navBar';
+import NavBar from '<prefix>/components/common/bar/navbar/navBar';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
