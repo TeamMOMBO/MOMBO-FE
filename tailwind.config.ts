@@ -1,15 +1,17 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
+  presets: [require('tailwindcss-preset-px-to-rem')],
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
       colors: {
-        primary: '#D8F6EA',
-        'primary-light': '#15CA87',
-        'primary-dark': '#04955F',
-        secondary: '#DBF3FF',
-        'secondary-light': '#13B3FE',
-        'secondary-dark': '#028BCC',
+        secondary: '#15CA87',
+        'secondary-light': '#D8F6EA',
+        'secondary-dark': '#04955F',
+        primary: '#13B3FE',
+        'primary-light': '#DBF3FF',
+        'primary-dark': '#028BCC',
         'semantic-red': '#F94721',
         'semantic-blue': '#3482F8',
         'neutral-100': '#FAFBFD',
@@ -21,6 +23,7 @@ module.exports = {
         'neutral-700': '#696B6E',
         'neutral-800': '#4A4B4D',
         'neutral-900': '#2A2B2C',
+        'primary-kakao': '#FEE500',
       },
       fontSize: {
         'head-01': [
