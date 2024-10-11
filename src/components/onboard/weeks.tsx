@@ -7,21 +7,21 @@ import Input from '<prefix>/components/common/input';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
+import { FunnelData } from '<prefix>/shared/types/auth';
 
-export default function NickNamePage() {
+interface WeeksProps {
+  onSubmit: (data: Partial<FunnelData>) => void;
+  onPrev: () => void;
+}
+
+export default function Weeks({ onPrev, onSubmit }: WeeksProps) {
   const router = useRouter();
   const [isSelected, toggleButton] = useToggle();
-  const [inputValue, handleInputChange] = useInput<number | undefined>(
-    undefined,
-  );
-
-  const onSubmit = () => {
-    // router.push('/main')
-  };
+  const [weeks, handleInputChange] = useInput<number | undefined>(undefined);
 
   return (
     <>
-      <BackTopBar />
+      <BackTopBar onPrev={onPrev} />
       <div className='px-16 pt-37'>
         <div className='mb-32 space-y-6'>
           <h2 className='text-head-01 text-neutral-900'>
@@ -38,7 +38,7 @@ export default function NickNamePage() {
             placeholder='ex) 12'
             onChange={handleInputChange}
             className='w-120 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-            value={inputValue}
+            value={weeks}
           />
           <span className='text-body-05 text-neutral-900'>주 차</span>
         </div>
@@ -48,13 +48,12 @@ export default function NickNamePage() {
             몇 주차인지 잘 모르거나 이미 출산했어요
           </span>
         </div>
-
         <LargeButton
           variant='fill'
           buttonColor='primary'
           className='absolute bottom-40'
-          onClick={onSubmit}
-          disabled={!!inputValue === false && isSelected === false}
+          onClick={() => onSubmit({ weeks })}
+          disabled={!!weeks === false && isSelected === false}
         >
           맘보 시작하기
         </LargeButton>

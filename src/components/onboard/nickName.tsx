@@ -3,13 +3,18 @@
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import Input from '<prefix>/components/common/input';
 import useInput from '<prefix>/hooks/useInput';
+import { FunnelData } from '<prefix>/shared/types/auth';
 import {
   maxLenRegExp,
   specialCharRegExp,
   whiteSpaceRegExp,
 } from '<prefix>/shared/utils/regex';
-import Link from 'next/link';
-export default function NickNamePage() {
+
+interface NickNameProps {
+  onNext: (value: Partial<FunnelData>) => void;
+}
+
+export default function NickName({ onNext }: NickNameProps) {
   const validator = (value: string) => {
     return (
       maxLenRegExp(8).test(value) &&
@@ -17,7 +22,7 @@ export default function NickNamePage() {
       !specialCharRegExp.test(value)
     );
   };
-  const [inputValue, handleInputChange] = useInput<string>('', validator);
+  const [nickname, handleInputChange] = useInput<string>('', validator);
 
   return (
     <div className='px-16'>
@@ -30,21 +35,20 @@ export default function NickNamePage() {
         </p>
       </div>
       <Input
-        value={inputValue}
+        value={nickname}
         maxLength={8}
         placeholder='닉네임을 입력해주세요.'
         onChange={handleInputChange}
       />
-      <Link href='/login/usertype'>
-        <LargeButton
-          variant='fill'
-          buttonColor='primary'
-          className='absolute bottom-40'
-          disabled={!!inputValue === false}
-        >
-          다음
-        </LargeButton>
-      </Link>
+      <LargeButton
+        variant='fill'
+        buttonColor='primary'
+        className='absolute bottom-40'
+        disabled={!!nickname === false}
+        onClick={() => onNext({ nickname })}
+      >
+        다음
+      </LargeButton>
     </div>
   );
 }

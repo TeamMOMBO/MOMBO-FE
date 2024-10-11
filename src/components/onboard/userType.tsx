@@ -5,13 +5,19 @@ import useTab from '<prefix>/hooks/useTab';
 import { USER_TYPE } from '<prefix>/shared/constants/user';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
+import { FunnelData } from '<prefix>/shared/types/auth';
 
-export default function NickNamePage() {
+interface UserTypeProps {
+  onNext: (value: Partial<FunnelData>) => void;
+  onPrev: () => void;
+}
+
+export default function UserType({ onNext, onPrev }: UserTypeProps) {
   const { currentItem, changeItem } = useTab(-1, USER_TYPE);
 
   return (
     <>
-      <BackTopBar />
+      <BackTopBar onPrev={onPrev} />
       <div className='px-16 pt-37'>
         <div className='mb-32 space-y-6'>
           <h2 className='text-head-01 text-neutral-900'>어떤 회원이신가요?</h2>
@@ -48,16 +54,15 @@ export default function NickNamePage() {
             </LargeButton>
           ))}
         </div>
-        <Link href='/login/weeks'>
-          <LargeButton
-            variant='fill'
-            buttonColor='primary'
-            className='absolute bottom-40'
-            disabled={!currentItem}
-          >
-            다음
-          </LargeButton>
-        </Link>
+        <LargeButton
+          variant='fill'
+          buttonColor='primary'
+          className='absolute bottom-40'
+          disabled={!currentItem}
+          onClick={() => onNext({ userType: currentItem?.tab })}
+        >
+          다음
+        </LargeButton>
       </div>
     </>
   );
