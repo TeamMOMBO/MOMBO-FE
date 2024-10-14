@@ -7,6 +7,7 @@ import { FunnelData } from '<prefix>/shared/types/auth';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
+import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 
 interface WeeksProps {
   onSubmit: (data: Partial<FunnelData>) => void;
@@ -16,8 +17,19 @@ interface WeeksProps {
 
 export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
   const [isSelected, toggleButton] = useToggle();
+
   const [weeks, handleInputChange] = useInput<number | undefined>(
     initialValue || undefined,
+  );
+
+  useKeyDown(
+    'Enter',
+    () => {
+      if (isSelected || weeks) {
+        onSubmit({ weeks: isSelected ? 0 : weeks });
+      }
+    },
+    [weeks, isSelected],
   );
 
   return (
