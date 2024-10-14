@@ -1,11 +1,13 @@
 'use client';
 
+import ProgressBar from '<prefix>/components/main/progressBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 
 export default function MainPage() {
   // 더미데이터
   const nickName = '맘보';
-  const weeks = 13;
+  const week = 13;
+  const totalWeek = 40;
   const weekInfoItems = [
     {
       imageSrc: '/',
@@ -35,6 +37,17 @@ export default function MainPage() {
   return (
     <>
       <MainTopBar />
+      <div className='flex h-full w-full flex-col gap-30'>
+        <div className='flex flex-col gap-2 px-16 pb-20 pt-12'>
+          <span className='text-head-01 text-neutral-900'>
+            {nickName}님, 안녕하세요!
+          </span>
+          <span className='mb-20 text-body-06 text-neutral-600'>
+            임신 {week}주 차
+          </span>
+          <ProgressBar currentNum={week} totalNum={totalWeek} />
+        </div>
+        </div>
     </>
   );
 }
