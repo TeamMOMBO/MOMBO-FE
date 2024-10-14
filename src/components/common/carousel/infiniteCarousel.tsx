@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import useCarousel from '<prefix>/hooks/useCarousel';
 import useCarouselSize from '<prefix>/hooks/useCarouselSize';
 
@@ -54,7 +54,7 @@ export default function InfiniteCarousel<T>({
         onTransitionEnd={onTransitionEnd}
       >
         {slideList.map((item, index) => (
-          <>{renderItem(item, index)}</>
+          <Fragment key={index}>{renderItem(item, index)}</Fragment>
         ))}
       </div>
       <div className='absolute bottom-8 right-16 z-10 flex h-22 w-39 items-center justify-center gap-1 rounded-full bg-black bg-opacity-30 px-8 py-2'>

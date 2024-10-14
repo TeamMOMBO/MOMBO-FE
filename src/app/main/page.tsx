@@ -1,7 +1,12 @@
 'use client';
 
+import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
+import MainInfoItem from '<prefix>/components/main/mainInfoItem';
+import WeekInfoItem from '<prefix>/components/main/weekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
+import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
+import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
 
 export default function MainPage() {
   // 더미데이터
@@ -47,7 +52,24 @@ export default function MainPage() {
           </span>
           <ProgressBar currentNum={week} totalNum={totalWeek} />
         </div>
+        <div className='pl-16'>
+          <DragCarousel
+            items={weekInfoItems}
+            slideWidth={328}
+            gap={8}
+            renderItem={(weeksItem: IWeekInfo) => (
+              <WeekInfoItem weekInfoItem={weeksItem} />
+            )}
+          />
         </div>
+        <InfiniteCarousel
+          items={infoItems}
+          autoTransitionInterval={5000}
+            renderItem={(infoItem: IMainInfo) => (
+              <MainInfoItem mainInfoItem={infoItem} />
+          )}
+        />
+      </div>
     </>
   );
 }

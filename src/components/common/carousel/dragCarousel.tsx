@@ -1,5 +1,6 @@
 import useCarousel from '<prefix>/hooks/useCarousel';
 import useCarouselSize from '<prefix>/hooks/useCarouselSize';
+import { Fragment } from 'react';
 
 type DragCarouselProps<T> = {
   items: T[];
@@ -39,7 +40,7 @@ export default function DragCarousel<T>({
         onMouseDown={onMouseDown}
       >
         {items.map((item, index) => (
-          <> {renderItem(item, index)}</>
+          <Fragment key={index}> {renderItem(item, index)}</Fragment>
         ))}
       </div>
     </div>
