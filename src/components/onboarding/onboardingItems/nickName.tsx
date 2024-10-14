@@ -3,6 +3,7 @@
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import Input from '<prefix>/components/common/input';
 import useInput from '<prefix>/hooks/useInput';
+import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 import { FunnelData } from '<prefix>/shared/types/auth';
 import {
   maxLenRegExp,
@@ -26,6 +27,16 @@ export default function NickName({ onNext, initialValue }: NickNameProps) {
   const [nickname, handleInputChange] = useInput<string>(
     initialValue,
     validator,
+  );
+
+  useKeyDown(
+    'Enter',
+    () => {
+      if (nickname) {
+        onNext({ nickname });
+      }
+    },
+    [nickname],
   );
 
   return (
