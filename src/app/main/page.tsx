@@ -1,6 +1,7 @@
 'use client';
 
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
+import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import WeekInfoItem from '<prefix>/components/main/weekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
@@ -38,12 +39,18 @@ export default function MainPage() {
     { description: '맘보대상' },
     { description: '맘보1등' },
   ];
+  const faqInfoItems = [
+    { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
+    { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
+    { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
+  ];
 
   return (
     <>
       <MainTopBar />
       <div className='flex h-full w-full flex-col gap-30'>
-        <div className='flex flex-col gap-2 px-16 pb-20 pt-12'>
+        <div className='flex flex-col gap-2 px-16 pt-12'>
+          <h2 className='sr-only'>유저 정보</h2>
           <span className='text-head-01 text-neutral-900'>
             {nickName}님, 안녕하세요!
           </span>
@@ -53,6 +60,7 @@ export default function MainPage() {
           <ProgressBar currentNum={week} totalNum={totalWeek} />
         </div>
         <div className='pl-16'>
+          <h2 className='sr-only'>주차별 정보</h2>
           <DragCarousel
             items={weekInfoItems}
             slideWidth={328}
@@ -62,13 +70,26 @@ export default function MainPage() {
             )}
           />
         </div>
-        <InfiniteCarousel
-          items={infoItems}
-          autoTransitionInterval={5000}
+        <div>
+          <h2 className='sr-only'>메인 정보 배너</h2>
+          <InfiniteCarousel
+            items={infoItems}
+            autoTransitionInterval={5000}
             renderItem={(infoItem: IMainInfo) => (
               <MainInfoItem mainInfoItem={infoItem} />
-          )}
-        />
+            )}
+          />
+        </div>
+        <div className='px-16'>
+          <h2 className='mb-12 text-body-01 text-neutral-900'>
+            자주하는 질문을 모아봤어요
+          </h2>
+          <ul className='flex flex-col gap-16'>
+            {faqInfoItems.map((faqInfoItem, index) => (
+              <FaqInfoItem key={index} faqInfoItem={faqInfoItem} />
+            ))}
+          </ul>
+        </div>
       </div>
     </>
   );

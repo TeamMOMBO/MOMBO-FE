@@ -31,9 +31,11 @@ const MainTopBar = ({
 }: MainTopBarProps) => {
   return (
     <div className='flex h-58 w-full items-center justify-between py-9 pl-16 pr-6'>
-      <Link href={logoHref}>
-        <LocoIcon className='h-19 w-103 fill-primary' />
-      </Link>
+      <h1>
+        <Link href={logoHref}>
+          <LocoIcon className='h-19 w-103 fill-primary' />
+        </Link>
+      </h1>
       <div className='flex items-center gap-4'>
         {icons.map(({ href, icon: Icon, className }, index) => (
           <Link
