@@ -45,6 +45,8 @@ export default function MainPage() {
     { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
   ];
 
+  
+
   return (
     <>
       <MainTopBar />
