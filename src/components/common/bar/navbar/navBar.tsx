@@ -45,7 +45,7 @@ const NavBar = () => {
   };
 
   //앱 내애서 사진 찍어서 등록
-  const handlePhotoTake = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTakePhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const objectUrl = URL.createObjectURL(file);
@@ -61,7 +61,7 @@ const NavBar = () => {
   };
 
   //앨범에서 미리 찍은 사진 등록
-  const handleSelectImg = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSelectPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       const objectUrl = URL.createObjectURL(file);
@@ -119,16 +119,15 @@ const NavBar = () => {
         accept='image/*'
         capture='environment'
         ref={fileInputRef}
-        onChange={handlePhotoTake}
+        onChange={handleTakePhoto}
         className='hidden'
       />
       <input
         type='file'
         accept='image/jpg, image/png, image/jpeg, image/bmp, image/tif, image/heic'
-        
         hidden
         ref={fileInputRef}
-        onChange={handleSelectImg}
+        onChange={handleSelectPhoto}
       />
     </nav>
   );
