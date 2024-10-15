@@ -1,3 +1,5 @@
+'use client';
+
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import UserIcon from '/public/svgs/filled/icon-user.svg';
