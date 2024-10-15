@@ -5,6 +5,7 @@ import { USER_TYPE } from '<prefix>/shared/constants/user';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import { FunnelData } from '<prefix>/shared/types/auth';
+import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 
 interface UserTypeProps {
   onNext: (value: Partial<FunnelData>) => void;
@@ -21,6 +22,16 @@ export default function UserType({
   const { currentItem, changeItem } = useTab(
     initialIndex !== -1 ? initialIndex : -1,
     USER_TYPE,
+  );
+
+  useKeyDown(
+    'Enter',
+    () => {
+      if (currentItem) {
+        onNext({ userType: currentItem.tab });
+      }
+    },
+    [currentItem],
   );
 
   return (
