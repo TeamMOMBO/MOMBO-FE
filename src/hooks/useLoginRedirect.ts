@@ -1,7 +1,10 @@
+import { useCookies } from 'next-client-cookies';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 export default function useLoginRedirect() {
   const router = useRouter();
+  const cookies = useCookies();
+
   useEffect(() => {
     /* 기존 회원 */
     //?accessToken={refresh.access_token}&refreshToken={refresh}
@@ -19,8 +22,10 @@ export default function useLoginRedirect() {
     if (accessToken) {
       // 기존 회원 처리: 액세스 토큰과 리프레시 토큰 저장
       localStorage.setItem('accessToken', accessToken);
+      // cookies.set('accessToken', 'accessToken');
       if (refreshToken) {
         localStorage.setItem('refreshToken', refreshToken);
+        // cookies.set('refreshToken', refreshToken);
       }
       router.push('/main');
     } else if (!isMember && email) {
