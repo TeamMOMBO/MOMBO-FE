@@ -129,6 +129,12 @@ const NavBar = () => {
         ref={fileInputRef}
         onChange={handleSelectPhoto}
       />
+      {/* 미리보기 이미지 */}
+      {photoSrc && (
+        <div className='mt-4 flex justify-center'>
+          <img src={photoSrc} alt='Preview' className='h-32 w-32 rounded-md' />
+        </div>
+      )}
     </nav>
   );
 };
