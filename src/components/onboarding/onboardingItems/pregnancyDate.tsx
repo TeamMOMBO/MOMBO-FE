@@ -3,14 +3,14 @@
 import useInput from '<prefix>/hooks/useInput';
 import { useToggle } from '<prefix>/hooks/useToggle';
 import Input from '<prefix>/components/common/input';
-import { FunnelData } from '<prefix>/shared/types/auth';
+import { IJoinReq } from '<prefix>/shared/types/auth';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 
 interface PregnancyDateProps {
-  onSubmit: (data: Partial<FunnelData>) => void;
+  onSubmit: (data: Partial<IJoinReq>) => void;
   onPrev: () => void;
   initialValue: number;
 }
@@ -22,15 +22,17 @@ export default function PregnancyDate({
 }: PregnancyDateProps) {
   const [isSelected, toggleButton] = useToggle();
 
-  const [pregnancyDate, handleInputChange] = useInput<number | undefined>(
-    initialValue || undefined,
-  );
+  const [pregnancyDate, handleInputChange] = useInput<
+    string | number | undefined
+  >(initialValue || undefined);
 
   useKeyDown(
     'Enter',
     () => {
       if (isSelected || pregnancyDate) {
-        onSubmit({ pregnancyDate: isSelected ? 0 : pregnancyDate });
+        onSubmit({
+          pregnancyDate: isSelected ? 0 : parseInt(pregnancyDate as string),
+        });
       }
     },
     [pregnancyDate, isSelected],
@@ -69,7 +71,9 @@ export default function PregnancyDate({
           buttonColor='primary'
           className='absolute bottom-40'
           onClick={() =>
-            onSubmit({ pregnancyDate: isSelected ? 0 : pregnancyDate })
+            onSubmit({
+              pregnancyDate: isSelected ? 0 : parseInt(pregnancyDate as string),
+            })
           }
           disabled={!!pregnancyDate === false && isSelected === false}
         >

@@ -1,14 +1,16 @@
 'use client';
 
 import useFunnel from '<prefix>/hooks/funnel/useFunnel';
-import { FunnelData } from '<prefix>/shared/types/auth';
+import { useJoinMutation } from '<prefix>/state/mutations/auth';
 import { useState } from 'react';
 import Funnel from '../funnel/funnel';
 import NickName from './onboardingItems/nickName';
 import UserType from './onboardingItems/userType';
 import PregnancyDate from './onboardingItems/pregnancyDate';
-
-const initailFunnelData: FunnelData = {
+import { useAuthStore } from '<prefix>/state/store/authStore';
+import { IJoinReq } from '<prefix>/shared/types/auth';
+import { useCookies } from 'next-client-cookies';
+const initailFunnelData: IJoinReq = {
   nickname: '',
   userType: '',
   pregnancyDate: 0,
@@ -17,10 +19,12 @@ const initailFunnelData: FunnelData = {
 const steps = ['닉네임', '회원유형', '주차'];
 
 export default function Onboarding() {
+  const cookies = useCookies();
+  const { mutate: join } = useJoinMutation();
   const { step, onNextStep, onPrevStep } = useFunnel({ steps });
   const [funnelData, setFunnelData] = useState(initailFunnelData);
-
-  const onNext = (value: Partial<FunnelData>) => {
+  const setUserInfo = useAuthStore((state) => state.setUserInfo);
+  const onNext = (value: Partial<IJoinReq>) => {
     if (funnelData) {
       setFunnelData((prevData) => ({
         ...prevData,
@@ -30,12 +34,16 @@ export default function Onboarding() {
     onNextStep();
   };
 
-  const onSubmit = (value: Partial<FunnelData>) => {
+  const onSubmit = (value: Partial<IJoinReq>) => {
+    const email = cookies.get('email');
+
     const onboardData = {
+      email,
       ...funnelData,
-      ...value,
+      ...value, // pregnancyDate
     };
-    console.log(onboardData);
+    setUserInfo(onboardData);
+    join(onboardData);
   };
 
   return (

@@ -21,16 +21,13 @@ export default function useLoginRedirect() {
 
     if (accessToken) {
       // 기존 회원 처리: 액세스 토큰과 리프레시 토큰 저장
-      localStorage.setItem('accessToken', accessToken);
-      // cookies.set('accessToken', 'accessToken');
+      cookies.set('accessToken', 'accessToken');
       if (refreshToken) {
-        localStorage.setItem('refreshToken', refreshToken);
-        // cookies.set('refreshToken', refreshToken);
+        cookies.set('refreshToken', refreshToken);
       }
       router.push('/main');
     } else if (!isMember && email) {
       // 신규 회원 처리: 이메일 저장 후 온보딩 페이지로 리다이렉트
-      localStorage.setItem('email', email);
       router.push('/onboarding');
     } else {
       router.push('/login');

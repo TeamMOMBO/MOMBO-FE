@@ -4,7 +4,7 @@ import LargeButton from '<prefix>/components/common/button/largeButton';
 import Input from '<prefix>/components/common/input';
 import useInput from '<prefix>/hooks/useInput';
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
-import { FunnelData } from '<prefix>/shared/types/auth';
+import { IJoinReq } from '<prefix>/shared/types/auth';
 import {
   maxLenRegExp,
   specialCharRegExp,
@@ -12,7 +12,7 @@ import {
 } from '<prefix>/shared/utils/regex';
 
 interface NickNameProps {
-  onNext: (value: Partial<FunnelData>) => void;
+  onNext: (value: Partial<IJoinReq>) => void;
   initialValue: string;
 }
 
