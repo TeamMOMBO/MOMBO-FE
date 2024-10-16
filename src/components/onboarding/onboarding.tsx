@@ -6,12 +6,12 @@ import { useState } from 'react';
 import Funnel from '../funnel/funnel';
 import NickName from './onboardingItems/nickName';
 import UserType from './onboardingItems/userType';
-import Weeks from './onboardingItems/weeks';
+import PregnancyDate from './onboardingItems/pregnancyDate';
 
 const initailFunnelData: FunnelData = {
   nickname: '',
   userType: '',
-  weeks: 0,
+  pregnancyDate: 0,
 };
 
 const steps = ['닉네임', '회원유형', '주차'];
@@ -51,10 +51,10 @@ export default function Onboarding() {
         />
       </Funnel.Step>
       <Funnel.Step name='주차'>
-        <Weeks
+        <PregnancyDate
           onPrev={onPrevStep}
           onSubmit={onSubmit}
-          initialValue={funnelData.weeks}
+          initialValue={funnelData.pregnancyDate}
         />
       </Funnel.Step>
     </Funnel>

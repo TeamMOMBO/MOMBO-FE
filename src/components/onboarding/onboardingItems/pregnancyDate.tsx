@@ -9,27 +9,31 @@ import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 
-interface WeeksProps {
+interface PregnancyDateProps {
   onSubmit: (data: Partial<FunnelData>) => void;
   onPrev: () => void;
   initialValue: number;
 }
 
-export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
+export default function PregnancyDate({
+  onPrev,
+  onSubmit,
+  initialValue,
+}: PregnancyDateProps) {
   const [isSelected, toggleButton] = useToggle();
 
-  const [weeks, handleInputChange] = useInput<number | undefined>(
+  const [pregnancyDate, handleInputChange] = useInput<number | undefined>(
     initialValue || undefined,
   );
 
   useKeyDown(
     'Enter',
     () => {
-      if (isSelected || weeks) {
-        onSubmit({ weeks: isSelected ? 0 : weeks });
+      if (isSelected || pregnancyDate) {
+        onSubmit({ pregnancyDate: isSelected ? 0 : pregnancyDate });
       }
     },
-    [weeks, isSelected],
+    [pregnancyDate, isSelected],
   );
 
   return (
@@ -50,7 +54,7 @@ export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
             placeholder='ex) 12'
             onChange={handleInputChange}
             className='w-120 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-            value={weeks}
+            value={pregnancyDate}
           />
           <span className='text-body-05 text-neutral-900'>주 차</span>
         </div>
@@ -64,8 +68,10 @@ export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
           variant='fill'
           buttonColor='primary'
           className='absolute bottom-40'
-          onClick={() => onSubmit({ weeks: isSelected ? 0 : weeks })}
-          disabled={!!weeks === false && isSelected === false}
+          onClick={() =>
+            onSubmit({ pregnancyDate: isSelected ? 0 : pregnancyDate })
+          }
+          disabled={!!pregnancyDate === false && isSelected === false}
         >
           맘보 시작하기
         </LargeButton>
