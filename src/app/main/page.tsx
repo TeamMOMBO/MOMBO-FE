@@ -8,8 +8,18 @@ import ProgressBar from '<prefix>/components/main/progressBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
 import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
+import { useNotificationPermission } from '<prefix>/hooks/notification/useNotificationPermission';
+import { useForegroundNotification } from '<prefix>/hooks/notification/useForegroundNotification';
+import { useEffect } from 'react';
 
 export default function MainPage() {
+  const { requestPermission } = useNotificationPermission();
+  useForegroundNotification();
+
+  useEffect(() => {
+    requestPermission();
+  }, [requestPermission]);
+
   // 더미데이터
   const nickName = '맘보';
   const week = 13;
@@ -44,8 +54,6 @@ export default function MainPage() {
     { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
     { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
   ];
-
-  
 
   return (
     <>
