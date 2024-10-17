@@ -14,7 +14,7 @@ export default function useLoginRedirect() {
 
     if (accessToken) {
       // 기존 회원 처리: 액세스 토큰과 리프레시 토큰 저장
-      cookies.set('accessToken', 'accessToken');
+      cookies.set('accessToken', accessToken);
       if (refreshToken) {
         cookies.set('refreshToken', refreshToken);
       }
