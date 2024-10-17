@@ -18,7 +18,7 @@ export const useAuthStore = create<IAuthState, [['zustand/persist', unknown]]>(
     }),
     {
       name: 'userInfo',
-      storage: createJSONStorage(() => sessionStorage),
+      storage: createJSONStorage(() => localStorage),
     },
   ),
 );
