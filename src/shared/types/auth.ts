@@ -1,5 +1,6 @@
-export interface FunnelData {
+export interface IJoinReq {
+  email?: string;
   nickname: string;
   userType: string;
-  weeks: number;
+  pregnancyDate: number;
 }

@@ -3,33 +3,39 @@
 import useInput from '<prefix>/hooks/useInput';
 import { useToggle } from '<prefix>/hooks/useToggle';
 import Input from '<prefix>/components/common/input';
-import { FunnelData } from '<prefix>/shared/types/auth';
+import { IJoinReq } from '<prefix>/shared/types/auth';
 import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 
-interface WeeksProps {
-  onSubmit: (data: Partial<FunnelData>) => void;
+interface PregnancyDateProps {
+  onSubmit: (data: Partial<IJoinReq>) => void;
   onPrev: () => void;
   initialValue: number;
 }
 
-export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
+export default function PregnancyDate({
+  onPrev,
+  onSubmit,
+  initialValue,
+}: PregnancyDateProps) {
   const [isSelected, toggleButton] = useToggle();
 
-  const [weeks, handleInputChange] = useInput<number | undefined>(
-    initialValue || undefined,
-  );
+  const [pregnancyDate, handleInputChange] = useInput<
+    string | number | undefined
+  >(initialValue || undefined);
 
   useKeyDown(
     'Enter',
     () => {
-      if (isSelected || weeks) {
-        onSubmit({ weeks: isSelected ? 0 : weeks });
+      if (isSelected || pregnancyDate) {
+        onSubmit({
+          pregnancyDate: isSelected ? 0 : parseInt(pregnancyDate as string),
+        });
       }
     },
-    [weeks, isSelected],
+    [pregnancyDate, isSelected],
   );
 
   return (
@@ -50,7 +56,7 @@ export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
             placeholder='ex) 12'
             onChange={handleInputChange}
             className='w-120 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
-            value={weeks}
+            value={pregnancyDate}
           />
           <span className='text-body-05 text-neutral-900'>주 차</span>
         </div>
@@ -64,8 +70,12 @@ export default function Weeks({ onPrev, onSubmit, initialValue }: WeeksProps) {
           variant='fill'
           buttonColor='primary'
           className='absolute bottom-40'
-          onClick={() => onSubmit({ weeks: isSelected ? 0 : weeks })}
-          disabled={!!weeks === false && isSelected === false}
+          onClick={() =>
+            onSubmit({
+              pregnancyDate: isSelected ? 0 : parseInt(pregnancyDate as string),
+            })
+          }
+          disabled={!!pregnancyDate === false && isSelected === false}
         >
           맘보 시작하기
         </LargeButton>
