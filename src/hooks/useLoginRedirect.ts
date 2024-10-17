@@ -6,13 +6,6 @@ export default function useLoginRedirect() {
   const cookies = useCookies();
 
   useEffect(() => {
-    /* 기존 회원 */
-    //?accessToken={refresh.access_token}&refreshToken={refresh}
-    /* 신규 회원 */
-    //?email={email}
-    /* 회원 여부 검증 */
-    //?isMember={boolean}
-
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get('accessToken');
     const refreshToken = urlParams.get('refreshToken');
@@ -28,6 +21,7 @@ export default function useLoginRedirect() {
       router.push('/main');
     } else if (!isMember && email) {
       // 신규 회원 처리: 이메일 저장 후 온보딩 페이지로 리다이렉트
+      cookies.set('email', email);
       router.push('/onboarding');
     } else {
       router.push('/login');
