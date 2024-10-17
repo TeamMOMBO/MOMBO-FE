@@ -7,7 +7,6 @@ import Funnel from '../funnel/funnel';
 import NickName from './onboardingItems/nickName';
 import UserType from './onboardingItems/userType';
 import PregnancyDate from './onboardingItems/pregnancyDate';
-import { useAuthStore } from '<prefix>/state/store/authStore';
 import { IJoinReq } from '<prefix>/shared/types/auth';
 import { useCookies } from 'next-client-cookies';
 const initailFunnelData: IJoinReq = {
@@ -23,7 +22,6 @@ export default function Onboarding() {
   const { mutate: join } = useJoinMutation();
   const { step, onNextStep, onPrevStep } = useFunnel({ steps });
   const [funnelData, setFunnelData] = useState(initailFunnelData);
-  const setUserInfo = useAuthStore((state) => state.setUserInfo);
   const onNext = (value: Partial<IJoinReq>) => {
     if (funnelData) {
       setFunnelData((prevData) => ({
@@ -42,7 +40,6 @@ export default function Onboarding() {
       ...funnelData,
       ...value, // pregnancyDate
     };
-    setUserInfo(onboardData);
     join(onboardData);
   };
 
