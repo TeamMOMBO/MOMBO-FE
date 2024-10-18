@@ -50,12 +50,12 @@ export default function Tooltip({
   };
 
   return (
-    <div className='relative h-24 w-24'>
-      <button type='button' onClick={handleClick}>
+    <div className='relative h-18 w-18'>
+      <button type='button' onClick={handleClick} className='h-fit w-fit'>
         <CircleInfoIcon
-          width={24}
-          height={24}
-          className='h-24 w-24 items-center justify-center stroke-neutral-600'
+          width={18}
+          height={18}
+          className='h-18 w-18 stroke-neutral-600'
         />
       </button>
       {isModalOpen && (
