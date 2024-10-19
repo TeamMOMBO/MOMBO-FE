@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { IIngredientInfo } from '<prefix>/shared/types/ingredient';
 
 type IngredientItemProps = {
-  ingrediientItem: IIngredientInfo;
+    ingrediientItem: IIngredientInfo;
 };
 
 export default function IngredientItem({

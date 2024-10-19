@@ -4,3 +4,4 @@ export interface IIngredientInfo {
   level: number;
   notes: string;
 }
+
