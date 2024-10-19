@@ -1,6 +1,6 @@
-export interface IWeekInfo {
+export interface IPregnancyInfo {
   imageSrc: string;
-  weeks: number;
+  pregnancyDate: number;
   description: string;
 }
 

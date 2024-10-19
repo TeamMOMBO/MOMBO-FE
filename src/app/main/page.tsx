@@ -1,9 +1,9 @@
 'use client';
 
-import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
+import { IMainInfo, IPregnancyInfo } from '<prefix>/shared/types/main';
 import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
-import WeekInfoItem from '<prefix>/components/main/weekInfoItem';
+import PregnancyInfoItem from '<prefix>/components/main/pregnancyInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
@@ -27,19 +27,19 @@ export default function MainPage() {
   const weekInfoItems = [
     {
       imageSrc: '/',
-      weeks: 13,
+      pregnancyDate: 13,
       description:
         '투명하게 보이던 피부에 점차 살이 오르고, 심장박동이 힘차 얼굴에 붉은 기운이 감돌아요.',
     },
     {
       imageSrc: '/',
-      weeks: 13,
+      pregnancyDate: 13,
       description:
         '호르몬 분비량이 안정적으로 변화하며 불안하던 감정이 차츰 가라앉게 됩니다.',
     },
     {
       imageSrc: '/',
-      weeks: 13,
+      pregnancyDate: 13,
       description:
         '호르몬 분비량이 안정적으로 변화하며 불안하던 감정이 차츰 가라앉게 됩니다.',
     },
@@ -75,8 +75,8 @@ export default function MainPage() {
             items={weekInfoItems}
             slideWidth={328}
             gap={8}
-            renderItem={(weeksItem: IWeekInfo) => (
-              <WeekInfoItem weekInfoItem={weeksItem} />
+            renderItem={(pregnancyDateItem: IPregnancyInfo) => (
+              <PregnancyInfoItem pregnancyInfoItem={pregnancyDateItem} />
             )}
           />
         </div>
