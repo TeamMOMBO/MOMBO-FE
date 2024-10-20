@@ -7,8 +7,6 @@ import BookIcon from '/public/svgs/filled/icon-book.svg';
 import LayersIcon from '/public/svgs/filled/icon-layers.svg';
 import ScannerIcon from '/public/svgs/filled/icon-scanner.svg';
 import NavBarItem from './navBarItem';
-import DropDown from '../../dropdown/dropdown';
-import { useToggle } from '<prefix>/hooks/useToggle';
 import { useRef, useState } from 'react';
 
 const navItems = [
@@ -32,8 +30,6 @@ const navItems = [
 const NavBar = () => {
   const currentPath = usePathname();
   const isActive = (path: string) => currentPath.split('/').pop() === path;
-
-  const [isDropdownOpen, toggleDropdown] = useToggle();
   const [photoSrc, setPhotoSrc] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -41,26 +37,9 @@ const NavBar = () => {
   // 카메라 or 이미지 접근 함수
   const handlePhotoClick = () => {
     fileInputRef.current?.click();
-    toggleDropdown();
   };
 
-  //앱 내애서 사진 찍어서 등록
-  const handleTakePhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const objectUrl = URL.createObjectURL(file);
-      setPhotoSrc(objectUrl);
-
-      const formData = new FormData();
-      formData.append('photo', file);
-
-      formData.forEach((value, key) => {
-        console.log(`FormData key: ${key}, value:`, value);
-      });
-    }
-  };
-
-  //앨범에서 미리 찍은 사진 등록
+  //사진 등록
   const handleSelectPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -83,23 +62,14 @@ const NavBar = () => {
           if (item.isCenter) {
             return (
               <li key={index} className='flex basis-full justify-center'>
-                <button className='absolute bottom-13' onClick={toggleDropdown}>
+                <button
+                  className='absolute bottom-13'
+                  onClick={handlePhotoClick}
+                >
                   <div className='flex h-57 w-57 items-center justify-center rounded-full border-4 border-solid border-white bg-primary'>
                     <item.icon className='h-24 w-24' />
                   </div>
                 </button>
-                {isDropdownOpen && (
-                  <DropDown handleClose={toggleDropdown}>
-                    <DropDown.Menu isOpen={isDropdownOpen}>
-                      <DropDown.Item onClick={handlePhotoClick}>
-                        사진 촬영하기
-                      </DropDown.Item>
-                      <DropDown.Item onClick={handlePhotoClick}>
-                        사진 업로드하기
-                      </DropDown.Item>
-                    </DropDown.Menu>
-                  </DropDown>
-                )}
               </li>
             );
           }
@@ -116,18 +86,12 @@ const NavBar = () => {
       </ul>
       <input
         type='file'
-        accept='image/*'
-        capture='environment'
-        ref={fileInputRef}
-        onChange={handleTakePhoto}
-        className='hidden'
-      />
-      <input
-        type='file'
         accept='image/jpg, image/png, image/jpeg, image/bmp, image/tif, image/heic'
         hidden
+        capture='environment'
         ref={fileInputRef}
         onChange={handleSelectPhoto}
+        className='hidden'
       />
       {photoSrc && (
         <div className='mt-5 flex justify-center'>
