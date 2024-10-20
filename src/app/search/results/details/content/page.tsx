@@ -15,7 +15,7 @@ const faqInfoItems = [
   { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
 ];
 
-export default function SearchContentsKeywordDetails() {
+export default function SearchContentsDetails() {
   return (
     <div className='px-16 py-19'>
       <div className='flex flex-col gap-20'>

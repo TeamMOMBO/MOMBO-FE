@@ -1,7 +1,7 @@
 import SearchBar from '<prefix>/components/common/bar/searchbar/searchbar';
 import LeftArrowIcon from '/public/svgs/arrow/icon-left2.svg';
 
-export default function SearchKeywordLayout({
+export default function SearchResultLayout({
   children,
 }: {
   children: React.ReactNode;

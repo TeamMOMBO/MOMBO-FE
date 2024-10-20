@@ -26,7 +26,7 @@ const ingrediientItems: IIngredientInfo[] = [
   },
 ];
 
-export default function SearchDictionaryKeywordDetails() {
+export default function SearchDictionaryDetails() {
   return (
     <div className='px-16 py-19'>
       <div className='flex flex-col gap-20'>

@@ -34,7 +34,14 @@ const ingrediientItems: IIngredientInfo[] = [
   },
 ];
 
-export default function SearchKewordPage() {
+export default function SearchResultPage({
+  searchParams,
+}: {
+  searchParams: {
+    keyword?: string;
+  };
+}) {
+  console.log(searchParams.keyword);
   return (
     <div className='px-16 py-19'>
       <div className='flex flex-col gap-20'>
