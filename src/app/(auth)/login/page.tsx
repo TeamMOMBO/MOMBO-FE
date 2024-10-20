@@ -11,7 +11,7 @@ export default function LoginPage() {
         className='absolute left-1/2 top-253 -translate-x-1/2 fill-primary'
       />
       <Link
-        href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=http://localhost:8000/user/login/kakao/callback/`}
+        href={`https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.KAKAO_CLIENT_ID}&redirect_uri=${process.env.REDIRECT_URI}`}
       >
         <KakaoButton className='absolute bottom-40' />
       </Link>

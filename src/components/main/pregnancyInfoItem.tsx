@@ -1,12 +1,14 @@
-import { IWeekInfo } from '<prefix>/shared/types/main';
+import { IPregnancyInfo } from '<prefix>/shared/types/main';
 import Image from 'next/image';
 
-type WeekCardProps = {
-  weekInfoItem: IWeekInfo;
+type PregnancyCardProps = {
+  pregnancyInfoItem: IPregnancyInfo;
 };
 
-export default function WeekInfoItem({ weekInfoItem }: WeekCardProps) {
-  const { imageSrc, weeks, description } = weekInfoItem;
+export default function PregnancyInfoItem({
+  pregnancyInfoItem,
+}: PregnancyCardProps) {
+  const { imageSrc, pregnancyDate, description } = pregnancyInfoItem;
   return (
     <div className='flex h-102 w-328 shrink-0 cursor-pointer gap-12 rounded-12 border border-solid border-neutral-300 bg-white p-16'>
       <Image
@@ -18,7 +20,7 @@ export default function WeekInfoItem({ weekInfoItem }: WeekCardProps) {
       />
       <div className='flex flex-col gap-4'>
         <span className='text-body-04 text-neutral-900'>
-          {weeks}주 차 엄마는
+          {pregnancyDate}주 차 엄마는
         </span>
         <p className='text-overflow text-body-10 text-neutral-600'>
           {description}
