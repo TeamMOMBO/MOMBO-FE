@@ -14,13 +14,13 @@ interface SearchBarProps {
 export default function SearchBar({ isResultSearch = false }: SearchBarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [search, setSearch, changeHandler, reset] = useInput('');
+  const [search, changeHandler, reset] = useInput('');
 
   const keyword = searchParams.get('keyword');
 
-  useEffect(() => {
-    setSearch(keyword || '');
-  }, [keyword]);
+  // useEffect(() => {
+  //   setSearch(keyword || '');
+  // }, [keyword]);
 
   const handleSubmit = () => {
     if (!search || keyword === search) return;

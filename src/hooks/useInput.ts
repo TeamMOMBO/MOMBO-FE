@@ -2,7 +2,6 @@ import { useState, useCallback, ChangeEvent } from 'react';
 
 type UseInputProps<T> = [
   value: T, // 현재 입력값
-  setValue: (value: T) => void,
   changeHandler: (e: ChangeEvent<HTMLInputElement>) => void,
   reset: () => void, // 입력값 리셋
 ];
@@ -27,5 +26,5 @@ export default function useInput<T>(
     setValue(initialValue); // 초기값으로 리셋
   }, [initialValue, validate]);
 
-  return [value, setValue, changeHandler, reset];
+  return [value, changeHandler, reset];
 }
