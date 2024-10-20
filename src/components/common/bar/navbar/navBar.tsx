@@ -1,6 +1,5 @@
 'use client';
-
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import UserIcon from '/public/svgs/filled/icon-user.svg';
 import HomeIcon from '/public/svgs/filled/icon-home.svg';
 import BookIcon from '/public/svgs/filled/icon-book.svg';
@@ -8,6 +7,7 @@ import LayersIcon from '/public/svgs/filled/icon-layers.svg';
 import ScannerIcon from '/public/svgs/filled/icon-scanner.svg';
 import NavBarItem from './navBarItem';
 import { useRef, useState } from 'react';
+import { useCreateIngredientAnalysis } from '<prefix>/state/mutations/ingredient';
 
 const navItems = [
   { href: '/main', icon: HomeIcon, label: '홈', activePath: 'main' },
@@ -17,29 +17,24 @@ const navItems = [
     label: '콘텐츠',
     activePath: 'contents',
   },
-  {
-    href: '/',
-    icon: ScannerIcon,
-    activePath: 'dictionary',
-    isCenter: true,
-  },
+  { href: '/', icon: ScannerIcon, activePath: 'dictionary', isCenter: true },
   { href: '/dictionary', icon: BookIcon, label: '성분사전', activePath: '' },
   { href: '/my', icon: UserIcon, label: '마이페이지', activePath: 'my' },
 ];
 
 const NavBar = () => {
+  const { mutate: createIngredientAnalysis } = useCreateIngredientAnalysis();
+  const router = useRouter();
   const currentPath = usePathname();
   const isActive = (path: string) => currentPath.split('/').pop() === path;
   const [photoSrc, setPhotoSrc] = useState<string | null>(null);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // 카메라 or 이미지 접근 함수
   const handlePhotoClick = () => {
     fileInputRef.current?.click();
   };
 
-  //사진 등록
   const handleSelectPhoto = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -47,11 +42,9 @@ const NavBar = () => {
       setPhotoSrc(objectUrl);
 
       const formData = new FormData();
-      formData.append('photo', file);
-
-      formData.forEach((value, key) => {
-        console.log(`FormData key: ${key}, value:`, value);
-      });
+      formData.append('image', file);
+      createIngredientAnalysis(formData);
+      // router.push('/성분 분석 결과 페이지');
     }
   };
 
