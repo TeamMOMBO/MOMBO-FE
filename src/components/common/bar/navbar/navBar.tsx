@@ -88,7 +88,6 @@ const NavBar = () => {
         type='file'
         accept='image/jpg, image/png, image/jpeg, image/bmp, image/tif, image/heic'
         hidden
-        capture='environment'
         ref={fileInputRef}
         onChange={handleSelectPhoto}
         className='hidden'
