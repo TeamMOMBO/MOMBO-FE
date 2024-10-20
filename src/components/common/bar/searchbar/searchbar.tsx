@@ -12,8 +12,8 @@ export default function SearchBar({ isResultSearch = false }: SearchBarProps) {
         <SearchIcon className='h-18 w-18 stroke-neutral-600' />
       </div>
       <input
-        className='h-full w-full rounded-8 bg-neutral-200 pl-40 text-body-05 placeholder-neutral-600 focus:outline-none focus:ring-0'
-        placeholder='호박'
+        className='h-full w-full rounded-8 bg-neutral-200 pl-40 text-body-05 text-neutral-900 placeholder-neutral-600 focus:outline-none focus:ring-0'
+        placeholder='임신 고민, 유해 성분 등'
         type='text'
       />
       {isResultSearch && (
