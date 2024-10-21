@@ -8,7 +8,7 @@ type IngredientItemProps = {
 export default function IngredientItem({
   ingredientItem,
 }: IngredientItemProps) {
-  const { id, ingredientKr, level, reason } = ingredientItem;
+  const { id, name, level, reason } = ingredientItem;
 
   const levelStyles: { [key: string]: string } = {
     '1등급': 'bg-[#EE5E56]',
@@ -23,7 +23,7 @@ export default function IngredientItem({
       >
         <div className='flex gap-8'>
           <div className={`h-24 w-24 rounded-full ${levelStyles[level]}`}></div>
-          <h3 className='text-body-04 text-neutral-900'>{ingredientKr}</h3>
+          <h3 className='text-body-04 text-neutral-900'>{name}</h3>
         </div>
         <p className='text-overflow text-body-10 text-neutral-600'>{reason}</p>
       </Link>
