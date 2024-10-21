@@ -14,22 +14,22 @@ const ingrediientItems: IIngredientInfo[] = [
   {
     id: 1,
     name: '아세트아미노펜(USP)',
-    level: 1,
-    notes:
+    level: '1',
+    reason:
       '아세트아미노펜(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
   },
   {
     id: 2,
     name: '디펜히드라민염산염(USP)',
-    level: 2,
-    notes:
+    level: '2',
+    reason:
       '디펜히드라민염산염(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
   },
   {
     id: 3,
     name: '디펜히드라민염산염(USP)',
-    level: 1,
-    notes:
+    level: '1',
+    reason:
       '디펜히드라민염산염(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
   },
 ];
@@ -63,7 +63,7 @@ export default function SearchResultPage({
         </p>
         <ul className='flex w-full flex-col gap-12'>
           {ingrediientItems.map((ingrediientItem, index) => (
-            <IngredientItem key={index} ingrediientItem={ingrediientItem} />
+            <IngredientItem key={index} ingredientItem={ingrediientItem} />
           ))}
         </ul>
         <button className='h-44 w-358 rounded-8 bg-neutral-200 text-center text-body-08 text-neutral-900'>
