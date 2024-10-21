@@ -8,6 +8,7 @@ import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import ResultBar from '/public/svgs/icon-result-bar.svg';
 import ArrowIcon from '/public/svgs/arrow/icon-gauge.svg';
 import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
+import useImageHandler from '<prefix>/hooks/useImageAnalyzer';
 
 const result = 3;
 
