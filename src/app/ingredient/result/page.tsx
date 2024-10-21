@@ -1,6 +1,5 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { IIngredientInfo } from '<prefix>/shared/types/ingredient';
 import Tooltip from '<prefix>/components/common/tooltip';
 import TopBar from '<prefix>/components/common/bar/topBar';
 import ImagePreviewModal from '<prefix>/components/ingredient/ImagePreviewModal';
@@ -8,35 +7,27 @@ import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import ResultBar from '/public/svgs/icon-result-bar.svg';
 import ArrowIcon from '/public/svgs/arrow/icon-gauge.svg';
 import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
-
-const result = 3;
+import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnalysisStore';
+import { RiskLevel } from '<prefix>/shared/types/ingredient';
 
 export default function IngredientResultPage() {
   const router = useRouter();
+  const analysisResult = useIngredientAnalysisStore(
+    (state) => state.analysisResult,
+  );
+
+  //analysisResult.riskLevel, analysisResult.analysisImage 로 직접 값 바인딩 사용 대신 객체 분해 할당 방식으로 설정
+  const { riskLevel, analysisImage, riskIngredientCount, ingredientAnalysis } =
+    analysisResult || {};
+
+  const { positionClass, colorClass } = getArrowStyles(riskLevel as RiskLevel);
+  const totalRisk = riskIngredientCount?.total || 0;
 
   const onClose = () => {
     // router.push('/main');
   };
-  const ingredientImage = '/images/image-ingredient.png';
-  const description = '제품의 성분이 정확하게\n스캔되었는지 꼭 확인해주세요';
-  const ingrediientItems: IIngredientInfo[] = [
-    {
-      id: 1,
-      name: '아세트아미노펜(USP)',
-      level: 1,
-      notes:
-        '아세트아미노펜(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
-    },
-    {
-      id: 2,
-      name: '디펜히드라민염산염(USP)',
-      level: 2,
-      notes:
-        '디펜히드라민염산염(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
-    },
-  ];
 
-  const { positionClass, colorClass } = getArrowStyles(result);
+  const description = '제품의 성분이 정확하게\n스캔되었는지 꼭 확인해주세요';
 
   return (
     <>
@@ -45,12 +36,17 @@ export default function IngredientResultPage() {
         <div className='flex flex-col items-center gap-8 pt-25'>
           <div className='relative mt-44 h-fit w-fit'>
             <ResultBar className='absolute -top-37 left-1/2 shrink-0 -translate-x-1/2' />
-
             <div className='relative z-20 flex h-109 w-210 flex-col items-center justify-center rounded-t-full border-gray-500 bg-white shadow-[0_-2px_12px_#7B7B7B1A]'>
               <p className='mb-2 mt-22 text-head-01 text-neutral-900'>주의</p>
-              <span className='text-body-10 text-neutral-600'>
-                임산부 위험 성분 미검출
-              </span>
+              {totalRisk > 0 ? (
+                <span className='text-body-10 text-neutral-600'>
+                  임산부 위험 성분 {totalRisk}건
+                </span>
+              ) : (
+                <span className='text-body-10 text-neutral-600'>
+                  임산부 위험 성분 미검출
+                </span>
+              )}
             </div>
             <div
               className={`absolute flex items-center justify-center ${positionClass}`}
@@ -68,22 +64,22 @@ export default function IngredientResultPage() {
               <h2 className='text-body-04 text-neutral-900'>스캔 성분 확인</h2>
               <Tooltip description={description} />
             </div>
-            <ImagePreviewModal imgSrc={ingredientImage} />
+            <ImagePreviewModal imgSrc={analysisImage!} />
           </div>
         </div>
 
-        {ingrediientItems.length > 0 && (
+        {ingredientAnalysis && ingredientAnalysis.length > 0 && (
           <div className='flex flex-col gap-20'>
             <h2 className='sr-only'>위험 성분 리스트</h2>
             <p className='text-body-01'>
               <span className='text-body-01 text-semantic-red'>
-                {ingrediientItems.length}건
+                {totalRisk}건
               </span>
               의 위험 성분이 검출되었어요
             </p>
             <ul className='flex w-full flex-col gap-12'>
-              {ingrediientItems.map((ingrediientItem, index) => (
-                <IngredientItem key={index} ingrediientItem={ingrediientItem} />
+              {ingredientAnalysis?.map((ingrediientItem, index) => (
+                <IngredientItem key={index} ingredientItem={ingrediientItem} />
               ))}
             </ul>
           </div>
