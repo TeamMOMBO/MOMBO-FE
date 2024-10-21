@@ -8,6 +8,7 @@ import ResultBar from '/public/svgs/icon-result-bar.svg';
 import ArrowIcon from '/public/svgs/arrow/icon-gauge.svg';
 import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
 import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnalysisStore';
+import { RiskLevel } from '<prefix>/shared/types/ingredient';
 
 export default function IngredientResultPage() {
   const router = useRouter();
@@ -19,7 +20,7 @@ export default function IngredientResultPage() {
   const { riskLevel, analysisImage, riskIngredientCount, ingredientAnalysis } =
     analysisResult || {};
 
-  const { positionClass, colorClass } = getArrowStyles(riskLevel);
+  const { positionClass, colorClass } = getArrowStyles(riskLevel as RiskLevel);
   const totalRisk = riskIngredientCount?.total || 0;
 
   const onClose = () => {

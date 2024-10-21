@@ -27,8 +27,10 @@ interface IngredientAnalysis {
   reason: string;
 }
 
+export type RiskLevel = 'high' | 'middle' | 'low';
+
 export interface IAnalysisResult {
-  riskLevel: string;
+  riskLevel: RiskLevel;
   user: IUser;
   analysisImage: string;
   riskIngredientCount: IRiskIngredientCount;
