@@ -2,17 +2,17 @@ import Link from 'next/link';
 import { IIngredientInfo } from '<prefix>/shared/types/ingredient';
 
 type IngredientItemProps = {
-    ingrediientItem: IIngredientInfo;
+  ingredientItem: IIngredientInfo;
 };
 
 export default function IngredientItem({
-  ingrediientItem,
+  ingredientItem,
 }: IngredientItemProps) {
-  const { id, name, level, notes } = ingrediientItem;
+  const { id, name, level, reason } = ingredientItem;
 
-  const levelStyles: { [key: number]: string } = {
-    1: 'bg-[#EE5E56]',
-    2: 'bg-[#FFF07D]',
+  const levelStyles: { [key: string]: string } = {
+    '1등급': 'bg-[#EE5E56]',
+    '2등급': 'bg-[#FFF07D]',
   };
 
   return (
@@ -25,7 +25,7 @@ export default function IngredientItem({
           <div className={`h-24 w-24 rounded-full ${levelStyles[level]}`}></div>
           <h3 className='text-body-04 text-neutral-900'>{name}</h3>
         </div>
-        <p className='text-overflow text-body-10 text-neutral-600'>{notes}</p>
+        <p className='text-overflow text-body-10 text-neutral-600'>{reason}</p>
       </Link>
     </li>
   );
