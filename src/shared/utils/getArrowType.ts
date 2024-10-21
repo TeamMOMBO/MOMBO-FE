@@ -1,7 +1,7 @@
 enum ResultLevelType {
-  high = 1,
-  middle = 2,
-  low = 3,
+  high = 'high',
+  middle = 'middle',
+  low = 'low',
 }
 
 export const getArrowStyles = (resultLevel: ResultLevelType) => {

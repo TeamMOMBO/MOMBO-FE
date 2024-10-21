@@ -1,8 +1,8 @@
 export interface IIngredientInfo {
   id: number;
   name: string;
-  level: number;
-  notes: string;
+  level: string;
+  reason: string;
 }
 
 export interface IIngredientImage {
