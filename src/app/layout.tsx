@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <html lang='kr' className={`${pretendard.variable}`}>
       <body
-        className={`${pretendard.className} relative mx-auto min-h-[100dvh] w-390 shadow-xl`}
+        className={`${pretendard.className} relative mx-auto h-[100dvh] w-390 shadow-xl`}
       >
         <TanstackQueryProvider>
           <CookiesProvider>{children}</CookiesProvider>
