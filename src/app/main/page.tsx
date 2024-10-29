@@ -11,6 +11,7 @@ import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarous
 import { useNotificationPermission } from '<prefix>/hooks/notification/useNotificationPermission';
 import { useForegroundNotification } from '<prefix>/hooks/notification/useForegroundNotification';
 import { useEffect } from 'react';
+import LocoIcon from '/public/svgs/icon-logo.svg';
 
 export default function MainPage() {
   const { requestPermission } = useNotificationPermission();
@@ -57,7 +58,9 @@ export default function MainPage() {
 
   return (
     <>
-      <MainTopBar />
+      <MainTopBar>
+        <LocoIcon className='h-19 w-103 fill-primary' />
+      </MainTopBar>
       <div className='flex h-full w-full flex-col gap-30'>
         <div className='flex flex-col gap-2 px-16 pt-12'>
           <h2 className='sr-only'>유저 정보</h2>

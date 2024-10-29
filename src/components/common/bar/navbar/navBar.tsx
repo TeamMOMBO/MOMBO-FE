@@ -11,10 +11,10 @@ import useImageAnalyzer from '<prefix>/hooks/useImageAnalyzer';
 const navItems = [
   { href: '/main', icon: HomeIcon, label: '홈', activePath: 'main' },
   {
-    href: '/contents',
+    href: '/content',
     icon: LayersIcon,
     label: '콘텐츠',
-    activePath: 'contents',
+    activePath: 'content',
   },
   { href: '/', icon: ScannerIcon, activePath: 'dictionary', isCenter: true },
   { href: '/dictionary', icon: BookIcon, label: '성분사전', activePath: '' },
