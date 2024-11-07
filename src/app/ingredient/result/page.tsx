@@ -10,6 +10,7 @@ import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
 import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnalysisStore';
 import { RiskLevel } from '<prefix>/shared/types/ingredient';
 import { convertRiskLevel } from '<prefix>/shared/utils/convertRiskLevel';
+import IngredientCard from '<prefix>/components/ingredient/ingredientCard';
 
 export default function IngredientResultPage() {
   const router = useRouter();
@@ -62,6 +63,7 @@ export default function IngredientResultPage() {
             정보를 제공합니다. 이는 의학적 진단의 대체가 아니며, 복용 전 반드시
             전문가와 상담하시기 바랍니다.
           </p>
+
           <div className='flex w-full flex-col gap-8 rounded-12 border border-solid border-neutral-300 bg-white p-16'>
             <div className='flex items-center gap-4'>
               <h2 className='text-body-04 text-neutral-900'>스캔 성분 확인</h2>
@@ -70,7 +72,7 @@ export default function IngredientResultPage() {
             <ImagePreviewModal imgSrc={analysisImage!} />
           </div>
         </div>
-
+        <IngredientCard />
         {ingredientAnalysis && ingredientAnalysis.length > 0 && (
           <div className='flex flex-col gap-20'>
             <h2 className='sr-only'>위험 성분 리스트</h2>
@@ -80,11 +82,12 @@ export default function IngredientResultPage() {
               </span>
               의 위험 성분이 검출되었어요
             </p>
-            <ul className='flex w-full flex-col gap-12'>
+
+            {/* <ul className='flex w-full flex-col gap-12'>
               {ingredientAnalysis?.map((ingrediientItem, index) => (
-                <IngredientItem key={index} ingredientItem={ingrediientItem} />
+                <IngredientCard key={index} ingredientItem={ingrediientItem} />
               ))}
-            </ul>
+            </ul> */}
           </div>
         )}
       </div>
