@@ -1,32 +1,76 @@
-import Link from 'next/link';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import ArrowIcon from '/public/svgs/arrow/icon-top.svg';
 import { IIngredientInfo } from '<prefix>/shared/types/ingredient';
+import IngredientItemDetails from './ingredientItemDetails';
 
 type IngredientItemProps = {
   ingredientItem: IIngredientInfo;
 };
 
-export default function IngredientItem({
-  ingredientItem,
-}: IngredientItemProps) {
-  const { id, name, level, reason } = ingredientItem;
+const levelStyles: { [key: string]: string } = {
+  '1등급': 'bg-semantic-pink text-semantic-red',
+  '2등급': 'bg-semantic-yellow text-semantic-brown',
+};
 
-  const levelStyles: { [key: string]: string } = {
-    '1등급': 'bg-[#EE5E56]',
-    '2등급': 'bg-[#FFF07D]',
+const IngredientItem = ({ ingredientItem }: IngredientItemProps) => {
+  const [openItems, setOpenItems] = useState<{ [key: string]: boolean }>({});
+
+  const { id, ingredientKr, level, reason, effectType } = ingredientItem;
+
+  const toggleItem = (name: string) => {
+    setOpenItems((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
   };
 
   return (
-    <li className='h-auto w-full rounded-12 border border-solid border-neutral-300 bg-white'>
-      <Link
-        href={`/indredient/detail/${id}`} // 임시 url 설정
-        className='flex w-full flex-col gap-8 p-16'
+    <>
+      <div
+        key={id}
+        className='w-full space-y-12 rounded-12 border border-solid border-neutral-300 bg-white p-16'
       >
-        <div className='flex gap-8'>
-          <div className={`h-24 w-24 rounded-full ${levelStyles[level]}`}></div>
-          <h3 className='text-body-04 text-neutral-900'>{name}</h3>
-        </div>
-        <p className='text-overflow text-body-10 text-neutral-600'>{reason}</p>
-      </Link>
-    </li>
+        <button
+          onClick={() => toggleItem(ingredientKr)}
+          className='flex w-full items-center justify-between rounded-lg bg-white'
+        >
+          <div className='flex items-center gap-6'>
+            <span className='text-body-04 text-neutral-900'>
+              {ingredientKr}
+            </span>
+            {level && (
+              <span
+                className={`rounded-6 px-6 py-2 text-caption-02 ${levelStyles[level]}`}
+              >
+                {level}
+              </span>
+            )}
+          </div>
+          <motion.div
+            animate={{ rotate: openItems[ingredientKr] ? 180 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ArrowIcon className={`h-24 w-24 stroke-neutral-600`} />
+          </motion.div>
+        </button>
+
+        <AnimatePresence>
+          {openItems[ingredientKr] && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className='overflow-hidden'
+            >
+              <IngredientItemDetails effectType={effectType} reason={reason} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </>
   );
-}
+};
+
+export default IngredientItem;
