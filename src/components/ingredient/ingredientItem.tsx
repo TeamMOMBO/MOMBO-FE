@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ArrowIcon from '/public/svgs/arrow/icon-top.svg';
+import ArrowBottomIcon from '/public/svgs/arrow/icon-bottom.svg';
 import { IIngredientInfo } from '<prefix>/shared/types/ingredient';
 import IngredientItemDetails from './ingredientItemDetails';
 
@@ -51,7 +51,7 @@ const IngredientItem = ({ ingredientItem }: IngredientItemProps) => {
             animate={{ rotate: openItems[ingredientKr] ? 180 : 0 }}
             transition={{ duration: 0.2 }}
           >
-            <ArrowIcon className={`h-24 w-24 stroke-neutral-600`} />
+            <ArrowBottomIcon className={`h-24 w-24 stroke-neutral-600`} />
           </motion.div>
         </button>
 
