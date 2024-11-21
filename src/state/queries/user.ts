@@ -1,27 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 
-import {
-  axiosInstance,
-  useClientAuthInstance,
-  useServerAuthInstance,
-} from '<prefix>/shared/apis/axiosInstance';
-import { ApiResponse } from '<prefix>/shared/types/axios';
 import { ProfileResponse } from '<prefix>/shared/types/auth';
+import { useClientAuthInstance } from '<prefix>/shared/intercepte/useClientAuthInstance';
+import { getUserProfile } from '<prefix>/shared/apis/auth';
 
 export function useUserProfileQuery() {
-  const authInstance = useClientAuthInstance();
-
+  const clientAuthInstance = useClientAuthInstance();
   const {
     data: userProfile,
     isLoading,
     error,
-  } = useQuery<ApiResponse<ProfileResponse>>({
+  } = useQuery<ProfileResponse>({
     queryKey: ['userProfile'],
-    queryFn: async () => {
-      const response =
-        await authInstance.get<ApiResponse<ProfileResponse>>('/user/profile');
-      return response.data;
-    },
+    queryFn: () => getUserProfile(clientAuthInstance),
     staleTime: 300000, // 5분
   });
 

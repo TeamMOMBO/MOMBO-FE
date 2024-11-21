@@ -30,6 +30,10 @@ interface IngredientResult {
 }
 
 export interface ProfileResponse {
-  profile: UserProfile;
-  userAnalysisResult: UserAnalysis[];
+  data: UserProfile;
 }
+
+export const AUTH_COOKIE_KEYS = {
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+} as const;
