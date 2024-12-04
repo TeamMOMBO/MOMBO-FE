@@ -2,10 +2,7 @@
 
 import { AxiosError, AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import { Cookies } from 'next-client-cookies';
-import { AUTH_COOKIE_KEYS } from '../types/auth';
-interface RefreshResponse {
-  access: string;
-}
+import { AUTH_COOKIE_KEYS, RefreshResponse } from '../types/auth';
 
 interface ExtendedAxiosRequestConfig extends InternalAxiosRequestConfig {
   _retry?: boolean;
