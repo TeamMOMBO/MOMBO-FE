@@ -37,3 +37,7 @@ export const AUTH_COOKIE_KEYS = {
   accessToken: 'accessToken',
   refreshToken: 'refreshToken',
 } as const;
+
+export interface RefreshResponse {
+  access: string;
+}
