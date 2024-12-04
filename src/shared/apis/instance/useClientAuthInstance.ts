@@ -1,9 +1,8 @@
 'use client';
-
 import axios from 'axios';
 import { useCookies } from 'next-client-cookies';
 import { useMemo } from 'react';
-import { clientAuthInterceptor } from '../apis/clientAuthInterceptor';
+import { clientAuthInterceptor } from '../clientAuthInterceptor';
 
 const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
@@ -13,7 +12,6 @@ export const useClientAuthInstance = () => {
   const clientInstance = useMemo(() => {
     const instance = axios.create({
       baseURL,
-      timeout: 5000,
     });
 
     const interceptors = clientAuthInterceptor(instance, cookies);
