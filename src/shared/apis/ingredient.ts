@@ -1,13 +1,18 @@
-import axiosInstance from './axiosInstance';
-import { IAnalysisResult, IIngredientImage } from '../types/ingredient';
+import { AxiosInstance } from 'axios';
+import { IAnalysisResult } from '../types/ingredient';
 
 export const createIngredientAnalysis = async (
   formData: FormData,
+  clientAuthInstace: AxiosInstance,
 ): Promise<IAnalysisResult> => {
-  const response = await axiosInstance.post('/ingredient/analysis/', formData, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
+  const response = await clientAuthInstace.post(
+    '/ingredient/analysis/',
+    formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
     },
-  });
+  );
   return response.data;
 };
