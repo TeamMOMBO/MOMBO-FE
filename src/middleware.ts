@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { jwtDecode } from 'jwt-decode';
 import { refreshAccessToken } from './shared/apis/auth';
+import {
+  ResponseCookies,
+  RequestCookies,
+} from 'next/dist/server/web/spec-extension/cookies';
 
 interface DecodedToken {
   exp: number; // 토큰 만료 시간
@@ -30,8 +34,9 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
               const newAccessToken = await refreshAccessToken(refreshToken);
 
               res.cookies.set('accessToken', newAccessToken, {
-                httpOnly: true,
+                httpOnly: false,
                 path: '/',
+                secure: process.env.NODE_ENV === 'production',
               });
               applySetCookie(request, res);
             } catch (error) {
@@ -49,7 +54,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
         const newAccessToken = await refreshAccessToken(refreshToken);
 
         res.cookies.set('accessToken', newAccessToken, {
-          httpOnly: true,
+          httpOnly: false,
           path: '/',
           secure: process.env.NODE_ENV === 'production',
         });
@@ -66,19 +71,33 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
   return NextResponse.next();
 }
-
 function applySetCookie(req: NextRequest, res: NextResponse): void {
-  const setCookies = res.headers.get('set-cookie');
-  if (setCookies) {
-    const newReqHeaders = new Headers(req.headers);
-    newReqHeaders.set('cookie', setCookies);
-    res.headers.set(
-      'x-middleware-request-headers',
-      newReqHeaders.get('cookie') || '',
-    );
-  }
-}
+  // 응답의 Set-Cookie 헤더 파싱
+  const setCookies = new ResponseCookies(res.headers);
 
+  // 요청에 대한 새로운 Cookie 헤더 생성
+  const newReqHeaders = new Headers(req.headers);
+  const newReqCookies = new RequestCookies(newReqHeaders);
+
+  // 응답 헤더 순회
+  setCookies.getAll().forEach((cookie) => newReqCookies.set(cookie));
+
+  // 응답 쿠키 오버라이드
+  NextResponse.next({
+    request: { headers: newReqHeaders },
+  }).headers.forEach((value, key) => {
+    if (
+      key === 'x-middleware-override-headers' ||
+      key.startsWith('x-middleware-request-')
+    ) {
+      res.headers.set(key, value);
+    }
+  });
+}
 export const config = {
-  matcher: '/((?!_next/static|_next/image|favicon.ico).*)',
+  matcher: [
+    // public 파일, public 라우터 제외
+    '/((?!_next/static|_next/image|favicon.ico).*)',
+    '/((?!login|onboarding).*)',
+  ],
 };
