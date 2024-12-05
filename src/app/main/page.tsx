@@ -11,10 +11,14 @@ import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarous
 import { useNotificationPermission } from '<prefix>/hooks/notification/useNotificationPermission';
 import { useForegroundNotification } from '<prefix>/hooks/notification/useForegroundNotification';
 import { useEffect } from 'react';
+import { useUserProfileQuery } from '<prefix>/state/queries/user';
 
 export default function MainPage() {
   const { requestPermission } = useNotificationPermission();
   useForegroundNotification();
+
+  const { userProfile } = useUserProfileQuery();
+  console.log(userProfile);
 
   useEffect(() => {
     requestPermission();
