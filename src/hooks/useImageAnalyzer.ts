@@ -1,4 +1,3 @@
-import { useClientAuthInstance } from '<prefix>/shared/apis/instance/useClientAuthInstance';
 import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
@@ -9,21 +8,17 @@ import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnaly
 export default function useImageAnalyzer() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const clientAuthInstance = useClientAuthInstance();
+
   const setAnalysisResult = useIngredientAnalysisStore(
     (state) => state.setAnalysisResult,
   );
-  //   const [analysisResult, setAnalysisResult] = useState<IAnalysisResult | null>(
-  //     null,
-  //   );
 
   const { mutate: analyzeIngredient } = useMutation<
     IAnalysisResult,
     unknown,
     FormData
   >({
-    mutationFn: (formData: FormData) =>
-      createIngredientAnalysis(formData, clientAuthInstance),
+    mutationFn: (formData: FormData) => createIngredientAnalysis(formData),
     onSuccess: (data) => {
       console.log(data);
       router.push('/ingredient/result');

@@ -1,6 +1,7 @@
 import { IJoinReq, ProfileResponse, RefreshResponse } from '../types/auth';
 import { AxiosInstance } from 'axios';
 import { publicInstance } from './instance/publicInstance';
+import { clientAuthInstance } from './instance/clientAuthInstance';
 
 export const createUserInfo = async (data: IJoinReq) => {
   const response = await publicInstance.post('/user/join/', data);
@@ -33,8 +34,8 @@ export const refreshAccessToken = async (
   }
 };
 
-export const getUserProfile = async (clientAuthInstance: AxiosInstance) => {
+export const getUserProfile = async () => {
   const response =
-    await clientAuthInstance.get<ProfileResponse>('/user/profile');
+    await clientAuthInstance.get<ProfileResponse>('/user/profile/');
   return response.data;
 };

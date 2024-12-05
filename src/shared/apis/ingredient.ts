@@ -1,11 +1,10 @@
-import { AxiosInstance } from 'axios';
 import { IAnalysisResult } from '../types/ingredient';
+import { clientAuthInstance } from './instance/clientAuthInstance';
 
 export const createIngredientAnalysis = async (
   formData: FormData,
-  clientAuthInstace: AxiosInstance,
 ): Promise<IAnalysisResult> => {
-  const response = await clientAuthInstace.post(
+  const response = await clientAuthInstance.post(
     '/ingredient/analysis/',
     formData,
     {
