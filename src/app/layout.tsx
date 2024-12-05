@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import '<prefix>/shared/styles/global.css';
 import Script from 'next/script';
-import { CookiesProvider } from 'next-client-cookies/server';
 import TanstackQueryProvider from '../../providers/tanstackQueryProvider';
 export const metadata: Metadata = {
   title: '맘보 - 맘을 위한 정보',
@@ -26,9 +25,7 @@ export default function RootLayout({
       <body
         className={`${pretendard.className} relative mx-auto h-[100dvh] w-390 shadow-xl`}
       >
-        <TanstackQueryProvider>
-          <CookiesProvider>{children}</CookiesProvider>
-        </TanstackQueryProvider>
+        <TanstackQueryProvider>{children}</TanstackQueryProvider>
         <Script src='/service-worker.js' />
       </body>
     </html>
