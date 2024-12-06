@@ -5,10 +5,12 @@ import { useJoinMutation } from '<prefix>/state/mutations/auth';
 import { useState } from 'react';
 import Funnel from '../funnel/funnel';
 import NickName from './onboardingItems/nickName';
+import { getCookie } from 'cookies-next';
+
 import UserType from './onboardingItems/userType';
 import PregnancyDate from './onboardingItems/pregnancyDate';
 import { IJoinReq } from '<prefix>/shared/types/auth';
-import { useCookies } from 'next-client-cookies';
+
 const initailFunnelData: IJoinReq = {
   nickname: '',
   userType: '',
@@ -18,7 +20,6 @@ const initailFunnelData: IJoinReq = {
 const steps = ['닉네임', '회원유형', '주차'];
 
 export default function Onboarding() {
-  const cookies = useCookies();
   const { mutate: join } = useJoinMutation();
   const { step, onNextStep, onPrevStep } = useFunnel({ steps });
   const [funnelData, setFunnelData] = useState(initailFunnelData);
@@ -33,8 +34,7 @@ export default function Onboarding() {
   };
 
   const onSubmit = (value: Partial<IJoinReq>) => {
-    const email = cookies.get('email');
-
+    const email = getCookie('email') as string | undefined;
     const onboardData = {
       email,
       ...funnelData,

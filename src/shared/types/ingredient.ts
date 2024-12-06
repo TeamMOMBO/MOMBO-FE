@@ -1,8 +1,12 @@
 export interface IIngredientInfo {
   id: number;
-  name: string;
+  categoryId: string;
+  effectType: string;
+  ingredientKr: string;
+  ingredient: string;
   level: string;
   reason: string;
+  notes: string | null;
 }
 
 export interface IIngredientImage {
@@ -20,13 +24,6 @@ interface IRiskIngredientCount {
   '2단계': number;
 }
 
-interface IngredientAnalysis {
-  id: number;
-  name: string;
-  level: string;
-  reason: string;
-}
-
 export type RiskLevel = 'high' | 'middle' | 'low';
 
 export interface IAnalysisResult {
@@ -34,5 +31,5 @@ export interface IAnalysisResult {
   user: IUser;
   analysisImage: string;
   riskIngredientCount: IRiskIngredientCount;
-  ingredientAnalysis: IngredientAnalysis[];
+  ingredientAnalysis: IIngredientInfo[];
 }

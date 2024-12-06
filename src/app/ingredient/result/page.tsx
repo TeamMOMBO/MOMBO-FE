@@ -3,13 +3,13 @@ import { useRouter } from 'next/navigation';
 import Tooltip from '<prefix>/components/common/tooltip';
 import TopBar from '<prefix>/components/common/bar/topBar';
 import ImagePreviewModal from '<prefix>/components/ingredient/ImagePreviewModal';
-import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import ResultBar from '/public/svgs/icon-result-bar.svg';
 import ArrowIcon from '/public/svgs/arrow/icon-gauge.svg';
 import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
 import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnalysisStore';
 import { RiskLevel } from '<prefix>/shared/types/ingredient';
 import { convertRiskLevel } from '<prefix>/shared/utils/convertRiskLevel';
+import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 
 export default function IngredientResultPage() {
   const router = useRouter();
@@ -17,7 +17,6 @@ export default function IngredientResultPage() {
     (state) => state.analysisResult,
   );
 
-  //analysisResult.riskLevel, analysisResult.analysisImage 로 직접 값 바인딩 사용 대신 객체 분해 할당 방식으로 설정
   const { riskLevel, analysisImage, riskIngredientCount, ingredientAnalysis } =
     analysisResult || {};
 
@@ -62,6 +61,7 @@ export default function IngredientResultPage() {
             정보를 제공합니다. 이는 의학적 진단의 대체가 아니며, 복용 전 반드시
             전문가와 상담하시기 바랍니다.
           </p>
+
           <div className='flex w-full flex-col gap-8 rounded-12 border border-solid border-neutral-300 bg-white p-16'>
             <div className='flex items-center gap-4'>
               <h2 className='text-body-04 text-neutral-900'>스캔 성분 확인</h2>
@@ -70,7 +70,6 @@ export default function IngredientResultPage() {
             <ImagePreviewModal imgSrc={analysisImage!} />
           </div>
         </div>
-
         {ingredientAnalysis && ingredientAnalysis.length > 0 && (
           <div className='flex flex-col gap-20'>
             <h2 className='sr-only'>위험 성분 리스트</h2>

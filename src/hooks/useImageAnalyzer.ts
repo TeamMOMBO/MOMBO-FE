@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
 import { createIngredientAnalysis } from '<prefix>/shared/apis/ingredient';
@@ -8,12 +8,10 @@ import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnaly
 export default function useImageAnalyzer() {
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
+
   const setAnalysisResult = useIngredientAnalysisStore(
     (state) => state.setAnalysisResult,
   );
-  //   const [analysisResult, setAnalysisResult] = useState<IAnalysisResult | null>(
-  //     null,
-  //   );
 
   const { mutate: analyzeIngredient } = useMutation<
     IAnalysisResult,
@@ -25,12 +23,9 @@ export default function useImageAnalyzer() {
       console.log(data);
       router.push('/ingredient/result');
       setAnalysisResult(data);
-      //   setAnalysisResult(data);
-      //성공 응답 data 전역 상태관리?
     },
     onError: (error: unknown) => {
       console.error('성분 분석 실패', error);
-      // 에러 처리 로직 추가 (예: 사용자에게 알림)
     },
   });
 
