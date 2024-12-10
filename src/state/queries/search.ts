@@ -1,17 +1,17 @@
 import { getSearch } from '<prefix>/shared/apis/clientApi/search.client';
-import { SearchParams } from '<prefix>/shared/types/searchType';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { SearchParams, SearchResponse } from '<prefix>/shared/types/searchType';
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-export const useSearchQuery = (params: Omit<SearchParams, 'page'>) => {
-  return useInfiniteQuery({
-    queryKey: ['search', params],
-    queryFn: ({ pageParam = 1 }) =>
-      getSearch({
-        ...params,
-        page: pageParam,
-      }),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) =>
-      lastPage.hasMore ? lastPage.nextPage : undefined,
-  });
+export const useSearchPreviewQuery = (params: Omit<SearchParams, 'page'>) => {
+  const { data: searchPreviewData, isLoading: searchPreviewLoading } =
+    useQuery<SearchResponse>({
+      queryKey: ['preview-search', params],
+      queryFn: () =>
+        getSearch({
+          ...params,
+          page: 1,
+        }),
+    });
+
+  return { searchPreviewData, searchPreviewLoading };
 };

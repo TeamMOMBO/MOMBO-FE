@@ -1,3 +1,5 @@
+import { IIngredientInfo } from './ingredient';
+
 export interface SearchParams {
   keyword: string;
   category: 'all' | 'content' | 'ingredient';
@@ -20,7 +22,7 @@ export interface IngredientResponse {
 
 export interface SearchResponse {
   faqs: FAQResponse[];
-  Ingredients: IngredientResponse[];
+  ingredients: IIngredientInfo[];
   hasMore: boolean;
   nextPage: number;
   total: number;
