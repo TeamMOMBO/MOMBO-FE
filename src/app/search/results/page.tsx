@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import SearchBar from '<prefix>/components/common/bar/searchbar/searchbar';
-import SearchResults from '<prefix>/components/common/bar/searchbar/searchResults';
+import SearchResults from '<prefix>/components/search/searchResults';
 import { getSearchServer } from '<prefix>/shared/apis/serverApi/search.server.api';
 import {
   dehydrate,
