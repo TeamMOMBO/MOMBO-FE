@@ -3,15 +3,11 @@ import { FIVE_MIN_STALE_TIME } from '<prefix>/shared/constants/queryOptions';
 import { SearchParams, SearchResponse } from '<prefix>/shared/types/searchType';
 import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
-export const useSearchPreviewQuery = (params: Omit<SearchParams, 'page'>) => {
+export const useSearchPreviewQuery = (keyword: string) => {
   const { data: searchPreviewData, isLoading: searchPreviewLoading } =
     useQuery<SearchResponse>({
-      queryKey: ['preview-search', params],
-      queryFn: () =>
-        getSearch({
-          ...params,
-          page: 1,
-        }),
+      queryKey: ['preview-search', keyword],
+      queryFn: () => getSearch(keyword),
       staleTime: FIVE_MIN_STALE_TIME,
       refetchOnMount: false,
     });

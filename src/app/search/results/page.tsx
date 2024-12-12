@@ -1,5 +1,4 @@
 import Link from 'next/link';
-
 import SearchBar from '<prefix>/components/common/bar/searchbar/searchbar';
 import SearchResults from '<prefix>/components/common/bar/searchbar/searchResults';
 import { getSearchServer } from '<prefix>/shared/apis/serverApi/search.server.api';
@@ -10,29 +9,20 @@ import {
 } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import LeftArrowIcon from '/public/svgs/arrow/icon-left2.svg';
+
 export default async function SearchResultPage({
   searchParams,
 }: {
   searchParams: {
     keyword?: string;
-    page?: string;
   };
 }) {
   const queryClient = new QueryClient();
+
   if (searchParams.keyword) {
-    const initialData = await getSearchServer({
-      keyword: searchParams.keyword,
-      category: 'all',
-      page: parseInt(searchParams.page || '1'),
-    });
+    const initialData = await getSearchServer(searchParams.keyword);
     await queryClient.prefetchQuery({
-      queryKey: [
-        'preview-search',
-        {
-          keyword: searchParams.keyword,
-          category: 'all',
-        },
-      ],
+      queryKey: ['preview-search', searchParams.keyword],
       queryFn: () => Promise.resolve(initialData),
     });
   }
@@ -53,7 +43,7 @@ export default async function SearchResultPage({
       </div>
 
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense fallback={<div>검색결과 볼러오는중...</div>}>
+        <Suspense fallback={<div>검색결과 불러오는중...</div>}>
           <SearchResults keyword={searchParams.keyword!} />
         </Suspense>
       </HydrationBoundary>

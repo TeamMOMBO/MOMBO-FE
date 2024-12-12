@@ -11,10 +11,8 @@ interface SearchResultsProps {
 }
 
 export default function SearchResults({ keyword }: SearchResultsProps) {
-  const { searchPreviewData, searchPreviewLoading } = useSearchPreviewQuery({
-    keyword,
-    category: 'all',
-  });
+  const { searchPreviewData, searchPreviewLoading } =
+    useSearchPreviewQuery(keyword);
 
   const router = useRouter();
   const contentItems = searchPreviewData?.faqs;
@@ -28,7 +26,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
         <p className='text-body-01 text-neutral-900'>
           콘텐츠{' '}
           <span className='text-body-04 text-primary'>
-            {contentItems?.length}
+            {searchPreviewData?.faqsCount}
           </span>
         </p>
         <ul className='flex flex-col gap-16'>
@@ -49,7 +47,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
         <p className='text-body-01 text-neutral-900'>
           성분사전{' '}
           <span className='text-body-04 text-primary'>
-            {dictionaryItems?.length}
+            {searchPreviewData?.ingredientsCount}
           </span>
         </p>
         <ul className='flex w-full flex-col gap-12'>

@@ -3,24 +3,15 @@ import { baseURL } from './../instance/publicInstance';
 import { SearchParams, SearchResponse } from '<prefix>/shared/types/searchType';
 
 export const getSearchServer = async (
-  params: SearchParams,
+  keyword: string,
 ): Promise<SearchResponse> => {
   try {
-    const queryParams = new URLSearchParams({
-      keyword: params.keyword,
-      page: params.page.toString(),
-      ...(params.category && { category: params.category }),
-    });
-
-    const response = await fetch(
-      `${baseURL}/search?${queryParams.toString()}`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${cookies().get('accessToken')?.value}`,
-        },
+    const response = await fetch(`${baseURL}/search?keyword=${keyword}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${cookies().get('accessToken')?.value}`,
       },
-    );
+    });
 
     if (!response.ok) {
       throw new Error(`검색 실패: ${response.status}`);
