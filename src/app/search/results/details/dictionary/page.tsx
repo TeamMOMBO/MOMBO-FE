@@ -1,47 +1,57 @@
 'use client';
-import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
-import { IIngredientInfo } from '<prefix>/shared/types/ingredient';
 
-// const ingrediientItems: IIngredientInfo[] = [
-//   {
-//     id: 1,
-//     name: '아세트아미노펜(USP)',
-//     level: '1',
-//     reason:
-//       '아세트아미노펜(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
-//   },
-//   {
-//     id: 2,
-//     name: '디펜히드라민염산염(USP)',
-//     level: '2',
-//     reason:
-//       '디펜히드라민염산염(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
-//   },
-//   {
-//     id: 3,
-//     name: '디펜히드라민염산염(USP)',
-//     level: '1',
-//     reason:
-//       '디펜히드라민염산염(USP)은 이러이러한 성분이고 이러이러해서 안좋습니다. 이러이러한 이유가 어쩌구 저쩌구 어쩌구 저쩌구',
-//   },
-// ];
+import Link from 'next/link';
+import LeftArrowIcon from '/public/svgs/arrow/icon-left2.svg';
+import SearchBar from '<prefix>/components/common/bar/searchbar/searchbar';
+import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
+import { useSearchParams } from 'next/navigation';
+
+import { Virtuoso } from 'react-virtuoso';
+import { useSearchDetailsInfiniteQuery } from '<prefix>/state/queries/search';
 
 export default function SearchDictionaryDetails() {
+  const searchParams = useSearchParams();
+  const keyword = searchParams.get('keyword') || '';
+
+  const { detailsData, totalCount, fetchNextPage, hasNextPage, isLoading } =
+    useSearchDetailsInfiniteQuery({ keyword, category: 'ingredient' });
+
+  if (isLoading) return <div>로딩중...</div>;
+
   return (
-    <div className='px-16 py-19'>
-      <div className='flex flex-col gap-20'>
-        <p className='text-body-01 text-neutral-900'>
-          성분사전 <span className='text-body-04 text-primary'>12</span>
-        </p>
-        {/* <ul className='flex w-full flex-col gap-12'>
-          {ingrediientItems.map((ingrediientItem, index) => (
-            <IngredientItem key={index} ingredientItem={ingrediientItem} />
-          ))}
-        </ul> */}
-        {/* <button className='h-44 w-358 rounded-8 bg-neutral-200 text-center text-body-08 text-neutral-900'>
-          성분사전 더보기
-        </button> */}
+    <>
+      <div className='flex items-center gap-13 pt-9'>
+        <Link href={'/main'}>
+          <LeftArrowIcon
+            className={`h-24 w-24 cursor-pointer items-center justify-center stroke-neutral-600`}
+          />
+        </Link>
+        <SearchBar defaultKeyword={keyword} isResultSearch={true} />
       </div>
-    </div>
+      <div className='px-16 py-19'>
+        <div className='mb-20 flex flex-col'>
+          <p className='text-body-01 text-neutral-900'>
+            성분사전{' '}
+            <span className='text-body-04 text-primary'>{totalCount}</span>
+          </p>
+
+          <Virtuoso
+            style={{
+              height: 'calc(100dvh - 144px)', //100dvh - 헤더높이
+              scrollBehavior: 'smooth',
+              msOverflowStyle: 'none', // IE, Edge
+              scrollbarWidth: 'none', // Firefox
+            }}
+            data={detailsData}
+            endReached={() => hasNextPage && fetchNextPage()}
+            itemContent={(index, ingredientItem) => (
+              <div className=''>
+                <IngredientItem key={index} ingredientItem={ingredientItem} />
+              </div>
+            )}
+          />
+        </div>
+      </div>
+    </>
   );
 }

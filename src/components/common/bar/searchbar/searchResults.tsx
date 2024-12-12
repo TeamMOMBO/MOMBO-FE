@@ -53,8 +53,8 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
           </span>
         </p>
         <ul className='flex w-full flex-col gap-12'>
-          {dictionaryItems?.map((ingrediientItem, index) => (
-            <IngredientItem key={index} ingredientItem={ingrediientItem} />
+          {dictionaryItems?.map((ingredientItem, index) => (
+            <IngredientItem key={index} ingredientItem={ingredientItem} />
           ))}
         </ul>
         <button
@@ -63,7 +63,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
             router.push(`/search/results/details/dictionary?keyword=${keyword}`)
           }
         >
-          콘텐츠 더보기
+          성분사전 더보기
         </button>
       </div>
     </div>

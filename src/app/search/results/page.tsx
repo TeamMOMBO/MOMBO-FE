@@ -25,7 +25,6 @@ export default async function SearchResultPage({
       category: 'all',
       page: parseInt(searchParams.page || '1'),
     });
-
     await queryClient.prefetchQuery({
       queryKey: [
         'preview-search',
