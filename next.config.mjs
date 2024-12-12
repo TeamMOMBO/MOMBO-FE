@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['mombobucket.s3.ap-northeast-2.amazonaws.com'],
+    domains: ['mombobucket.s3.ap-northeast-2.amazonaws.com', 'i.ibb.co'],
   },
   webpack(config) {
     config.module.rules.push({

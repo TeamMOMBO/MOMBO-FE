@@ -12,7 +12,7 @@ type FaqInfoItemProps = {
 export default function FaqInfoItem({ faqInfoItem }: FaqInfoItemProps) {
   const { id, question, image, views } = faqInfoItem;
   return (
-    <li className=''>
+    <ul className=''>
       <Link className='flex h-81 w-full gap-12' href={`/faq/${id}`}>
         <Image
           src={image as string}
@@ -33,6 +33,6 @@ export default function FaqInfoItem({ faqInfoItem }: FaqInfoItemProps) {
           </div>
         </div>
       </Link>
-    </li>
+    </ul>
   );
 }
