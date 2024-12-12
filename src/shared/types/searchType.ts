@@ -4,10 +4,10 @@ export interface SearchParams {
   keyword: string;
 }
 
-export interface SearchDetailParams {
+export interface SearchDetailsParams {
   keyword: string;
-  category: 'all' | 'content' | 'ingredient';
-  page: number;
+  category: 'content' | 'ingredient';
+  page?: number;
 }
 
 export interface FAQResponse {
@@ -18,15 +18,23 @@ export interface FAQResponse {
   views: number;
 }
 
-export interface IngredientResponse {
-  id: number;
-  ingredientKr: string;
-  ingredientDescription: string;
-}
-
 export interface SearchResponse {
   faqs: FAQResponse[];
   ingredients: IIngredientInfo[];
   faqsCount: number;
   ingredientsCount: number;
+}
+
+export interface SearchDetailsResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    faqs: FAQResponse[];
+    ingredients: IIngredientInfo[];
+    count: number;
+    page: number;
+    page_size: number;
+    maxPage: number;
+  };
 }
