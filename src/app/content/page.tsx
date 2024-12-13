@@ -7,7 +7,6 @@ import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import useTab from '<prefix>/hooks/useTab';
 import { FAQResponse } from '<prefix>/shared/types/contents';
-
 import { IMainInfo } from '<prefix>/shared/types/main';
 
 interface ContentPageProps {}

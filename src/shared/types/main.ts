@@ -1,10 +1,10 @@
 import { UserProfile } from './auth';
 import { FAQResponse, WeekResponse } from './contents';
 
-export interface IPregnancyInfo {
+export interface IWeekInfo {
   pregnancyDate: number;
   description: string;
-  type: string | null;
+  type: '엄마' | '아기';
 }
 
 export interface IMainInfo {
