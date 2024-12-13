@@ -19,7 +19,6 @@ export default function MainPage() {
   useForegroundNotification();
 
   const { userProfile } = useUserProfileQuery();
-  console.log(userProfile);
 
   useEffect(() => {
     requestPermission();
