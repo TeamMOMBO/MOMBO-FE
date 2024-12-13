@@ -5,7 +5,7 @@ export interface IJoinReq {
   pregnancyDate: number;
 }
 
-interface UserProfile {
+export interface UserProfile {
   id: number;
   email: string;
   nickname: string;

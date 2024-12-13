@@ -1,12 +1,12 @@
-import { IFAQ } from '<prefix>/shared/types/faq';
 import Image from 'next/image';
 import React from 'react';
 import EyeIcon from '/public/svgs/light/icon-eye.svg';
 import { formatNumberWithCommas } from '<prefix>/shared/utils/format';
 import Link from 'next/link';
+import { FAQResponse } from '<prefix>/shared/types/contents';
 
 type FaqInfoItemProps = {
-  faqInfoItem: IFAQ;
+  faqInfoItem: FAQResponse;
 };
 
 export default function FaqInfoItem({ faqInfoItem }: FaqInfoItemProps) {
