@@ -1,3 +1,4 @@
+import { FAQResponse } from './contents';
 import { IIngredientInfo } from './ingredient';
 
 export interface SearchParams {
@@ -8,14 +9,6 @@ export interface SearchDetailsParams {
   keyword: string;
   category: 'content' | 'ingredient';
   page?: number;
-}
-
-export interface FAQResponse {
-  id: number;
-  question: string;
-  real_question: string;
-  answer: string;
-  views: number;
 }
 
 export interface SearchResponse {

@@ -6,6 +6,8 @@ import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarous
 import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import useTab from '<prefix>/hooks/useTab';
+import { FAQResponse } from '<prefix>/shared/types/contents';
+
 import { IMainInfo } from '<prefix>/shared/types/main';
 
 interface ContentPageProps {}
@@ -24,10 +26,31 @@ export default function ContentPage({}: ContentPageProps) {
     { description: '맘보1등' },
   ];
 
-  const faqInfoItems = [
-    { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
-    { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
-    { question: '출산 후 호박 달인 물은 언제 먹어야 하나요?', views: 1365 },
+  const faqInfoItems: FAQResponse[] = [
+    {
+      id: 1,
+      image: '',
+      real_question: '',
+      question: '출산 후 호박 달인 물은 언제 먹어야 하나요?',
+      views: 1365,
+      answer: '',
+    },
+    {
+      id: 2,
+      image: '',
+      real_question: '',
+      question: '출산 후 호박 달인 물은 언제 먹어야 하나요?',
+      views: 1365,
+      answer: '',
+    },
+    {
+      id: 3,
+      image: '',
+      real_question: '',
+      question: '출산 후 호박 달인 물은 언제 먹어야 하나요?',
+      views: 1365,
+      answer: '',
+    },
   ];
 
   return (
