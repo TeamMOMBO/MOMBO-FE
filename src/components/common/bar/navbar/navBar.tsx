@@ -1,5 +1,5 @@
 'use client';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import UserIcon from '/public/svgs/filled/icon-user.svg';
 import HomeIcon from '/public/svgs/filled/icon-home.svg';
 import BookIcon from '/public/svgs/filled/icon-book.svg';
@@ -7,6 +7,7 @@ import LayersIcon from '/public/svgs/filled/icon-layers.svg';
 import ScannerIcon from '/public/svgs/filled/icon-scanner.svg';
 import NavBarItem from './navBarItem';
 import useImageAnalyzer from '<prefix>/hooks/useImageAnalyzer';
+import IngredientLoading from '<prefix>/components/ingredient/ingredientLoading';
 
 const navItems = [
   { href: '/main', icon: HomeIcon, label: '홈', activePath: 'main' },
@@ -24,8 +25,13 @@ const navItems = [
 const NavBar = () => {
   const currentPath = usePathname();
   const isActive = (path: string) => currentPath.split('/').pop() === path;
-  const { fileInputRef, handleImageClick, handleSelectImage } =
+  const { fileInputRef, handleImageClick, handleSelectImage, isPending } =
     useImageAnalyzer();
+
+  if (isPending) {
+    return <IngredientLoading />;
+  }
+
   return (
     <nav className='sticky bottom-0 mt-12 h-58 w-full bg-white px-12 pb-5 pt-11 shadow-[0px_-4px_20px_#a1a1a11a]'>
       <ul className='flex justify-around'>

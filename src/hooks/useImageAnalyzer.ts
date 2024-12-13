@@ -13,7 +13,7 @@ export default function useImageAnalyzer() {
     (state) => state.setAnalysisResult,
   );
 
-  const { mutate: analyzeIngredient } = useMutation<
+  const { mutate: analyzeIngredient, isPending } = useMutation<
     IAnalysisResult,
     unknown,
     FormData
@@ -46,5 +46,6 @@ export default function useImageAnalyzer() {
     fileInputRef,
     handleImageClick,
     handleSelectImage,
+    isPending,
   };
 }
