@@ -27,23 +27,27 @@ export default function MainPage() {
     return <div>로딩중...</div>;
   }
 
-  // 더미데이터
-  const { nickname, pregnancyWeek } = mainInfo?.user!;
-  const { week, fetus, maternity } = mainInfo?.weekInformation!;
-  const faqs = mainInfo?.faqs!;
+  const nickname = mainInfo?.user?.nickname || '익명';
+  const pregnancyWeek = mainInfo?.user?.pregnancyWeek || 0;
+  const weekInfo = mainInfo?.weekInformation || {
+    week: 0,
+    fetus: '',
+    maternity: '',
+  };
+  const faqs = mainInfo?.faqs || [];
 
   const totalWeek = 40;
 
   const weekInfoItems: IWeekInfo[] = [
     {
       type: '아기',
-      pregnancyDate: week,
-      description: fetus,
+      pregnancyDate: weekInfo.week,
+      description: weekInfo.fetus,
     },
     {
       type: '엄마',
-      pregnancyDate: week,
-      description: maternity,
+      pregnancyDate: weekInfo.week,
+      description: weekInfo.maternity,
     },
   ];
 
@@ -52,7 +56,7 @@ export default function MainPage() {
     { description: '맘보대상' },
     { description: '맘보1등' },
   ];
-
+  console.log(faqs);
   return (
     <>
       <MainTopBar>
@@ -100,9 +104,13 @@ export default function MainPage() {
               자주하는 질문을 모아봤어요
             </h2>
             <ul className='flex flex-col gap-16'>
-              {faqs.map((faqInfoItem, index) => (
-                <FaqInfoItem key={index} faqInfoItem={faqInfoItem} />
-              ))}
+              {faqs.length > 0 ? (
+                faqs.map((faqInfoItem, index) => (
+                  <FaqInfoItem key={index} faqInfoItem={faqInfoItem} />
+                ))
+              ) : (
+                <li>자주 묻는 질문이 없습니다.</li>
+              )}
             </ul>
           </div>
         </div>

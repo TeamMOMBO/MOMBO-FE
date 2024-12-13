@@ -14,13 +14,15 @@ export default function FaqInfoItem({ faqInfoItem }: FaqInfoItemProps) {
   return (
     <ul className=''>
       <Link className='flex h-81 w-full gap-12' href={`/faq/${id}`}>
-        <Image
-          src={image as string}
-          alt=''
-          width={81}
-          height={81}
-          className='h-81 w-81 shrink-0 rounded-12'
-        />
+        {image && (
+          <Image
+            src={image as string}
+            alt=''
+            width={81}
+            height={81}
+            className='h-81 w-81 shrink-0 rounded-12'
+          />
+        )}
         <div className='flexflex-col gap-4'>
           <p className='text-overflow text-body-04 text-neutral-900'>
             {question}
