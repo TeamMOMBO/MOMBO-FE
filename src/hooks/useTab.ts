@@ -4,17 +4,11 @@ interface Tab {
   tab: string;
 }
 
-interface UseTabsReturn {
-  currentItem: Tab | null;
-  changeItem: (index: number) => void;
-}
-
-// tab 버튼 사용시 선택한 버튼 표시 시 사용
-export default function useTab(
+export default function useTab<T extends Tab>(
   initialTab: number = -1,
-  allTabs: Tab[] = [],
-): UseTabsReturn {
-  // allTabs가 유효한 배열이 아닌 경우 기본값을 반환하여 안전하게 처리
+  allTabs: T[] = [],
+) {
+  // allTabs가 유효한 배열이 아닌 경우 기본값을 반환
   if (!Array.isArray(allTabs) || allTabs.length === 0) {
     return {
       currentItem: null,
@@ -32,31 +26,3 @@ export default function useTab(
     changeItem: setCurrentIndex,
   };
 }
-// 사용 예시
-// const tabs = [
-//     { tab: 'Tab 1' },
-//     { tab: 'Tab 2' },
-//     { tab: 'Tab 3' },
-//   ];
-
-//   const TabComponent = () => {
-//     const { currentItem, changeItem } = useTab(0, tabs);
-
-//     return (
-//       <div>
-//         <div>
-//           {tabs.map((tab, index) => (
-//             <button key={index} onClick={() => changeItem(index)}>
-//               {tab.tab}
-//             </button>
-//           ))}
-//         </div>
-//         <div>
-//           <h2>Selected Tab</h2>
-//           <p>{currentItem ? currentItem.tab : 'No tab selected'}</p>
-//         </div>
-//       </div>
-//     );
-//   };
-
-//   export default TabComponent;
