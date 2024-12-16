@@ -5,21 +5,21 @@ import Cross from '/public/svgs/filled/icon-cross.svg';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface SearchBarProps {
   isResultSearch?: boolean;
-  defaultKeyword?: string;
 }
 
-export default function SearchBar({
-  isResultSearch = false,
-  defaultKeyword,
-}: SearchBarProps) {
+export default function SearchBar({ isResultSearch = false }: SearchBarProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [search, setSearch] = useState(defaultKeyword);
+  const [search, setSearch] = useState('');
   const keyword = searchParams.get('keyword');
+
+  useEffect(() => {
+    setSearch(keyword!);
+  }, [keyword]);
 
   const handleSubmit = () => {
     if (!search || keyword === search) return;
@@ -38,7 +38,7 @@ export default function SearchBar({
   return (
     <div className={`relative h-40 ${isResultSearch ? 'w-334' : 'w-312'}`}>
       <div className='absolute inset-y-0 left-13 flex items-center'>
-        <SearchIcon className='h-18 w-18 stroke-neutral-600'  />
+        <SearchIcon className='h-18 w-18 stroke-neutral-600' />
       </div>
       <input
         className='h-full w-full rounded-8 bg-neutral-200 pl-40 text-body-05 text-neutral-900 placeholder-neutral-600 focus:outline-none focus:ring-0'
