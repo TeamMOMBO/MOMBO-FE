@@ -18,13 +18,13 @@ const navItems = [
     activePath: 'content',
   },
   { href: '/', icon: ScannerIcon, activePath: 'dictionary', isCenter: true },
-  { href: '/dictionary', icon: BookIcon, label: '성분사전', activePath: '' },
   {
-    href: '/my',
-    icon: UserIcon,
-    label: '마이페이지',
-    activePath: 'my',
+    href: '/ingredient/dictionary',
+    icon: BookIcon,
+    label: '성분사전',
+    activePath: 'ingredient/dictionary',
   },
+  { href: '/my', icon: UserIcon, label: '마이페이지', activePath: 'my' },
 ];
 
 const NavBar = () => {

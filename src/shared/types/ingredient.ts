@@ -33,3 +33,20 @@ export interface IAnalysisResult {
   riskIngredientCount: IRiskIngredientCount;
   ingredientAnalysis: IIngredientInfo[];
 }
+
+export interface IngredientDictionaryResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    ingredients: IIngredientInfo[];
+    count: number;
+    page: number;
+    page_size: number;
+    maxPage: number;
+  };
+}
+export interface IngredientDictionaryParams {
+  page: number;
+  sort: 'name' | 'level';
+}
