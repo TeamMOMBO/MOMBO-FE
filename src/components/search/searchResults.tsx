@@ -4,6 +4,7 @@ import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import { useSearchPreviewQuery } from '<prefix>/state/queries/search';
 import { useRouter } from 'next/navigation';
 import React from 'react';
+import LoadingSpinner from '../common/loading/loadingSpinner';
 
 interface SearchResultsProps {
   keyword: string;
@@ -17,7 +18,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
   const contentItems = searchPreviewData?.faqs;
   const dictionaryItems = searchPreviewData?.ingredients;
 
-  if (searchPreviewLoading) return <div>검색중...</div>;
+  if (searchPreviewLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -43,9 +44,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
               <button
                 className='h-44 w-358 rounded-8 bg-neutral-200 text-center text-body-08 text-neutral-900'
                 onClick={() =>
-                  router.push(
-                    `/search/results/details/content?keyword=${keyword}`,
-                  )
+                  router.push(`/search/results/details/${keyword}/content`)
                 }
               >
                 콘텐츠 더보기
@@ -72,7 +71,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
                 className='h-44 w-358 rounded-8 bg-neutral-200 text-center text-body-08 text-neutral-900'
                 onClick={() =>
                   router.push(
-                    `/search/results/details/dictionary?keyword=${keyword}`,
+                    `/search/results/details/${encodeURIComponent(keyword)}/dictionary`,
                   )
                 }
               >
