@@ -28,9 +28,17 @@ interface IngredientResult {
   level: number;
   notes: string;
 }
+export interface UserAnalysisResult {
+  id: number;
+  user_id: number;
+  image: string;
+  elapsed_time: number | null;
+  created_at: string;
+}
 
 export interface ProfileResponse {
-  data: UserProfile;
+  profile: UserProfile;
+  user_analysis_results: UserAnalysisResult[];
 }
 
 export const AUTH_COOKIE_KEYS = {
