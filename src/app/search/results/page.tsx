@@ -35,13 +35,8 @@ export default async function SearchResultPage({
             className={`h-24 w-24 cursor-pointer items-center justify-center stroke-neutral-600`}
           />
         </Link>
-
-        <SearchBar
-          defaultKeyword={searchParams.keyword}
-          isResultSearch={true}
-        />
+        <SearchBar isResultSearch={true} />
       </div>
-
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Suspense fallback={<div>검색결과 불러오는중...</div>}>
           <SearchResults keyword={searchParams.keyword!} />
