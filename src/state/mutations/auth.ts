@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '../store/authStore';
 import { IJoinReq } from '<prefix>/shared/types/auth';
 import {
@@ -58,13 +58,15 @@ export const useWithdrawalMutation = () => {
 export const useProfileEditMutation = () => {
   const router = useRouter();
   const setUserInfo = useAuthStore((state) => state.setUserInfo);
+  const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (data: FormData) => editUserProfile(data),
 
     onSuccess: () => {
       alert('계정 정보 수정이 완료되었습니다.');
-      router.refresh();
+      queryClient.invalidateQueries({ queryKey: ['userProfile'] });
+      router.push('/my');
     },
     onError: (error: unknown) => {
       console.error('계정 정보 수정 실패:', error);
