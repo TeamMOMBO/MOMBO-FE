@@ -11,7 +11,7 @@ export interface UserProfile {
   nickname: string;
   userType: string;
   pregnancyDate: string;
-  pregnancyWeek: number;
+  pregnancyWeek: number | null;
 }
 
 interface UserAnalysis {
