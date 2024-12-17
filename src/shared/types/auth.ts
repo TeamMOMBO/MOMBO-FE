@@ -14,15 +14,6 @@ export interface UserProfile {
   pregnancyWeek: number | null;
 }
 
-interface UserAnalysis {
-  id: number;
-  user_id: number;
-  image: string;
-  elapsed_time: number;
-  created_at: string;
-  IngredientResult: IngredientResult[];
-}
-
 interface IngredientResult {
   name: string;
   level: number;
@@ -48,4 +39,11 @@ export const AUTH_COOKIE_KEYS = {
 
 export interface RefreshResponse {
   access: string;
+}
+
+export interface ProfileEditRequest {
+  nickname: string;
+  userType: string;
+  pregnancyDate?: string; // date-time
+  pregnancyWeek: string | null;
 }

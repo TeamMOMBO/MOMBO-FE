@@ -49,3 +49,8 @@ export const removeWithdrawUser = async () => {
   const response = await clientAuthInstance.delete('/user/withdrawal/');
   return response.data;
 };
+
+export const editUserProfile = async (data: FormData) => {
+  const response = await clientAuthInstance.put('/user/profile/edit/', data);
+  return response.data;
+};

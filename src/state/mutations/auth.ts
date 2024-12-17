@@ -4,6 +4,7 @@ import { useAuthStore } from '../store/authStore';
 import { IJoinReq } from '<prefix>/shared/types/auth';
 import {
   createUserInfo,
+  editUserProfile,
   postLogoutUser,
   removeWithdrawUser,
 } from '<prefix>/shared/apis/auth';
@@ -50,6 +51,23 @@ export const useWithdrawalMutation = () => {
     },
     onError: (error: unknown) => {
       console.error('회원탈퇴 실패:', error);
+    },
+  });
+};
+
+export const useProfileEditMutation = () => {
+  const router = useRouter();
+  const setUserInfo = useAuthStore((state) => state.setUserInfo);
+
+  return useMutation({
+    mutationFn: (data: FormData) => editUserProfile(data),
+
+    onSuccess: () => {
+      alert('계정 정보 수정이 완료되었습니다.');
+      router.refresh();
+    },
+    onError: (error: unknown) => {
+      console.error('계정 정보 수정 실패:', error);
     },
   });
 };
