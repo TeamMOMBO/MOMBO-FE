@@ -1,5 +1,5 @@
 'use client';
-import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
+import FaqItem from '<prefix>/components/content/faqItem';
 import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import { useSearchPreviewQuery } from '<prefix>/state/queries/search';
 import { useRouter } from 'next/navigation';
@@ -38,7 +38,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
               </p>
               <ul className='flex flex-col gap-16'>
                 {contentItems.map((faqInfoItem, index) => (
-                  <FaqInfoItem key={index} faqInfoItem={faqInfoItem} />
+                  <FaqItem key={index} faqInfoItem={faqInfoItem} />
                 ))}
               </ul>
               <button

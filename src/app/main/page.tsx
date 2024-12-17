@@ -1,7 +1,7 @@
 'use client';
 
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
-import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
+import FaqItem from '<prefix>/components/content/faqItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
@@ -106,7 +106,7 @@ export default function MainPage() {
             <ul className='flex flex-col gap-16'>
               {faqs.length > 0 ? (
                 faqs.map((faqInfoItem, index) => (
-                  <FaqInfoItem key={index} faqInfoItem={faqInfoItem} />
+                  <FaqItem key={index} faqInfoItem={faqInfoItem} />
                 ))
               ) : (
                 <li>자주 묻는 질문이 없습니다.</li>

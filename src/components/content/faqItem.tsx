@@ -3,13 +3,13 @@ import React from 'react';
 import EyeIcon from '/public/svgs/light/icon-eye.svg';
 import { formatNumberWithCommas } from '<prefix>/shared/utils/format';
 import Link from 'next/link';
-import { FAQResponse } from '<prefix>/shared/types/contents';
+import { FAQResponse } from '<prefix>/shared/types/content';
 
-type FaqInfoItemProps = {
+type FaqItemProps = {
   faqInfoItem: FAQResponse;
 };
 
-export default function FaqInfoItem({ faqInfoItem }: FaqInfoItemProps) {
+export default function FaqItem({ faqInfoItem }: FaqItemProps) {
   const { id, question, image, views } = faqInfoItem;
   return (
     <ul className=''>

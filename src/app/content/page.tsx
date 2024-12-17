@@ -3,7 +3,7 @@
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import ChipButton from '<prefix>/components/common/button/chipButton';
 import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
-import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
+import FaqItem from '<prefix>/components/content/faqItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import useTab from '<prefix>/hooks/useTab';
 import { FAQResponse } from '<prefix>/shared/types/contents';
