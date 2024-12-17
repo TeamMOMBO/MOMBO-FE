@@ -3,7 +3,7 @@
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
 import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
-import WeekInfoItem from '<prefix>/components/main/weekInfoItem';
+import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
@@ -85,7 +85,7 @@ export default function MainPage() {
               slideWidth={328}
               gap={8}
               renderItem={(weekInfoItem: IWeekInfo) => (
-                <WeekInfoItem weekInfoItem={weekInfoItem} />
+                <MainWeekInfoItem weekInfoItem={weekInfoItem} />
               )}
             />
           </div>
