@@ -14,3 +14,30 @@ export interface WeekInfoResponse {
   maternity: string;
   summary: string;
 }
+
+export interface ContentParams {
+  category: 'all' | 'faq' | 'info';
+  page?: number;
+}
+
+export interface ContentAllResponse {
+  faqs: FAQResponse[];
+  weekinformations: WeekInfoResponse[];
+}
+
+export interface ContentFAQResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: {
+    faqs: FAQResponse[];
+    count: number;
+    page: number;
+    page_size: number;
+    maxPage: number;
+  };
+}
+
+export interface ContentWeekInfoResponse {
+  weekinformations: WeekInfoResponse[];
+}
