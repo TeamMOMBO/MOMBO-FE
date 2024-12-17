@@ -1,5 +1,5 @@
 import { UserProfile } from './auth';
-import { FAQResponse, WeekResponse } from './contents';
+import { FAQResponse, WeekInfoResponse } from './content';
 
 export interface IWeekInfo {
   pregnancyDate: number;
@@ -14,5 +14,5 @@ export interface IMainInfo {
 export interface MainResponse {
   user: UserProfile;
   faqs: FAQResponse[];
-  weekInformation: WeekResponse;
+  weekInformation: WeekInfoResponse;
 }

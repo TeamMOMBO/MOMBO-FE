@@ -37,8 +37,8 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
                 </span>
               </p>
               <ul className='flex flex-col gap-16'>
-                {contentItems.map((faqInfoItem, index) => (
-                  <FaqItem key={index} faqInfoItem={faqInfoItem} />
+                {contentItems.map((faqItem, index) => (
+                  <FaqItem key={index} faqItem={faqItem} />
                 ))}
               </ul>
               <button

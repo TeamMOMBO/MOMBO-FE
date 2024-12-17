@@ -6,11 +6,11 @@ import Link from 'next/link';
 import { FAQResponse } from '<prefix>/shared/types/content';
 
 type FaqItemProps = {
-  faqInfoItem: FAQResponse;
+  faqItem: FAQResponse;
 };
 
-export default function FaqItem({ faqInfoItem }: FaqItemProps) {
-  const { id, question, image, views } = faqInfoItem;
+export default function FaqItem({ faqItem }: FaqItemProps) {
+  const { id, question, image, views } = faqItem;
   return (
     <ul className=''>
       <Link className='flex h-81 w-full gap-12' href={`/faq/${id}`}>

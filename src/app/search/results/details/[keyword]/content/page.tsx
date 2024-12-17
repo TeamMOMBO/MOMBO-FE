@@ -35,7 +35,7 @@ export default function SearchContentsDetails({ params }: searchParmasProps) {
           onEndReached={() => hasNextPage && fetchNextPage()}
           renderItem={(index, item) => (
             <div className='mb-12'>
-              <FaqItem key={index} faqInfoItem={item} />
+              <FaqItem key={index} faqItem={item} />
             </div>
           )}
         />

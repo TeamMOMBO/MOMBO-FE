@@ -6,7 +6,7 @@ export interface FAQResponse {
   views: number;
   image: string;
 }
-export interface WeekResponse {
+export interface WeekInfoResponse {
   id: number;
   step: string;
   week: number;

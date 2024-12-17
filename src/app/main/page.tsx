@@ -105,8 +105,8 @@ export default function MainPage() {
             </h2>
             <ul className='flex flex-col gap-16'>
               {faqs.length > 0 ? (
-                faqs.map((faqInfoItem, index) => (
-                  <FaqItem key={index} faqInfoItem={faqInfoItem} />
+                faqs.map((faqItem, index) => (
+                  <FaqItem key={index} faqItem={faqItem} />
                 ))
               ) : (
                 <li>자주 묻는 질문이 없습니다.</li>
