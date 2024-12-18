@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import useTab from '<prefix>/hooks/useTab';
@@ -10,11 +12,7 @@ import TabMenu from '../common/tabMenu/tabMenu';
 import { FAQResponse, WeekInfoResponse } from '<prefix>/shared/types/content';
 import ContentCategoryList from './contentCategoryList';
 
-const infoItems = [
-  { description: '맘을 위한 정보,\n맘보를 소개합니다!' },
-  { description: '맘보대상' },
-  { description: '맘보1등' },
-];
+const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
 
 const extractData = (pages: any[], category: string) => {
   const results = {
@@ -41,12 +39,20 @@ const extractData = (pages: any[], category: string) => {
 };
 
 export default function ContentContainer() {
+  const router = useRouter();
   const { currentItem, changeItem } = useTab(0, CONTENT_TYPE);
   const selectedCategory = CATEGORY_MAP[currentItem?.tab || '전체'];
   const { data, fetchNextPage, hasNextPage, isLoading } =
     useContentInfiniteQuery({
       category: selectedCategory,
     });
+
+  useEffect(() => {
+    // 컴포넌트 마운트 시 router.refresh 호출
+    // 서버 데이터 API 갱신
+    router.refresh();
+  }, [router]);
+
   if (isLoading) return <div>로딩중</div>;
 
   const { faqs, weekinformations } = data?.pages
