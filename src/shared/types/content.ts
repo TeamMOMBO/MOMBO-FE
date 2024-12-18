@@ -19,6 +19,10 @@ export interface ContentParams {
   category: 'all' | 'faq' | 'info';
   page?: number;
 }
+export interface ContentDetailParams {
+  category: 'faq' | 'info';
+  postNo: number;
+}
 
 export interface ContentAllResponse {
   faqs: FAQResponse[];
@@ -40,4 +44,8 @@ export interface ContentFAQResponse {
 
 export interface ContentWeekInfoResponse {
   weekinformations: WeekInfoResponse[];
+}
+
+export interface ContentDetailResponse {
+  result: FAQResponse | WeekInfoResponse;
 }
