@@ -1,5 +1,5 @@
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
-import FaqItem from '<prefix>/components/content/faqItem';
+import FaqItem from '<prefix>/components/faq/faqItem';
 import { FAQResponse, WeekInfoResponse } from '<prefix>/shared/types/content';
 
 interface ContentCategoryListProps {
