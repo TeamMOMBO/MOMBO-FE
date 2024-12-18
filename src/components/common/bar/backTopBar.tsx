@@ -6,16 +6,25 @@ import LeftArrowIcon from '/public/svgs/arrow/icon-left2.svg';
 interface BackTopBarProps {
   title?: string;
   onPrev?: () => void;
+  transparent?: boolean; // 투명 옵션
 }
 
-const BackTopBar = ({ title, onPrev }: BackTopBarProps) => {
+const BackTopBar = ({
+  title,
+  onPrev,
+  transparent = false,
+}: BackTopBarProps) => {
   const router = useRouter();
 
   // onPrev가 없을 경우 router.back을 기본값으로
   const handlePrev = onPrev || router.back;
 
   return (
-    <div className='relative flex h-58 w-full items-center justify-center bg-white px-16 py-9'>
+    <div
+      className={`relative flex h-58 w-full items-center justify-center px-16 py-9 ${
+        transparent ? '' : 'bg-white'
+      }`}
+    >
       <button
         onClick={handlePrev}
         className='absolute left-3 top-1/2 flex h-40 w-40 -translate-y-1/2 items-center justify-center'

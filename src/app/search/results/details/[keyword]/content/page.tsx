@@ -1,6 +1,6 @@
 'use client';
 
-import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
+import FaqItem from '<prefix>/components/faq/faqItem';
 import { useSearchDetailsInfiniteQuery } from '<prefix>/state/queries/search';
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
 import SearchResultHeader from '<prefix>/components/search/header/searchResultHeader';
@@ -35,7 +35,7 @@ export default function SearchContentsDetails({ params }: searchParmasProps) {
           onEndReached={() => hasNextPage && fetchNextPage()}
           renderItem={(index, item) => (
             <div className='mb-12'>
-              <FaqInfoItem key={index} faqInfoItem={item} />
+              <FaqItem key={index} faqItem={item} />
             </div>
           )}
         />
