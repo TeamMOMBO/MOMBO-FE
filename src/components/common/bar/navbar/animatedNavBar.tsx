@@ -1,50 +1,44 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NavBar from '<prefix>/components/common/bar/navbar/navBar';
 
 export default function AnimatedNavBar() {
   const [showNav, setShowNav] = useState(false);
-  const [lastScrollTop, setLastScrollTop] = useState(0);
-  const endRef = useRef<HTMLDivElement | null>(null);
+  const [lastScrollTop, setLastScrollTop] = useState(0); // 마지막 스크롤 위치
 
   useEffect(() => {
     const handleScroll = () => {
-      const currentScrollTop = window.scrollY;
+      const currentScrollTop = window.scrollY; // 현재 스크롤 위치
+      const scrollPosition = currentScrollTop + window.innerHeight; // 현재 스크롤 + 화면 높이
+      const documentHeight = document.documentElement.scrollHeight; // 문서 전체 높이
 
-      if (endRef.current) {
-        const { bottom } = endRef.current.getBoundingClientRect();
-        const isAtBottom = bottom <= window.innerHeight;
-
-        // 페이지 끝에 도달하거나 아래로 스크롤 시 Nav 표시
-        if (isAtBottom) {
-          setShowNav(true);
-        } else if (currentScrollTop > lastScrollTop) {
-          setShowNav(true);
-        } else {
-          setShowNav(false);
-        }
-      } else if (
-        window.innerHeight + window.scrollY >=
-        document.body.offsetHeight
+      // 스크롤 내릴 때 + 최하단 도달 (currentScrollTop이 lastScrollTop보다 커지면)
+      if (
+        (currentScrollTop > lastScrollTop && scrollPosition < documentHeight) ||
+        scrollPosition >= documentHeight
       ) {
-        // 모바일 환경에서 높이가 작을 경우 페이지 끝 감지
         setShowNav(true);
-      } else {
+      } else if (currentScrollTop < lastScrollTop) {
+        // 스크롤 올릴 때
         setShowNav(false);
       }
 
+      // 마지막 스크롤 위치 업데이트
       setLastScrollTop(currentScrollTop);
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+
+    // 컴포넌트 언마운트 시 이벤트 리스너 정리
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [lastScrollTop]);
 
   return (
     <>
-      <div ref={endRef} style={{ height: '1px' }} /> {/* 페이지 끝 감지용 */}
       <AnimatePresence>
         {showNav && (
           <motion.div
