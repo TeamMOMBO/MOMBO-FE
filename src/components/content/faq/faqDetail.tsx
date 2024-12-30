@@ -6,7 +6,7 @@ import { formatNumberWithCommas } from '<prefix>/shared/utils/format';
 import EyeIcon from '/public/svgs/light/icon-eye.svg';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import { useRouter } from 'next/navigation';
-import BackTopBar from '../common/bar/backTopBar';
+import BackTopBar from '../../common/bar/backTopBar';
 
 type Props = {
   faqData: FAQResponse;

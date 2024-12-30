@@ -1,7 +1,7 @@
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
-import FaqItem from '<prefix>/components/faq/faqItem';
+import FaqItem from '<prefix>/components/content/faq/faqItem';
 import { FAQResponse, WeekInfoResponse } from '<prefix>/shared/types/content';
-import WeekInfoItem from './weekInfoItem';
+import WeekInfoItem from './weekInfo/weekInfoItem';
 
 interface ContentCategoryListProps {
   category: string;

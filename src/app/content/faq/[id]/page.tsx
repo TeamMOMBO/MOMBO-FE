@@ -1,6 +1,6 @@
 import { FAQResponse } from '<prefix>/shared/types/content';
 import { getFAQServer } from '<prefix>/shared/apis/serverApi/content/contentDetail.server.api';
-import FAQDetail from '<prefix>/components/faq/faqDetail';
+import FAQDetail from '<prefix>/components/content/faq/faqDetail';
 
 type Props = {
   params: {
