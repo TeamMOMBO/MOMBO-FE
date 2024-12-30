@@ -1,5 +1,5 @@
 'use client';
-import FaqItem from '<prefix>/components/faq/faqItem';
+import FaqItem from '<prefix>/components/content/faq/faqItem';
 import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import { useSearchPreviewQuery } from '<prefix>/state/queries/search';
 import { useRouter } from 'next/navigation';

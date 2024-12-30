@@ -1,4 +1,5 @@
-import NavBar from '<prefix>/components/common/bar/navbar/navBar';
+import AnimatedNavBar from '<prefix>/components/common/bar/navbar/animatedNavBar';
+
 type ContentProps = {
   children: React.ReactNode;
 };
@@ -7,7 +8,7 @@ export default function FAQLayout({ children }: ContentProps) {
   return (
     <>
       {children}
-      <NavBar />
+      <AnimatedNavBar />
     </>
   );
 }

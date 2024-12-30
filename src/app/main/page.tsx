@@ -1,7 +1,7 @@
 'use client';
 
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
-import FaqItem from '<prefix>/components/faq/faqItem';
+import FaqItem from '<prefix>/components/content/faq/faqItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
 import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';

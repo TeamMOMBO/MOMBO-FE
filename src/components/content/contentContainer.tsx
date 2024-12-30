@@ -30,6 +30,10 @@ const extractData = (pages: any[], category: string) => {
       case 'faq':
         if (page.results?.faqs) results.faqs.push(...page.results.faqs);
         break;
+      case 'info':
+        if ('weekinformations' in page)
+          results.weekinformations.push(...page.weekinformations);
+        break;
       default:
         break;
     }
