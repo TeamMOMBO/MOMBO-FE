@@ -51,12 +51,8 @@ export default function MainPage() {
     },
   ];
 
-  const infoItems = [
-    { description: '맘을 위한 정보,\n맘보를 소개합니다!' },
-    { description: '맘보대상' },
-    { description: '맘보1등' },
-  ];
-  console.log(faqs);
+  const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
+
   return (
     <>
       <MainTopBar>
