@@ -16,7 +16,7 @@ const Input = ({
   ...props
 }: InputProps) => {
   const inputClasses = twMerge(
-    'h-56 w-358 rounded-xl bg-neutral-200 p-16 text-body-05 text-neutral-900 placeholder-neutral-400 outline-none',
+    'h-56 w-full rounded-xl bg-neutral-200 p-16 text-body-05 text-neutral-900 placeholder-neutral-400 outline-none',
     className,
   );
 

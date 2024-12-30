@@ -66,8 +66,11 @@ export default function ProfileEditForm({ userProfile }: Props) {
 
   return (
     <>
-      <div className='flex h-full flex-col gap-24 px-16 pt-12'>
-        <h1 className='mb-12 text-head-01 text-neutral-900'>계정 정보 수정</h1>
+      <div className='relative flex h-full w-full flex-col px-16 pt-12'>
+        <div className='flex w-full basis-full flex-col gap-24'>
+          <h1 className='mb-12 text-head-01 text-neutral-900'>
+            계정 정보 수정
+          </h1>
         {/* 닉네임 입력 */}
         <label className='text-body-06 text-neutral-600'>
           <span>닉네임</span>
@@ -117,6 +120,7 @@ export default function ProfileEditForm({ userProfile }: Props) {
             </DropDown.Menu>
           </DropDown>
         </label>
+        </div>
         <LargeButton
           variant='fill'
           buttonColor='primary'

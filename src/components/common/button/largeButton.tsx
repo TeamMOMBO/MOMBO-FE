@@ -55,7 +55,7 @@ export default function LargeButton<V extends ButtonVariant>({
   ...props
 }: ButtonProps<V>) {
   const buttonClasses = twMerge(
-    'w-358 h-56 rounded-12 font-semibold',
+    'w-full h-56 rounded-12 font-semibold',
     getVariant(variant, buttonColor as ButtonColor, disabled),
     className,
   );

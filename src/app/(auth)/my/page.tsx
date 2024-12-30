@@ -20,10 +20,12 @@ export default async function MyPage() {
   return (
     <>
       <MainTopBar>마이페이지</MainTopBar>
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <UserIngredientResult />
-      </HydrationBoundary>
-      <AccountOptions />
+      <div className='basis-full'>
+        <HydrationBoundary state={dehydrate(queryClient)}>
+          <UserIngredientResult />
+        </HydrationBoundary>
+        <AccountOptions />
+      </div>
     </>
   );
 }

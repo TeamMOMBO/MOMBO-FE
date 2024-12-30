@@ -38,7 +38,10 @@ export default function AccountOptions() {
       <MyPageDetailsButton>오픈 라이센스</MyPageDetailsButton>
       <MyPageDetailsButton>개인정보처리방침</MyPageDetailsButton>
       <MyPageDetailsButton>이용약관</MyPageDetailsButton>
-      <div className='mx-auto my-8 h-px w-358 bg-gray-200' />
+      <div
+        className='mx-auto my-8 h-px bg-gray-200'
+        style={{ width: 'calc(100% - 42px)' }}
+      />
       <MyPageDetailsButton onClick={() => handleModalOpen('로그아웃')}>
         로그아웃
       </MyPageDetailsButton>

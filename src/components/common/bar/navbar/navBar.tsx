@@ -38,7 +38,7 @@ const NavBar = () => {
   }
 
   return (
-    <nav className='sticky bottom-0 mt-12 h-58 w-full bg-white px-12 pb-5 pt-11 shadow-[0px_-4px_20px_#a1a1a11a]'>
+    <nav className='sticky bottom-0 h-58 w-full bg-white px-12 pb-5 pt-11 shadow-[0px_-4px_20px_#a1a1a11a]'>
       <ul className='flex justify-around'>
         {navItems.map((item, index) => {
           if (item.isCenter) {
