@@ -1,4 +1,4 @@
-import { FAQResponse } from './contents';
+import { FAQResponse } from './content';
 import { IIngredientInfo } from './ingredient';
 
 export interface SearchParams {

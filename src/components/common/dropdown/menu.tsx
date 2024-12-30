@@ -15,12 +15,13 @@ export default function DropDownMenu({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className={`${position} absolute z-10 w-120 overflow-hidden rounded-12 border border-solid bg-gray-100`}
-          initial={{ opacity: 0, scale: 0.5, x: 20, y: -50 }}
-          animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-          exit={{ opacity: 0, scale: 0.5, x: 20, y: -50 }}
+          className={`${position} mt-12 w-full overflow-hidden rounded-12 bg-gray-100`}
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: 'auto', opacity: 1 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.2 }}
         >
-          <ul className='text-center'>{children}</ul>
+          <ul className=''>{children}</ul>
         </motion.div>
       )}
     </AnimatePresence>

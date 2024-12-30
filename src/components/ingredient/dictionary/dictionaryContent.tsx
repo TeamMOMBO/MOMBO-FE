@@ -1,16 +1,12 @@
 'use client';
 
 import IngredientItem from '../ingredientItem';
-import DictionaryHeader from './dictionaryHeader';
 import { useIngredientDictionaryQuery } from '<prefix>/state/queries/ingredient';
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
 import useTab from '<prefix>/hooks/useTab';
 import SkeletonList from '<prefix>/components/common/skeleton/skeletonList';
-
-export const DICTIONARY_TYPE = [
-  { tab: '이름순', value: 'name' as const },
-  { tab: '등급', value: 'level' as const },
-];
+import TabMenu from '<prefix>/components/common/tabMenu/tabMenu';
+import { DICTIONARY_TYPE } from '<prefix>/shared/constants/ingredient';
 
 export default function DictionaryContent() {
   const { currentItem, changeItem } = useTab(0, DICTIONARY_TYPE);
@@ -24,11 +20,13 @@ export default function DictionaryContent() {
   if (isLoading) return <SkeletonList count={10}/>;
   return (
     <>
-      <DictionaryHeader
+      <TabMenu
         tabs={DICTIONARY_TYPE}
         currentItem={currentItem}
         onChangeTab={changeItem}
+        containerClassName='pb-20 pl-16 pt-13'
       />
+
       <div className='px-16'>
         <VirtualList
           data={ingredientDictionaryData}

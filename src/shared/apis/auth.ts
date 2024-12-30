@@ -1,5 +1,5 @@
-import { IJoinReq, ProfileResponse, RefreshResponse } from '../types/auth';
-import { AxiosInstance } from 'axios';
+import { IJoinReq, ProfileResponse } from '../types/auth';
+
 import { publicInstance } from './instance/publicInstance';
 import { clientAuthInstance } from './instance/clientAuthInstance';
 
@@ -37,5 +37,20 @@ export const refreshAccessToken = async (
 export const getUserProfile = async () => {
   const response =
     await clientAuthInstance.get<ProfileResponse>('/user/profile/');
+  return response.data;
+};
+
+export const postLogoutUser = async () => {
+  const response = await clientAuthInstance.post('/user/logout/');
+  return response.data;
+};
+
+export const removeWithdrawUser = async () => {
+  const response = await clientAuthInstance.delete('/user/withdrawal/');
+  return response.data;
+};
+
+export const editUserProfile = async (data: FormData) => {
+  const response = await clientAuthInstance.put('/user/profile/edit/', data);
   return response.data;
 };

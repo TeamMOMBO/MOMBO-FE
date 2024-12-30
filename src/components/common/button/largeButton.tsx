@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type ButtonVariant = 'outline' | 'fill';
-type ButtonColor = 'primary' | 'primary-dark' | 'secondary';
+type ButtonColor = 'primary' | 'primary-dark' | 'secondary' | 'gray';
 
 // 유효한 조합만 허용하는 타입
 // ex) variant:outline, buttonColor:'primary' 조합 사용시x
@@ -36,6 +36,8 @@ const getVariant = (
         return 'bg-primary text-white';
       case 'primary-dark':
         return 'bg-primary-dark text-white';
+      case 'gray':
+        return 'bg-neutral-200 text-neutral-00';
       default:
         return 'bg-primary text-white';
     }

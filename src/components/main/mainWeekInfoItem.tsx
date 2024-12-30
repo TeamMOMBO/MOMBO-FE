@@ -7,7 +7,7 @@ type PregnancyCardProps = {
   weekInfoItem: IWeekInfo;
 };
 
-export default function WeekInfoItem({ weekInfoItem }: PregnancyCardProps) {
+export default function MainWeekInfoItem({ weekInfoItem }: PregnancyCardProps) {
   const { pregnancyDate, description, type } = weekInfoItem;
 
   return (

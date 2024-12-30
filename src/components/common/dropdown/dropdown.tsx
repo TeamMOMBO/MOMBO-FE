@@ -9,12 +9,7 @@ interface DropDownProps {
 }
 
 export default function DropDown({ children, handleClose }: DropDownProps) {
-  const clickRef = useClickOutside(handleClose);
-  return (
-    <div ref={clickRef} className='relative'>
-      {children}
-    </div>
-  );
+  return <div>{children}</div>;
 }
 
 DropDown.Item = DropDownItem;

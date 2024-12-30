@@ -10,6 +10,7 @@ import {
   specialCharRegExp,
   whiteSpaceRegExp,
 } from '<prefix>/shared/utils/regex';
+import { nickNameValidator } from '<prefix>/shared/utils/validator';
 
 interface NickNameProps {
   onNext: (value: Partial<IJoinReq>) => void;
@@ -17,16 +18,9 @@ interface NickNameProps {
 }
 
 export default function NickName({ onNext, initialValue }: NickNameProps) {
-  const validator = (value: string) => {
-    return (
-      maxLenRegExp(8).test(value) &&
-      !whiteSpaceRegExp.test(value) &&
-      !specialCharRegExp.test(value)
-    );
-  };
   const [nickname, handleInputChange] = useInput<string>(
     initialValue,
-    validator,
+    nickNameValidator,
   );
 
   useKeyDown(

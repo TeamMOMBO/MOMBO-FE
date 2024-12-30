@@ -1,9 +1,9 @@
 'use client';
 
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
-import FaqInfoItem from '<prefix>/components/faq/faqInfoItem';
+import FaqItem from '<prefix>/components/faq/faqItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
-import WeekInfoItem from '<prefix>/components/main/weekInfoItem';
+import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
 import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
 import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
@@ -85,7 +85,7 @@ export default function MainPage() {
               slideWidth={328}
               gap={8}
               renderItem={(weekInfoItem: IWeekInfo) => (
-                <WeekInfoItem weekInfoItem={weekInfoItem} />
+                <MainWeekInfoItem weekInfoItem={weekInfoItem} />
               )}
             />
           </div>
@@ -105,8 +105,8 @@ export default function MainPage() {
             </h2>
             <ul className='flex flex-col gap-16'>
               {faqs.length > 0 ? (
-                faqs.map((faqInfoItem, index) => (
-                  <FaqInfoItem key={index} faqInfoItem={faqInfoItem} />
+                faqs.map((faqItem, index) => (
+                  <FaqItem key={index} faqItem={faqItem} />
                 ))
               ) : (
                 <li>자주 묻는 질문이 없습니다.</li>

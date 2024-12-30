@@ -11,16 +11,7 @@ export interface UserProfile {
   nickname: string;
   userType: string;
   pregnancyDate: string;
-  pregnancyWeek: number;
-}
-
-interface UserAnalysis {
-  id: number;
-  user_id: number;
-  image: string;
-  elapsed_time: number;
-  created_at: string;
-  IngredientResult: IngredientResult[];
+  pregnancyWeek: number | null;
 }
 
 interface IngredientResult {
@@ -28,9 +19,17 @@ interface IngredientResult {
   level: number;
   notes: string;
 }
+export interface UserAnalysisResult {
+  id: number;
+  user_id: number;
+  image: string;
+  elapsed_time: number | null;
+  created_at: string;
+}
 
 export interface ProfileResponse {
-  data: UserProfile;
+  profile: UserProfile;
+  user_analysis_results: UserAnalysisResult[];
 }
 
 export const AUTH_COOKIE_KEYS = {
@@ -40,4 +39,11 @@ export const AUTH_COOKIE_KEYS = {
 
 export interface RefreshResponse {
   access: string;
+}
+
+export interface ProfileEditRequest {
+  nickname: string;
+  userType: string;
+  pregnancyDate?: string; // date-time
+  pregnancyWeek: string | null;
 }
