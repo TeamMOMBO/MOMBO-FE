@@ -5,6 +5,7 @@ import {
   ResponseCookies,
   RequestCookies,
 } from 'next/dist/server/web/spec-extension/cookies';
+import { TokenRefreshManager } from './shared/utils/tokenRefreshManager';
 
 interface DecodedToken {
   exp: number; // 토큰 만료 시간
@@ -31,10 +32,11 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
         if (expirationTime - currentTime < fiveMinutes) {
           if (refreshToken) {
             try {
-              const newAccessToken = await refreshAccessToken(refreshToken);
+              const newAccessToken =
+                await TokenRefreshManager.refreshToken(refreshToken);
 
               res.cookies.set('accessToken', newAccessToken, {
-                httpOnly: false,
+                httpOnly: true,
                 path: '/',
                 secure: process.env.NODE_ENV === 'production',
               });
@@ -54,7 +56,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
         const newAccessToken = await refreshAccessToken(refreshToken);
 
         res.cookies.set('accessToken', newAccessToken, {
-          httpOnly: false,
+          httpOnly: true,
           path: '/',
           secure: process.env.NODE_ENV === 'production',
         });
