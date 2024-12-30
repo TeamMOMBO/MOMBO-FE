@@ -5,6 +5,7 @@ import DictionaryHeader from './dictionaryHeader';
 import { useIngredientDictionaryQuery } from '<prefix>/state/queries/ingredient';
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
 import useTab from '<prefix>/hooks/useTab';
+import SkeletonList from '<prefix>/components/common/skeleton/skeletonList';
 
 export const DICTIONARY_TYPE = [
   { tab: '이름순', value: 'name' as const },
@@ -20,7 +21,7 @@ export default function DictionaryContent() {
   const ingredientDictionaryData =
     data?.pages.flatMap((page) => page.results.ingredients) ?? [];
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <SkeletonList count={10}/>;
   return (
     <>
       <DictionaryHeader
