@@ -8,7 +8,7 @@ export default function FAQLayout({ children }: ContentProps) {
   return (
     <>
       {children}
-      <AnimatedNavBar />
+      {/* <AnimatedNavBar /> */}
     </>
   );
 }
