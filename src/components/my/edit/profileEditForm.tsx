@@ -70,7 +70,7 @@ export default function ProfileEditForm({ userProfile }: Props) {
 
   return (
     <>
-      <div className='relative flex h-full w-full flex-col px-16 pt-12'>
+      <div className='relative flex w-full basis-full flex-col px-16 pb-40 pt-12'>
         <div className='flex w-full basis-full flex-col gap-24'>
           <h1 className='mb-12 text-head-01 text-neutral-900'>
             계정 정보 수정
@@ -132,7 +132,7 @@ export default function ProfileEditForm({ userProfile }: Props) {
         <LargeButton
           variant='fill'
           buttonColor='primary'
-          className='absolute bottom-80'
+          className='sticky bottom-0'
           onClick={onSubmit}
           disabled={
             nickName.trim() === '' ||

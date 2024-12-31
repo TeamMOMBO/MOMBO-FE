@@ -2,12 +2,12 @@ import { twMerge } from 'tailwind-merge';
 import KakaoIcon from '/public/svgs/icon-kakao.svg';
 
 interface ButtonProps {
-  className: string;
+  className?: string;
 }
 
 export default function KakaoButton({ className }: ButtonProps) {
   const buttonClasses = twMerge(
-    'h-56 w-358 rounded-12 text-body-05 bg-primary-kakao',
+    'h-56 w-full rounded-12 text-body-05 bg-primary-kakao',
     className,
   );
   return (
