@@ -4,43 +4,50 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import NavBar from '<prefix>/components/common/bar/navbar/navBar';
 
-export default function AnimatedNavBar() {
+export default function AnimatedNavBar({
+  containerRef,
+}: {
+  containerRef: React.RefObject<HTMLDivElement>;
+}) {
+  const [isNavFixed, setIsNavFixed] = useState(false);
   const [showNav, setShowNav] = useState(false);
   const [lastScrollTop, setLastScrollTop] = useState(0); // 마지막 스크롤 위치
 
   useEffect(() => {
+    const currentHeight = window.innerHeight; // 현재 스크롤 + 화면 높이
+    const scrollHeight = containerRef.current?.scrollHeight || 0; // 부모 컨테이너 전체 높이
+    console.log(currentHeight, scrollHeight);
+    if (currentHeight === scrollHeight) setIsNavFixed(true);
+  }, []);
+
+  useEffect(() => {
+    const container = containerRef.current;
     const handleScroll = () => {
-      const currentScrollTop = window.scrollY; // 현재 스크롤 위치
-      const scrollPosition = currentScrollTop + window.innerHeight; // 현재 스크롤 + 화면 높이
-      const documentHeight = document.documentElement.scrollHeight; // 문서 전체 높이
+      if (!container) return;
 
-      // 스크롤 내릴 때 + 최하단 도달 (currentScrollTop이 lastScrollTop보다 커지면)
-      if (
-        (currentScrollTop > lastScrollTop && scrollPosition < documentHeight) ||
-        scrollPosition >= documentHeight
-      ) {
-        setShowNav(true);
-      } else if (currentScrollTop < lastScrollTop) {
-        // 스크롤 올릴 때
-        setShowNav(false);
-      }
+      const scrollTop = container.scrollTop; // 현재 스크롤 위치
+      const currentHeight = window.innerHeight; // 화면 높이
+      const scrollHeight = container.scrollHeight; // 부모 컨테이너 전체 높이
 
-      // 마지막 스크롤 위치 업데이트
-      setLastScrollTop(currentScrollTop);
+      const isScrollingDown = scrollTop > lastScrollTop; // 아래로 스크롤 여부
+      const isAtBottom = scrollTop + currentHeight >= scrollHeight - 10; // 맨 아래 도달 여부 (오차 포함)
+      setShowNav(isAtBottom || isScrollingDown);
+      setLastScrollTop(scrollTop); // 마지막 스크롤 위치 업데이트
     };
 
-    window.addEventListener('scroll', handleScroll);
+    container?.addEventListener('scroll', handleScroll);
 
-    // 컴포넌트 언마운트 시 이벤트 리스너 정리
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      container?.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollTop]);
+  }, [containerRef, lastScrollTop]);
 
   return (
-    <>
-      <AnimatePresence>
-        {showNav && (
+    <AnimatePresence>
+      {isNavFixed ? (
+        <NavBar />
+      ) : (
+        showNav && (
           <motion.div
             style={{ position: 'sticky', bottom: 0, width: '100%' }}
             initial={{ opacity: 0, y: 50 }}
@@ -50,8 +57,8 @@ export default function AnimatedNavBar() {
           >
             <NavBar />
           </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+        )
+      )}
+    </AnimatePresence>
   );
 }
