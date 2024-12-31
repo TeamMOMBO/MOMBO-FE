@@ -8,6 +8,7 @@ import BackTopBar from '<prefix>/components/common/bar/backTopBar';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import CheckButton from '<prefix>/components/common/button/checkButton';
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
+import { pregnancyWeekValidator } from '<prefix>/shared/utils/validator';
 
 interface PregnancyDateProps {
   onSubmit: (data: Partial<IJoinReq>) => void;
@@ -22,9 +23,10 @@ export default function PregnancyDate({
 }: PregnancyDateProps) {
   const [isSelected, toggleButton] = useToggle();
 
-  const [pregnancyDate, handleInputChange] = useInput<
-    string | number | undefined
-  >(initialValue || undefined);
+  const [pregnancyDate, handleDateInputChange, resetDate] = useInput<string>(
+    '',
+    pregnancyWeekValidator,
+  );
 
   useKeyDown(
     'Enter',
@@ -37,6 +39,20 @@ export default function PregnancyDate({
     },
     [pregnancyDate, isSelected],
   );
+
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleDateInputChange(e);
+    if (e.target.value !== '' && isSelected) {
+      toggleButton();
+    }
+  };
+
+  const handleCheckBtnClick = () => {
+    if (!isSelected) {
+      resetDate('');
+    }
+    toggleButton();
+  };
 
   return (
     <>
@@ -52,16 +68,16 @@ export default function PregnancyDate({
         </div>
         <div className='mb-16 flex items-center gap-12'>
           <Input
-            type='number'
+            type='text'
             placeholder='ex) 12'
-            onChange={handleInputChange}
+            onChange={handleDateChange}
             className='w-120 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
             value={pregnancyDate}
           />
           <span className='text-body-05 text-neutral-900'>주 차</span>
         </div>
         <div className='flex items-center gap-8'>
-          <CheckButton isSelected={isSelected} onClick={toggleButton} />
+          <CheckButton isSelected={isSelected} onClick={handleCheckBtnClick} />
           <span className='text-body-10 text-neutral-600'>
             몇 주차인지 잘 모르거나 이미 출산했어요
           </span>
