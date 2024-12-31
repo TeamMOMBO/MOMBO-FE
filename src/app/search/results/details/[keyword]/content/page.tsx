@@ -1,6 +1,6 @@
 'use client';
 
-import FaqItem from '<prefix>/components/faq/faqItem';
+import FaqItem from '<prefix>/components/content/faq/faqItem';
 import { useSearchDetailsInfiniteQuery } from '<prefix>/state/queries/search';
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
 import SearchResultHeader from '<prefix>/components/search/header/searchResultHeader';

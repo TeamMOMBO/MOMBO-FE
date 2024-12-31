@@ -1,6 +1,7 @@
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
-import FaqItem from '<prefix>/components/faq/faqItem';
+import FaqItem from '<prefix>/components/content/faq/faqItem';
 import { FAQResponse, WeekInfoResponse } from '<prefix>/shared/types/content';
+import WeekInfoItem from './weekInfo/weekInfoItem';
 
 interface ContentCategoryListProps {
   category: string;
@@ -33,7 +34,7 @@ export default function ContentCategoryList({
             <span className='text-body-01 text-neutral-900'>주차별 정보</span>
             <ul className='flex flex-col gap-16'>
               {weekInfoItems.map((weekInfoItem, index) => (
-                <>{/* 주차별 정보 UI 컴포넌트 */}</>
+                <WeekInfoItem key={index} weekInfoItem={weekInfoItem} />
               ))}
             </ul>
           </div>
@@ -53,9 +54,15 @@ export default function ContentCategoryList({
       );
     case 'info':
       return (
-        <ul className='flex flex-col gap-16'>
-          {/* 주차별 정보 UI 컴포넌트 */}
-        </ul>
+        <VirtualList
+          data={weekInfoItems}
+          onEndReached={() => hasNextPage && fetchNextPage()}
+          renderItem={(index, item) => (
+            <div className='mb-16'>
+              <WeekInfoItem key={index} weekInfoItem={item} />
+            </div>
+          )}
+        />
       );
     default:
       return null;

@@ -1,3 +1,5 @@
+import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
+import NavBar from '<prefix>/components/common/bar/navbar/navBar';
 import ContentContainer from '<prefix>/components/content/contentContainer';
 import { getContentServer } from '<prefix>/shared/apis/serverApi/content/content.server.api';
 
@@ -28,11 +30,13 @@ export default async function ContentPage() {
 
   return (
     <>
+      <MainTopBar>콘텐츠</MainTopBar>
       <HydrationBoundary state={dehydrate(queryClient)}>
         <Suspense fallback={<div>콘텐츠 불러오는 중...</div>}>
           <ContentContainer />
         </Suspense>
       </HydrationBoundary>
+      <NavBar />
     </>
   );
 }
