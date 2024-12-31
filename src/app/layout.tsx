@@ -20,11 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='kr' className={`${pretendard.variable} h-full min-h-screen`}>
+    <html lang='kr' className={`${pretendard.variable} `}>
       <body
-        className={`${pretendard.className} relative mx-auto flex h-full min-h-[100dvh] w-full min-w-375 max-w-430 flex-col overflow-y-auto shadow-xl`}
+        className={`${pretendard.className} relative mx-auto flex h-[100dvh] w-full min-w-375 max-w-430 flex-col overflow-hidden shadow-xl`}
       >
-        <TanstackQueryProvider>{children}</TanstackQueryProvider>
+        <TanstackQueryProvider>
+          <div className='flex basis-full flex-col overflow-y-auto'>
+            {children}
+          </div>
+        </TanstackQueryProvider>
         <Script src='/service-worker.js' />
       </body>
     </html>
