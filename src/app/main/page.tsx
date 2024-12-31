@@ -13,6 +13,7 @@ import { useForegroundNotification } from '<prefix>/hooks/notification/useForegr
 import { useEffect } from 'react';
 import LocoIcon from '/public/svgs/icon-logo.svg';
 import { useMainInfoQuery } from '<prefix>/state/queries/main';
+import MainSkeleton from '<prefix>/components/common/skeleton/mainSkeleton';
 
 export default function MainPage() {
   const { mainInfo, mainInfoLoading } = useMainInfoQuery();
@@ -24,7 +25,7 @@ export default function MainPage() {
   }, [requestPermission]);
 
   if (mainInfoLoading && !mainInfo) {
-    return <div>로딩중...</div>;
+    return <MainSkeleton />;
   }
 
   const nickname = mainInfo?.user?.nickname || '익명';
