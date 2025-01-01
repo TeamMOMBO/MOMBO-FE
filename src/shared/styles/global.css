@@ -6,6 +6,11 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+  -ms-overflow-style: none; /* IE/Edge에서 스크롤바 숨기기 */
+  scrollbar-width: none; /* Firefox에서 스크롤바 숨기기 */
+}
+
 html,
 body,
 div,

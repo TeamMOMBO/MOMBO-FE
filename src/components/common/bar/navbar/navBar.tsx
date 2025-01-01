@@ -38,16 +38,13 @@ const NavBar = () => {
   }
 
   return (
-    <nav className='sticky bottom-0 mt-12 h-58 w-full bg-white px-12 pb-5 pt-11 shadow-[0px_-4px_20px_#a1a1a11a]'>
+    <nav className='sticky bottom-0 w-full bg-white px-12 pb-39 pt-11 shadow-[0px_-4px_20px_#a1a1a11a]'>
       <ul className='flex justify-around'>
         {navItems.map((item, index) => {
           if (item.isCenter) {
             return (
               <li key={index} className='flex basis-full justify-center'>
-                <button
-                  className='absolute bottom-13'
-                  onClick={handleImageClick}
-                >
+                <button className='absolute -top-13' onClick={handleImageClick}>
                   <div className='flex h-57 w-57 items-center justify-center rounded-full border-4 border-solid border-white bg-primary'>
                     <item.icon className='h-24 w-24' />
                   </div>

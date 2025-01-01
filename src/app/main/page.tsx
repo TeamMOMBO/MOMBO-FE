@@ -51,12 +51,7 @@ export default function MainPage() {
     },
   ];
 
-  const infoItems = [
-    { description: '맘을 위한 정보,\n맘보를 소개합니다!' },
-    { description: '맘보대상' },
-    { description: '맘보1등' },
-  ];
-  console.log(faqs);
+  const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
   return (
     <>
       <MainTopBar>
@@ -69,14 +64,19 @@ export default function MainPage() {
             <span className='text-head-01 text-neutral-900'>
               {nickname}님, 안녕하세요!
             </span>
-            {pregnancyWeek && (
-              <>
-                <span className='mb-20 text-body-06 text-neutral-600'>
-                  임신 {pregnancyWeek}주 차
-                </span>
-                <ProgressBar currentNum={pregnancyWeek} totalNum={totalWeek} />
-              </>
-            )}
+            <>
+              <span className='text-body-06 text-neutral-600'>
+                임신 {pregnancyWeek || '??'}주 차
+              </span>
+              {(pregnancyWeek ?? 0) !== 0 && (
+                <div className='mt-20'>
+                  <ProgressBar
+                    currentNum={pregnancyWeek ?? 0}
+                    totalNum={totalWeek}
+                  />
+                </div>
+              )}
+            </>
           </div>
           <div className='pl-16'>
             <h2 className='sr-only'>주차별 정보</h2>

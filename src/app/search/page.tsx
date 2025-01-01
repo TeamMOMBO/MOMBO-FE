@@ -12,7 +12,7 @@ export default function SearchPage() {
       <Suspense fallback={<LoadingSpinner />}>
         <SearchBar />
       </Suspense>
-      <button type='button' onClick={() => router.back()}>
+      <button type='button' className='shrink-0' onClick={() => router.back()}>
         취소
       </button>
     </div>

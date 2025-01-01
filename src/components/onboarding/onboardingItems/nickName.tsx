@@ -5,11 +5,6 @@ import Input from '<prefix>/components/common/input';
 import useInput from '<prefix>/hooks/useInput';
 import { useKeyDown } from '<prefix>/hooks/useKeyDown';
 import { IJoinReq } from '<prefix>/shared/types/auth';
-import {
-  maxLenRegExp,
-  specialCharRegExp,
-  whiteSpaceRegExp,
-} from '<prefix>/shared/utils/regex';
 import { nickNameValidator } from '<prefix>/shared/utils/validator';
 
 interface NickNameProps {
@@ -34,25 +29,26 @@ export default function NickName({ onNext, initialValue }: NickNameProps) {
   );
 
   return (
-    <div className='px-16'>
-      <div className='mb-32 space-y-6 pt-145'>
-        <h2 className='text-head-01 text-neutral-900'>
-          맘보에 오신 것을 환영해요! <br /> 사용하실 닉네임을 알려주세요.
-        </h2>
-        <p className='text-body-06 text-neutral-600'>
-          닉네임은 언제든지 변경할 수 있어요.
-        </p>
+    <div className='flex basis-full flex-col px-16 pb-40'>
+      <div className='basis-full'>
+        <div className='mb-32 space-y-6 pt-145'>
+          <h2 className='text-head-01 text-neutral-900'>
+            맘보에 오신 것을 환영해요! <br /> 사용하실 닉네임을 알려주세요.
+          </h2>
+          <p className='text-body-06 text-neutral-600'>
+            닉네임은 언제든지 변경할 수 있어요.
+          </p>
+        </div>
+        <Input
+          value={nickname}
+          maxLength={8}
+          placeholder='닉네임을 입력해주세요.'
+          onChange={handleInputChange}
+        />
       </div>
-      <Input
-        value={nickname}
-        maxLength={8}
-        placeholder='닉네임을 입력해주세요.'
-        onChange={handleInputChange}
-      />
       <LargeButton
         variant='fill'
         buttonColor='primary'
-        className='absolute bottom-40'
         disabled={!!nickname === false}
         onClick={() => onNext({ nickname })}
       >

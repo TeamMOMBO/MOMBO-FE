@@ -42,6 +42,10 @@ export default function IngredientLoading() {
             src='/images/image-baby.png' // 정적 경로로 제공
             alt='아기 이미지'
             className='absolute left-1/2 top-23 w-108 -translate-x-1/2 transform'
+            priority
+            width={108}
+            height={108}
+            sizes='(max-width: 390) 100vw'
           />
           <motion.div
             className='absolute bottom-10 left-0'
@@ -58,6 +62,9 @@ export default function IngredientLoading() {
               src='/images/image-magnifier.png'
               alt='돋보기 이미지'
               className='w-64'
+              priority
+              width={64}
+              height={64}
             />
           </motion.div>
         </div>
