@@ -3,57 +3,47 @@ import Image from 'next/image';
 import { UserAnalysisResult } from '<prefix>/shared/types/auth';
 import LeftIcon from '/public/svgs/arrow/icon-left2.svg';
 import RightIcon from '/public/svgs/arrow/icon-right.svg';
+import useImageAnalyzer from '<prefix>/hooks/useImageAnalyzer';
+import IngredientLoading from '<prefix>/components/ingredient/ingredientLoading';
 
 interface ResultItems {
   resultItem: UserAnalysisResult[];
 }
 
 export default function UseringredientResultList({ resultItem }: ResultItems) {
+  const { fileInputRef, handleImageClick, handleSelectImage, isPending } =
+    useImageAnalyzer();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = (direction: 'left' | 'right') => {
-    if (!scrollContainerRef.current) return;
-
-    const scrollAmount = 300; // 스크롤할 픽셀 양
-    const newScrollPosition =
-      scrollContainerRef.current.scrollLeft +
-      (direction === 'left' ? -scrollAmount : scrollAmount);
-
-    scrollContainerRef.current.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth',
-    });
-  };
-
-  const showNavigation = resultItem.length > 4;
+  if (isPending) {
+    return <IngredientLoading />;
+  }
 
   return (
     <div className='my-20 h-142 w-full rounded-12 bg-neutral-200 p-16'>
       <h3 className='mb-10 text-body-04 text-neutral-800'>최근 분석 기록</h3>
       {resultItem.length === 0 ? (
-        <div className='flex h-[calc(100%-2.5rem)] items-center justify-center'>
-          <p className='text-center text-body-05 text-neutral-500'>
-            아직 성분 분석 기록이 없습니다
+        <div className='flex h-[calc(100%-2.5rem)] flex-col items-center justify-center gap-12'>
+          <p className='text-center text-body-06 text-neutral-500'>
+            아직 분석 기록이 없어요.
           </p>
+          <button
+            onClick={handleImageClick}
+            className='w-326 rounded-lg bg-white py-8 text-body-04 text-primary outline outline-1'
+          >
+            분석할 이미지 등록하기
+          </button>
+          <input
+            type='file'
+            accept='image/jpg, image/png, image/jpeg, image/bmp, image/tif, image/heic'
+            hidden
+            ref={fileInputRef}
+            onChange={handleSelectImage}
+            className='hidden'
+          />
         </div>
       ) : (
         <div className='relative'>
-          {showNavigation && (
-            <>
-              <button
-                onClick={() => handleScroll('left')}
-                className='absolute left-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-gray-100 p-2 shadow-lg'
-              >
-                <LeftIcon className='h-24 w-24 stroke-neutral-600' />
-              </button>
-              <button
-                onClick={() => handleScroll('right')}
-                className='absolute right-0 top-1/2 z-10 -translate-y-1/2 transform rounded-full bg-white p-2 shadow-lg'
-              >
-                <RightIcon className='h-24 w-24 stroke-neutral-600' />
-              </button>
-            </>
-          )}
           <div
             ref={scrollContainerRef}
             className='hide-scrollbar flex overflow-x-auto'
