@@ -24,7 +24,6 @@ export default function InfiniteCarousel<T>({
     transX,
     animate,
     updateIndex,
-    displayedIndex,
     onTouchStart,
     onMouseDown,
     onTransitionEnd,
@@ -33,6 +32,13 @@ export default function InfiniteCarousel<T>({
     resetFirstIndex: true,
     slideWidth,
   });
+
+  const displayedIndex =
+    currentIndex === 0
+      ? items.length - 1
+      : currentIndex === slideList.length - 1
+        ? 0
+        : currentIndex - 1;
 
   useEffect(() => {
     const interval = setInterval(() => {

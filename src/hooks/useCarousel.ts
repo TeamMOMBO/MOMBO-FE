@@ -22,7 +22,7 @@ export default function useCarousel({
 }: UseCarouselProps) {
   const [transX, setTransX] = useState(0); // 현재 슬라이드 이동 거리
   const [animate, setAnimate] = useState(false); // 애니메이션 상태
-  const [currentIndex, setCurrentIndex] = useState<number>(1); // 현재 슬라이드 인덱스
+  const [currentIndex, setCurrentIndex] = useState<number>(0); // 현재 슬라이드 인덱스
 
   // 드래그 종료 핸들러
   const handleDragEnd = (deltaX: number) => {
@@ -34,20 +34,20 @@ export default function useCarousel({
         if (prev < maxIndex) {
           newIndex = prev + 1;
         } else if (resetFirstIndex) {
-          newIndex = 1; // 마지막 인덱스에서 첫 번째 인덱스로 돌아감 (무한 반복)
+          newIndex = 0; // 마지막에서 첫 번째로 이동
         }
       } else if (deltaX > 100) {
         // 왼쪽으로 슬라이드
-        if (prev > 1) {
+        if (prev > 0) {
           newIndex = prev - 1;
-        } else if (resetFirstIndex && prev === 1) {
-          newIndex = maxIndex; // 첫 번째 인덱스에서 마지막 인덱스로 이동 (무한 반복)
+        } else if (resetFirstIndex) {
+          newIndex = maxIndex; // 첫 번째에서 마지막으로 이동
         }
       }
 
       return newIndex;
     });
-    setTransX(0); // 드래그 종료 후 transX 초기화
+    setTransX(0); // 드래그 종료 후 초기화
   };
 
   // 터치 시작 핸들러
@@ -118,14 +118,6 @@ export default function useCarousel({
     }
   };
 
-  //현재 표시되는 인덱스 값
-  const displayedIndex =
-    currentIndex === 0
-      ? maxIndex
-      : currentIndex === maxIndex
-        ? 0
-        : currentIndex - 1;
-
   // 인덱스 업데이트
   const updateIndex = (updater: (prevIndex: number) => number) => {
     setCurrentIndex((prev) => updater(prev));
@@ -143,7 +135,6 @@ export default function useCarousel({
     transX,
     animate,
     updateIndex,
-    displayedIndex,
     ...eventHandlers,
     onTransitionEnd: handleTransitionEnd,
   };
