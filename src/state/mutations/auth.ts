@@ -9,6 +9,7 @@ import {
   removeWithdrawUser,
 } from '<prefix>/shared/apis/auth';
 import { deleteCookie } from 'cookies-next';
+import { setCookie } from 'cookies-next/client';
 
 export const useJoinMutation = () => {
   const router = useRouter();
@@ -18,6 +19,8 @@ export const useJoinMutation = () => {
     mutationFn: (data: IJoinReq) => createUserInfo(data),
     onSuccess: (data) => {
       setUserInfo(data.user);
+      setCookie('accessToken', data.token.access);
+      setCookie('refreshToken', data.token.refresh);
       router.push('/main');
     },
     onError: (error: unknown) => {},
