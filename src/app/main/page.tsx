@@ -3,17 +3,15 @@
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
 import FaqItem from '<prefix>/components/content/faq/faqItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
-import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
-import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
-import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
 import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
 import { useNotificationPermission } from '<prefix>/hooks/notification/useNotificationPermission';
 import { useForegroundNotification } from '<prefix>/hooks/notification/useForegroundNotification';
 import { useEffect } from 'react';
-import LocoIcon from '/public/svgs/icon-logo.svg';
 import { useMainInfoQuery } from '<prefix>/state/queries/main';
 import MainSkeleton from '<prefix>/components/common/skeleton/mainSkeleton';
+import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
+import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
 
 export default function MainPage() {
   const { mainInfo, mainInfoLoading } = useMainInfoQuery();
