@@ -4,6 +4,7 @@ import IngredientItem from '../ingredientItem';
 import { useIngredientDictionaryQuery } from '<prefix>/state/queries/ingredient';
 import VirtualList from '<prefix>/components/common/virtualList/virtualList';
 import useTab from '<prefix>/hooks/useTab';
+import SkeletonList from '<prefix>/components/common/skeleton/skeletonList';
 import TabMenu from '<prefix>/components/common/tabMenu/tabMenu';
 import { DICTIONARY_TYPE } from '<prefix>/shared/constants/ingredient';
 
@@ -16,7 +17,7 @@ export default function DictionaryContent() {
   const ingredientDictionaryData =
     data?.pages.flatMap((page) => page.results.ingredients) ?? [];
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <SkeletonList count={10} />;
   return (
     <>
       <TabMenu
@@ -35,6 +36,7 @@ export default function DictionaryContent() {
               <IngredientItem key={index} ingredientItem={ingredientItem} />
             </div>
           )}
+          isNavBar={true}
         />
       </div>
     </>

@@ -38,6 +38,7 @@ export default function SearchContentsDetails({ params }: searchParmasProps) {
               <FaqItem key={index} faqItem={item} />
             </div>
           )}
+          isNavBar={false}
         />
       </div>
     </div>

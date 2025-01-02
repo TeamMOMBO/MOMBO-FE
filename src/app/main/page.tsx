@@ -3,16 +3,15 @@
 import { IMainInfo, IWeekInfo } from '<prefix>/shared/types/main';
 import FaqItem from '<prefix>/components/content/faq/faqItem';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
-import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
 import ProgressBar from '<prefix>/components/main/progressBar';
-import MainTopBar from '<prefix>/components/common/bar/mainTopBar';
-import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
 import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
 import { useNotificationPermission } from '<prefix>/hooks/notification/useNotificationPermission';
 import { useForegroundNotification } from '<prefix>/hooks/notification/useForegroundNotification';
 import { useEffect } from 'react';
-import LocoIcon from '/public/svgs/icon-logo.svg';
 import { useMainInfoQuery } from '<prefix>/state/queries/main';
+import MainSkeleton from '<prefix>/components/common/skeleton/mainSkeleton';
+import MainWeekInfoItem from '<prefix>/components/main/mainWeekInfoItem';
+import DragCarousel from '<prefix>/components/common/carousel/dragCarousel';
 
 export default function MainPage() {
   const { mainInfo, mainInfoLoading } = useMainInfoQuery();
@@ -24,7 +23,7 @@ export default function MainPage() {
   }, [requestPermission]);
 
   if (mainInfoLoading && !mainInfo) {
-    return <div>로딩중...</div>;
+    return <MainSkeleton />;
   }
 
   const nickname = mainInfo?.user?.nickname || '익명';
@@ -54,9 +53,6 @@ export default function MainPage() {
   const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
   return (
     <>
-      <MainTopBar>
-        <LocoIcon className='h-19 w-103 fill-primary' />
-      </MainTopBar>
       {mainInfo && (
         <div className='flex h-full w-full flex-col gap-30'>
           <div className='flex flex-col gap-2 px-16 pt-12'>

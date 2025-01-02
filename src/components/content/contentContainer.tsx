@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import InfiniteCarousel from '<prefix>/components/common/carousel/infiniteCarousel';
 import MainInfoItem from '<prefix>/components/main/mainInfoItem';
@@ -11,6 +11,10 @@ import { useContentInfiniteQuery } from '<prefix>/state/queries/content';
 import TabMenu from '../common/tabMenu/tabMenu';
 import { FAQResponse, WeekInfoResponse } from '<prefix>/shared/types/content';
 import ContentCategoryList from './contentCategoryList';
+import ContentSkeleton from '../common/skeleton/content/contentSkeleton';
+import WeekInfoListSkeleton from '../common/skeleton/content/weekInfoListSkeleton';
+import FAQListSkeleton from '../common/skeleton/content/faqListSkeleton';
+import AllListSkeleton from '../common/skeleton/content/allListSkeleton';
 
 const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
 
@@ -44,6 +48,7 @@ const extractData = (pages: any[], category: string) => {
 
 export default function ContentContainer() {
   const router = useRouter();
+  const [initialLoading, setInitialLoading] = useState(true);
   const { currentItem, changeItem } = useTab(0, CONTENT_TYPE);
   const selectedCategory = CATEGORY_MAP[currentItem?.tab || '전체'];
   const { data, fetchNextPage, hasNextPage, isLoading } =
@@ -55,13 +60,37 @@ export default function ContentContainer() {
     // 컴포넌트 마운트 시 router.refresh 호출
     // 서버 데이터 API 갱신
     router.refresh();
+    setInitialLoading(false);
   }, [router]);
 
-  if (isLoading) return <div>로딩중</div>;
+  if (initialLoading) return <ContentSkeleton />;
 
   const { faqs, weekinformations } = data?.pages
     ? extractData(data.pages, selectedCategory)
     : { faqs: [], weekinformations: [] };
+
+  const renderContent = () => {
+    if (!initialLoading && isLoading) {
+      switch (selectedCategory) {
+        case 'all':
+          return <AllListSkeleton />;
+        case 'faq':
+          return <FAQListSkeleton count={6} />;
+        case 'info':
+        default:
+          return <WeekInfoListSkeleton count={6} />;
+      }
+    }
+    return (
+      <ContentCategoryList
+        category={selectedCategory}
+        faqItems={faqs}
+        weekInfoItems={weekinformations}
+        hasNextPage={hasNextPage}
+        fetchNextPage={fetchNextPage}
+      />
+    );
+  };
 
   return (
     <div className='mt-5 flex flex-col gap-20 px-16'>
@@ -83,15 +112,7 @@ export default function ContentContainer() {
           onChangeTab={changeItem}
           containerClassName='mb-20'
         />
-        {data && (
-          <ContentCategoryList
-            category={selectedCategory}
-            faqItems={faqs}
-            weekInfoItems={weekinformations}
-            hasNextPage={hasNextPage}
-            fetchNextPage={fetchNextPage}
-          />
-        )}
+        {renderContent()}
       </div>
     </div>
   );
