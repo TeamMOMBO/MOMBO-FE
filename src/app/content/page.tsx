@@ -32,9 +32,7 @@ export default async function ContentPage() {
     <>
       <MainTopBar>콘텐츠</MainTopBar>
       <HydrationBoundary state={dehydrate(queryClient)}>
-        <Suspense fallback={<div>콘텐츠 불러오는 중...</div>}>
-          <ContentContainer />
-        </Suspense>
+        <ContentContainer />
       </HydrationBoundary>
       <NavBar />
     </>
