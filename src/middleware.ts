@@ -15,9 +15,33 @@ const PUBLIC_PATHS = ['/login', '/onboarding'];
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const { pathname } = request.nextUrl;
 
+  // 정적 파일 요청 체크
+  const isFile = pathname.match(/\.(.*)$/);
+
+  // 정적 파일 요청은 바로 통과
+  if (isFile) {
+    return NextResponse.next();
+  }
+
+  if (PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {
+    const accessToken = request.cookies.get('accessToken')?.value;
+    const refreshToken = request.cookies.get('refreshToken')?.value;
+    // PUBLIC_PATHS 접근 시 토큰이 있으면 /main으로 리다이렉션
+    if (accessToken && refreshToken) {
+      return NextResponse.redirect(new URL('/main', request.url));
+    }
+
+    return NextResponse.next();
+  }
+
   if (!PUBLIC_PATHS.some((path) => pathname.startsWith(path))) {
     const accessToken = request.cookies.get('accessToken')?.value;
     const refreshToken = request.cookies.get('refreshToken')?.value;
+
+    // accessToken이 없고 refreshToken도 없는 경우 로그인 페이지로 리다이렉션
+    if (!accessToken && !refreshToken) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
 
     const res = NextResponse.next();
 
