@@ -39,6 +39,7 @@ export default function SearchDictionaryDetails({ params }: searchParmasProps) {
               <IngredientItem key={index} ingredientItem={item} />
             </div>
           )}
+          isNavBar={false}
         />
       </div>
     </div>

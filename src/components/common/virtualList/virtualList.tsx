@@ -7,12 +7,14 @@ interface VirtualListProps<T> {
   data: T[];
   renderItem: (index: number, item: T) => React.ReactNode;
   onEndReached?: () => void;
+  isNavBar?: boolean;
 }
 
 export default function VirtualList<T>({
   data,
   renderItem,
   onEndReached,
+  isNavBar,
 }: VirtualListProps<T>) {
   const [showTopButton, setShowTopButton] = useState(false);
   const virtuosoRef = useRef<VirtuosoHandle>(null);
@@ -31,7 +33,7 @@ export default function VirtualList<T>({
   };
 
   return (
-    <div className="relative h-[calc(100dvh-144px)]">
+    <div className='relative h-[calc(100dvh-144px)]'>
       <Virtuoso
         ref={virtuosoRef}
         style={{
@@ -48,7 +50,11 @@ export default function VirtualList<T>({
         itemContent={renderItem}
         scrollerRef={handleScroll}
       />
-      <TopButton onClick={scrollToTop} show={showTopButton} />
+      <TopButton
+        onClick={scrollToTop}
+        show={showTopButton}
+        isNavBar={isNavBar}
+      />
     </div>
   );
 }

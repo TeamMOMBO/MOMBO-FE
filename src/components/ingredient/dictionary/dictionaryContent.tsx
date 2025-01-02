@@ -17,7 +17,7 @@ export default function DictionaryContent() {
   const ingredientDictionaryData =
     data?.pages.flatMap((page) => page.results.ingredients) ?? [];
 
-  if (isLoading) return <SkeletonList count={10}/>;
+  if (isLoading) return <SkeletonList count={10} />;
   return (
     <>
       <TabMenu
@@ -36,6 +36,7 @@ export default function DictionaryContent() {
               <IngredientItem key={index} ingredientItem={ingredientItem} />
             </div>
           )}
+          isNavBar={true}
         />
       </div>
     </>

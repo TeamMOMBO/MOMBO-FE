@@ -50,6 +50,7 @@ export default function ContentCategoryList({
               <FaqItem key={index} faqItem={item} />
             </div>
           )}
+          isNavBar={true}
         />
       );
     case 'info':
@@ -62,6 +63,7 @@ export default function ContentCategoryList({
               <WeekInfoItem key={index} weekInfoItem={item} />
             </div>
           )}
+          isNavBar={true}
         />
       );
     default:
