@@ -28,7 +28,7 @@ export default function UseringredientResultList({ resultItem }: ResultItems) {
   const showNavigation = resultItem.length > 4;
 
   return (
-    <div className='my-20 h-142 w-358 rounded-12 bg-neutral-200 p-16'>
+    <div className='my-20 h-142 w-full rounded-12 bg-neutral-200 p-16'>
       <h3 className='mb-10 text-body-04 text-neutral-800'>최근 분석 기록</h3>
       {resultItem.length === 0 ? (
         <div className='flex h-[calc(100%-2.5rem)] items-center justify-center'>
