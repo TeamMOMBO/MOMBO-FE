@@ -25,7 +25,6 @@ export default function useCarousel({
   const [currentIndex, setCurrentIndex] = useState<number>(1); // 현재 슬라이드 인덱스
 
   // 드래그 종료 핸들러
-  // 드래그 종료 핸들러
   const handleDragEnd = (deltaX: number) => {
     setCurrentIndex((prev) => {
       let newIndex = prev;
@@ -39,10 +38,10 @@ export default function useCarousel({
         }
       } else if (deltaX > 100) {
         // 왼쪽으로 슬라이드
-        if (prev > 0) {
+        if (prev > 1) {
           newIndex = prev - 1;
-        } else if (resetFirstIndex) {
-          newIndex = maxIndex - 1; // 첫 번째 인덱스에서 마지막 인덱스로 돌아감 (무한 반복)
+        } else if (resetFirstIndex && prev === 1) {
+          newIndex = maxIndex; // 첫 번째 인덱스에서 마지막 인덱스로 이동 (무한 반복)
         }
       }
 

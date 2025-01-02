@@ -36,7 +36,7 @@ export default function SearchBar({ isResultSearch = false }: SearchBarProps) {
   useKeyDown('Enter', handleSubmit, [handleSubmit]);
 
   return (
-    <div className={`relative h-40 ${isResultSearch ? 'w-334' : 'w-312'}`}>
+    <div className={`relative h-40 basis-full`}>
       <div className='absolute inset-y-0 left-13 flex items-center'>
         <SearchIcon className='h-18 w-18 stroke-neutral-600' />
       </div>

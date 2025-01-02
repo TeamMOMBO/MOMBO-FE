@@ -5,10 +5,5 @@ type ContentProps = {
 };
 
 export default function FAQLayout({ children }: ContentProps) {
-  return (
-    <>
-      {children}
-      <AnimatedNavBar />
-    </>
-  );
+  return <>{children}</>;
 }

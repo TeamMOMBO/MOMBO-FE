@@ -14,18 +14,21 @@ const pretendard = localFont({
   weight: '45 920',
   variable: '--font-pretendard',
 });
-
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='kr' className={`${pretendard.variable}`}>
+    <html lang='kr' className={`${pretendard.variable} `}>
       <body
-        className={`${pretendard.className} relative mx-auto h-[100dvh] w-390 shadow-xl`}
+        className={`${pretendard.className} relative mx-auto flex h-[100dvh] w-full min-w-375 max-w-430 flex-col overflow-hidden shadow-xl`}
       >
-        <TanstackQueryProvider>{children}</TanstackQueryProvider>
+        <TanstackQueryProvider>
+          <div className='flex basis-full flex-col overflow-y-auto'>
+            {children}
+          </div>
+        </TanstackQueryProvider>
         <Script src='/service-worker.js' />
       </body>
     </html>

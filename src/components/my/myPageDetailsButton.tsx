@@ -26,7 +26,7 @@ export default function MyPageDetailsButton({
   return (
     <button
       onClick={handleClick}
-      className='flex w-390 items-center justify-between p-16'
+      className='flex w-full items-center justify-between p-16'
     >
       <span className='text-body-04'>{children}</span>
       <RightArrowIcon className='h-24 w-24 cursor-pointer items-center justify-center stroke-neutral-600' />

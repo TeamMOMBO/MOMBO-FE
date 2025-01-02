@@ -7,6 +7,8 @@ import EyeIcon from '/public/svgs/light/icon-eye.svg';
 import LargeButton from '<prefix>/components/common/button/largeButton';
 import { useRouter } from 'next/navigation';
 import BackTopBar from '../../common/bar/backTopBar';
+import AnimatedNavBar from '<prefix>/components/common/bar/navbar/animatedNavBar';
+import { useRef } from 'react';
 
 type Props = {
   faqData: FAQResponse;
@@ -14,20 +16,22 @@ type Props = {
 
 export default function FAQDetail({ faqData }: Props) {
   const router = useRouter();
+  const containerRef = useRef<HTMLDivElement>(null);
 
   return (
-    <>
-      <div className='relative h-[240px] w-full'>
-        <div className='absolute top-0 w-full'>
+    <div
+      ref={containerRef}
+      className='flex basis-full flex-col overflow-y-scroll'
+    >
+      <div className='relative h-[240px] w-full shrink-0'>
+        <div className='absolute top-0 z-10 w-full'>
           <BackTopBar transparent />
         </div>
         <Image
           src={faqData.image}
           alt='Q&A 이미지'
           fill
-          priority
-          className='!static object-cover object-center'
-          sizes='(max-width: 390px) 100vw'
+          className='unset relative'
         />
       </div>
       <div className='flex basis-full flex-col gap-30 px-16 pb-28 pt-24'>
@@ -62,6 +66,7 @@ export default function FAQDetail({ faqData }: Props) {
           목록보기
         </LargeButton>
       </div>
-    </>
+      <AnimatedNavBar containerRef={containerRef} />
+    </div>
   );
 }

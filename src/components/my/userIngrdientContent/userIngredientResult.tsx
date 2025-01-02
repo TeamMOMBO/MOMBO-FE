@@ -23,13 +23,17 @@ export default function UserIngredientResult() {
             />
           </Link>
         </div>
-        <span className='mb-20 text-body-06 text-neutral-600'>
-          임신 {userProfile?.profile.pregnancyWeek ?? 0}주 차
+        <span className='text-body-06 text-neutral-600'>
+          임신 {userProfile?.profile.pregnancyWeek || '??'}주 차
         </span>
-        <ProgressBar
-          currentNum={userProfile?.profile.pregnancyWeek ?? 0}
-          totalNum={totalWeek}
-        />
+        {(userProfile?.profile.pregnancyWeek ?? 0) !== 0 && (
+          <div className='mt-20'>
+            <ProgressBar
+              currentNum={userProfile?.profile.pregnancyWeek ?? 0}
+              totalNum={totalWeek}
+            />
+          </div>
+        )}
         <UseringredientResultList
           resultItem={userProfile?.user_analysis_results ?? []}
         />
