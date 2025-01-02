@@ -1,4 +1,4 @@
-import AllListSkeleton from './allListSkeletom';
+import AllListSkeleton from './allListSkeleton';
 
 export default function ContentSkeleton() {
   return (

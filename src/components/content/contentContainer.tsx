@@ -14,7 +14,7 @@ import ContentCategoryList from './contentCategoryList';
 import ContentSkeleton from '../common/skeleton/content/contentSkeleton';
 import WeekInfoListSkeleton from '../common/skeleton/content/weekInfoListSkeleton';
 import FAQListSkeleton from '../common/skeleton/content/faqListSkeleton';
-import AllListSkeleton from '../common/skeleton/content/allListSkeletom';
+import AllListSkeleton from '../common/skeleton/content/allListSkeleton';
 
 const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
 
