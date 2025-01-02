@@ -68,7 +68,7 @@ export default function SearchResults({ keyword }: SearchResultsProps) {
                 ))}
               </ul>
               <button
-                className='h-44 w-358 rounded-8 bg-neutral-200 text-center text-body-08 text-neutral-900'
+                className='h-44 w-full rounded-8 bg-neutral-200 text-center text-body-08 text-neutral-900'
                 onClick={() =>
                   router.push(
                     `/search/results/details/${encodeURIComponent(keyword)}/dictionary`,
