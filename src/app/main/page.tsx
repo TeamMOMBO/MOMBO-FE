@@ -55,9 +55,6 @@ export default function MainPage() {
   const infoItems = [{ description: '맘을 위한 정보,\n맘보를 소개합니다!' }];
   return (
     <>
-      <MainTopBar>
-        <LocoIcon className='h-19 w-103 fill-primary' />
-      </MainTopBar>
       {mainInfo && (
         <div className='flex h-full w-full flex-col gap-30'>
           <div className='flex flex-col gap-2 px-16 pt-12'>
