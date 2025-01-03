@@ -17,12 +17,12 @@ const navItems = [
     label: '콘텐츠',
     activePath: 'content',
   },
-  { href: '/', icon: ScannerIcon, activePath: 'dictionary', isCenter: true },
+  { href: '/', icon: ScannerIcon, activePath: 'result', isCenter: true },
   {
     href: '/ingredient/dictionary',
     icon: BookIcon,
     label: '성분사전',
-    activePath: 'ingredient/dictionary',
+    activePath: 'dictionary',
   },
   { href: '/my', icon: UserIcon, label: '마이페이지', activePath: 'my' },
 ];
