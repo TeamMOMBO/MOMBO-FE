@@ -2,7 +2,7 @@ import FAQListSkeleton from './content/faqListSkeleton';
 
 export default function MainSkeleton() {
   return (
-    <div className='flex h-full w-full flex-col gap-30'>
+    <div className='flex w-full flex-col gap-30'>
       {/* 유저 정보 & 프로그레스 바 스켈레톤 */}
       <div className='flex flex-col gap-2 px-16 pt-12'>
         <div className='h-33 w-[180px] animate-pulse rounded-4 bg-neutral-200' />

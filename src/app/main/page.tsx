@@ -54,7 +54,7 @@ export default function MainPage() {
   return (
     <>
       {mainInfo && (
-        <div className='flex h-full w-full flex-col gap-30'>
+        <div className='flex w-full flex-col gap-30'>
           <div className='flex flex-col gap-2 px-16 pt-12'>
             <h2 className='sr-only'>유저 정보</h2>
             <span className='text-head-01 text-neutral-900'>
