@@ -33,7 +33,7 @@ export default function PregnancyDate({
     () => {
       if (isSelected || pregnancyDate) {
         onSubmit({
-          pregnancyDate: isSelected ? 0 : parseInt(pregnancyDate as string),
+          pregnancyWeek: isSelected ? 0 : parseInt(pregnancyDate as string),
         });
       }
     },
@@ -92,7 +92,7 @@ export default function PregnancyDate({
           buttonColor='primary'
           onClick={() =>
             onSubmit({
-              pregnancyDate: isSelected ? 0 : parseInt(pregnancyDate as string),
+              pregnancyWeek: isSelected ? 0 : parseInt(pregnancyDate as string),
             })
           }
           disabled={!!pregnancyDate === false && isSelected === false}

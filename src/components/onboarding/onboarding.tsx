@@ -14,7 +14,7 @@ import { IJoinReq } from '<prefix>/shared/types/auth';
 const initailFunnelData: IJoinReq = {
   nickname: '',
   userType: '',
-  pregnancyDate: 0,
+  pregnancyWeek: 0,
 };
 
 const steps = ['닉네임', '회원유형', '주차'];
@@ -59,7 +59,7 @@ export default function Onboarding() {
         <PregnancyDate
           onPrev={onPrevStep}
           onSubmit={onSubmit}
-          initialValue={funnelData.pregnancyDate}
+          initialValue={funnelData.pregnancyWeek}
         />
       </Funnel.Step>
     </Funnel>
