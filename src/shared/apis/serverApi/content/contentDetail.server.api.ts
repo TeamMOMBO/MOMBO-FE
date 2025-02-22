@@ -5,7 +5,7 @@ import {
   ContentDetailResponse,
 } from '<prefix>/shared/types/content';
 
-export const getFAQServer = async ({
+export const getContentServer = async ({
   category,
   postNo,
 }: ContentDetailParams): Promise<ContentDetailResponse> => {

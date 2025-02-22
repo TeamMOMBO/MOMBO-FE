@@ -4,7 +4,7 @@ import EyeIcon from '/public/svgs/light/icon-eye.svg';
 export default function FAQSkeleton() {
   return (
     <div className='flex basis-full flex-col'>
-      {/* 이미지 스켈레톤톤 */}
+      {/* 이미지 스켈레톤 */}
       <div className='relative h-[240px] w-full shrink-0 animate-pulse bg-neutral-200'>
         <div className='absolute top-0 z-10 w-full'>
           <BackTopBar transparent />
