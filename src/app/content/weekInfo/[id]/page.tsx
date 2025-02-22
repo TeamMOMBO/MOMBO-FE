@@ -1,4 +1,3 @@
-import FAQDetail from '<prefix>/components/content/faq/faqDetail';
 import WeekInfoDetail from '<prefix>/components/content/weekInfo/weekInfoDetail';
 import { getContentServer } from '<prefix>/shared/apis/serverApi/content/contentDetail.server.api';
 import { WeekInfoResponse } from '<prefix>/shared/types/content';
