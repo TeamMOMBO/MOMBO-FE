@@ -93,7 +93,7 @@ export default function ContentContainer() {
   };
 
   return (
-    <div className='mt-5 flex flex-col gap-20 px-16'>
+    <div className='flex flex-col gap-20 px-16 pb-20 pt-5'>
       <div>
         <h2 className='sr-only'>정보</h2>
         <InfiniteCarousel

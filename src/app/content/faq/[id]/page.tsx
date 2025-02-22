@@ -1,5 +1,5 @@
 import { FAQResponse } from '<prefix>/shared/types/content';
-import { getFAQServer } from '<prefix>/shared/apis/serverApi/content/contentDetail.server.api';
+import { getContentServer } from '<prefix>/shared/apis/serverApi/content/contentDetail.server.api';
 import FAQDetail from '<prefix>/components/content/faq/faqDetail';
 import AnimatedNavBar from '<prefix>/components/common/bar/navbar/animatedNavBar';
 
@@ -11,7 +11,7 @@ type Props = {
 
 export default async function FAQPage({ params }: Props) {
   const { id } = params;
-  const data = await getFAQServer({
+  const data = await getContentServer({
     category: 'faq',
     postNo: parseInt(id),
   });
