@@ -1,21 +1,33 @@
 'use client';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Tooltip from '<prefix>/components/common/tooltip';
 import TopBar from '<prefix>/components/common/bar/topBar';
 import ImagePreviewModal from '<prefix>/components/ingredient/ImagePreviewModal';
 import ResultBar from '/public/svgs/icon-result-bar.svg';
+
 import ArrowIcon from '/public/svgs/arrow/icon-gauge.svg';
 import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
 import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnalysisStore';
 import { RiskLevel } from '<prefix>/shared/types/ingredient';
 import { convertRiskLevel } from '<prefix>/shared/utils/convertRiskLevel';
 import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
+import { useIngredientAnalysisDetailQuery } from '<prefix>/state/queries/ingredient';
 
 export default function IngredientResultPage() {
   const router = useRouter();
-  const analysisResult = useIngredientAnalysisStore(
+  const searchParams = useSearchParams();
+  const uarNo = searchParams.get('id');
+  const analysisResultFromStore = useIngredientAnalysisStore(
     (state) => state.analysisResult,
   );
+
+  const { data: analysisResultFromApi } =
+    useIngredientAnalysisDetailQuery(uarNo);
+
+  // 이미지 분석 시에는 스토어 데이터 사용 프로필에서 특정 분석 결과 접근시에는 apis 데이터 사용
+  const analysisResult = uarNo
+    ? analysisResultFromApi
+    : analysisResultFromStore;
 
   const { riskLevel, analysisImage, riskIngredientCount, ingredientAnalysis } =
     analysisResult || {};
@@ -24,14 +36,14 @@ export default function IngredientResultPage() {
   const totalRisk = riskIngredientCount?.total || 0;
 
   const onClose = () => {
-    // router.push('/main');
+    router.push('/main');
   };
 
   const description = '제품의 성분이 정확하게\n스캔되었는지 꼭 확인해주세요';
 
   return (
     <>
-      <TopBar title='성분 분석 결과' />
+      <TopBar title='성분 분석 결과' onClose={onClose} />
       <div className='flex flex-col gap-30 px-16'>
         <div className='flex flex-col items-center gap-8 pt-25'>
           <div className='relative mt-44 h-fit w-fit'>
