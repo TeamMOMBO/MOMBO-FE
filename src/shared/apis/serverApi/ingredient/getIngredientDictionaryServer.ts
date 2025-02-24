@@ -8,10 +8,11 @@ import {
 export const getIngredientDictionaryServer = async ({
   page = 1,
   sort = 'name',
+  order = 'asc',
 }: IngredientDictionaryParams): Promise<IngredientDictionaryResponse> => {
   try {
     const response = await fetch(
-      `${baseURL}/ingredient/dictionary/?page=${page}&sort=${sort}`,
+      `${baseURL}/ingredient/dictionary/?page=${page}&sort=${sort}&order=${order}`,
       {
         headers: {
           'Content-Type': 'application/json',

@@ -47,6 +47,7 @@ export interface IngredientDictionaryResponse {
   };
 }
 export interface IngredientDictionaryParams {
-  page: number;
+  page?: number;
   sort: 'name' | 'level';
+  order?: 'asc' | 'desc';
 }

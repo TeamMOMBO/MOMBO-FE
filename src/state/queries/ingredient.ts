@@ -3,11 +3,14 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { IngredientDictionaryResponse } from '<prefix>/shared/types/ingredient';
 import { THREE_MIN_STALE_TIME } from '<prefix>/shared/constants/queryOptions';
 
-export const useIngredientDictionaryQuery = (sort: 'name' | 'level') => {
+export const useIngredientDictionaryQuery = (
+  sort: 'name' | 'level',
+  order: 'asc' | 'desc',
+) => {
   return useInfiniteQuery<IngredientDictionaryResponse>({
-    queryKey: ['ingredient-dictionary', sort],
+    queryKey: ['ingredient-dictionary', sort, order],
     queryFn: ({ pageParam = 1 }) =>
-      getIngredientDictionary({ page: pageParam as number, sort }),
+      getIngredientDictionary({ page: pageParam as number, sort, order }),
     getNextPageParam: (lastPage) =>
       lastPage.next ? lastPage.results.page + 1 : undefined,
     initialPageParam: 1,
