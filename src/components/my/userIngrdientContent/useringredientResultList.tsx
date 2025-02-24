@@ -1,3 +1,4 @@
+'use client';
 import React, { useRef } from 'react';
 import Image from 'next/image';
 import { UserAnalysisResult } from '<prefix>/shared/types/auth';
@@ -5,6 +6,7 @@ import LeftIcon from '/public/svgs/arrow/icon-left2.svg';
 import RightIcon from '/public/svgs/arrow/icon-right.svg';
 import useImageAnalyzer from '<prefix>/hooks/useImageAnalyzer';
 import IngredientLoading from '<prefix>/components/ingredient/ingredientLoading';
+import { useRouter } from 'next/navigation';
 
 interface ResultItems {
   resultItem: UserAnalysisResult[];
@@ -14,6 +16,11 @@ export default function UseringredientResultList({ resultItem }: ResultItems) {
   const { fileInputRef, handleImageClick, handleSelectImage, isPending } =
     useImageAnalyzer();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  const handleResultClick = (id: number) => {
+    router.push(`/ingredient/result?id=${id}`);
+  };
 
   if (isPending) {
     return <IngredientLoading />;
@@ -55,7 +62,11 @@ export default function UseringredientResultList({ resultItem }: ResultItems) {
             <div className='flex gap-12'>
               {resultItem &&
                 resultItem.map((item) => (
-                  <div key={item.id} className='flex-none'>
+                  <div
+                    key={item.id}
+                    onClick={() => handleResultClick(item.id)}
+                    className='flex-none cursor-pointer'
+                  >
                     <Image
                       src={item.image}
                       alt={`성분 분석 이미지 ${item.id}`}

@@ -15,3 +15,12 @@ export const createIngredientAnalysis = async (
   );
   return response.data;
 };
+
+export const getIngredientAnalysisDetail = async (
+  uarNo: number,
+): Promise<IAnalysisResult> => {
+  const response = await clientAuthInstance.get(
+    `/ingredient/analysis/detail?uarNo=${uarNo}`,
+  );
+  return response.data;
+};
