@@ -1,10 +1,9 @@
 'use client';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import Tooltip from '<prefix>/components/common/tooltip';
 import TopBar from '<prefix>/components/common/bar/topBar';
 import ImagePreviewModal from '<prefix>/components/ingredient/ImagePreviewModal';
 import ResultBar from '/public/svgs/icon-result-bar.svg';
-
 import ArrowIcon from '/public/svgs/arrow/icon-gauge.svg';
 import { getArrowStyles } from '<prefix>/shared/utils/getArrowType';
 import { useIngredientAnalysisStore } from '<prefix>/state/store/IngredientAnalysisStore';
@@ -13,16 +12,20 @@ import { convertRiskLevel } from '<prefix>/shared/utils/convertRiskLevel';
 import IngredientItem from '<prefix>/components/ingredient/ingredientItem';
 import { useIngredientAnalysisDetailQuery } from '<prefix>/state/queries/ingredient';
 
-export default function IngredientResultPage() {
+interface PageProps {
+  searchParams: { id?: string };
+}
+
+export default function IngredientResultPage({ searchParams }: PageProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const uarNo = searchParams.get('id');
+  const uarNo = searchParams.id;
   const analysisResultFromStore = useIngredientAnalysisStore(
     (state) => state.analysisResult,
   );
 
-  const { data: analysisResultFromApi } =
-    useIngredientAnalysisDetailQuery(uarNo);
+  const { data: analysisResultFromApi } = useIngredientAnalysisDetailQuery(
+    uarNo as string,
+  );
 
   // 이미지 분석 시에는 스토어 데이터 사용 프로필에서 특정 분석 결과 접근시에는 apis 데이터 사용
   const analysisResult = uarNo
@@ -92,8 +95,8 @@ export default function IngredientResultPage() {
               의 위험 성분이 검출되었어요
             </p>
             <ul className='flex w-full flex-col gap-12'>
-              {ingredientAnalysis?.map((ingrediientItem, index) => (
-                <IngredientItem key={index} ingredientItem={ingrediientItem} />
+              {ingredientAnalysis?.map((ingredientItem, index) => (
+                <IngredientItem key={index} ingredientItem={ingredientItem} />
               ))}
             </ul>
           </div>
